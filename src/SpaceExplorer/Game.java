@@ -1,9 +1,15 @@
 package SpaceExplorer;
 
+import java.util.ArrayList;
+
 public class Game {
 	private static Game instance;
 	
-	private Game() {}
+	private ArrayList<Planet> planets;
+	
+	private Game() {
+		planets = new ArrayList<Planet>();
+	}
 	
 	public static Game getCurrentGame() {
 		if (instance == null) {
