@@ -18,6 +18,6 @@ public class Planet {
 	
 	@Override
 	public String toString() {
-		return name;
+		return "Planet " + name + (shipPartFound ? " does not have a ship part." : " has a ship part.");
 	}
 }
