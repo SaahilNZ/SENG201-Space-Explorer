@@ -81,11 +81,9 @@ public class NameGenerator {
         String name = "";
         if (hasPrefix) {
             name += prefixes[prefixIndex];
-            name += " ";
         }
         name += baseNames[middleIndex];
         if (hasSuffix) {
-            name += " ";
             name += suffixes[suffixIndex];
         }
 

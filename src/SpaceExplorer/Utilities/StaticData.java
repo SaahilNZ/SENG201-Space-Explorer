@@ -2,19 +2,19 @@ package SpaceExplorer.Utilities;
 
 public class StaticData {
 	public static final String[] PLANET_PREFIXES = {
-        "Alpha",
-        "Beta",
-        "Gamma",
-        "Delta",
-        "Epsilon",
-        "Zeta",
-        "Eta",
-        "Theta",
-        "Sigma",
-        "Omega",
-        "Lambda",
-        "New",
-        "Old"
+		"Alpha ",
+        "Beta ",
+        "Gamma ",
+        "Delta ",
+        "Epsilon ",
+        "Zeta ",
+        "Eta ",
+        "Theta ",
+        "Sigma ",
+        "Omega ",
+        "Lambda ",
+        "New ",
+        "Old "
     };
 	
     public static final String[] PLANET_NAMES = {
@@ -101,20 +101,20 @@ public class StaticData {
     };
     
     public static final String[] PLANET_SUFFIXES = {
-        "I",
-        "II",
-        "III",
-        "IV",
-        "V",
-        "VI",
-        "VII",
-        "VIII",
-        "IX",
-        "X",
-        "XI",
-        "XII",
-        "XIII",
-        "Minor",
-        "Major"
+        " I",
+        " II",
+        " III",
+        " IV",
+        " V",
+        " VI",
+        " VII",
+        " VIII",
+        " IX",
+        " X",
+        " XI",
+        " XII",
+        " XIII",
+        " Minor",
+        " Major"
     };
 }
