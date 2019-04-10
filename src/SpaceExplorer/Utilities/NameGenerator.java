@@ -33,6 +33,16 @@ public class NameGenerator {
 	 * Should the name generator use the supplied suffixes?
 	 */
 	private boolean usesSuffix;
+	
+	/**
+	 * Chance of using a prefix
+	 */
+	private int prefixPercentage;
+
+	/**
+	 * Chance of using a suffix
+	 */
+	private int suffixPercentage;
 
 	/**
 	 * A basic constructor for creating a NameGenerator
@@ -42,7 +52,7 @@ public class NameGenerator {
 	 * @param suffixes			Name suffixes to choose from
 	 */
 	public NameGenerator(String[] prefixes, String[] baseNames, String[] suffixes) {
-		this(prefixes, baseNames, suffixes, true, true);
+		this(prefixes, baseNames, suffixes, true, true, 50, 50);
 	}
 
 	/**
@@ -54,14 +64,18 @@ public class NameGenerator {
 	 * @param suffixes			Name suffixes to choose from
 	 * @param usesPrefix		Should the name generator use the supplied prefixes?
 	 * @param usesSuffix		Should the name generator use the supplied suffixes?
+	 * @param prefixPercentage	Chance of using a prefix
+	 * @param suffixPercentage	Chance of using a suffix
 	 */
 	public NameGenerator(String[] prefixes, String[] baseNames, String[] suffixes,
-			boolean usesPrefix, boolean usesSuffix) {
+			boolean usesPrefix, boolean usesSuffix, int prefixPercentage, int suffixPercentage) {
 		this.prefixes = prefixes;
 		this.baseNames = baseNames;
 		this.suffixes = suffixes;
 		this.usesPrefix = usesPrefix;
 		this.usesSuffix = usesSuffix;
+		this.prefixPercentage = Math.min(Math.max(0, prefixPercentage), 100);
+		this.suffixPercentage = Math.min(Math.max(0, suffixPercentage), 100);
 	}
 
 	/**
@@ -71,8 +85,8 @@ public class NameGenerator {
 	 * @return				A randomly generated name
 	 */
 	public String generateName() {
-        boolean hasPrefix = usesPrefix && (Math.random() * 100 >= 50);
-        boolean hasSuffix = usesSuffix && (Math.random() * 100 >= 50);
+        boolean hasPrefix = usesPrefix && (Math.random() * 100 >= (100 - prefixPercentage));
+        boolean hasSuffix = usesSuffix && (Math.random() * 100 >= (100 - suffixPercentage));
 
         int prefixIndex = hasPrefix ? (int)(Math.random() * prefixes.length) : -1;
         int middleIndex = (int)(Math.random() * baseNames.length);
