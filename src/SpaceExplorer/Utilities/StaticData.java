@@ -117,4 +117,16 @@ public class StaticData {
         " Minor",
         " Major"
     };
+    
+    public static final String[] OUTPOST_NAMES = {
+    	"Omicron"
+    };
+    
+    public static final String[] OUTPOST_SUFFIXES = {
+    	" Station",
+    	" City",
+    	" Outpost",
+    	" Town",
+    	" Village"
+    };
 }

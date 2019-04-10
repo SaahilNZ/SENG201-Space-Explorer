@@ -3,9 +3,11 @@ package SpaceExplorer;
 public class Planet {
 	private final String name;
 	private boolean shipPartFound;
+	private Outpost outpost;
 	
-	public Planet(String name) {
+	public Planet(String name, Outpost outpost) {
 		this.name = name;
+		this.outpost = outpost;
 	}
 	
 	public boolean hasShipPart() {
@@ -16,8 +18,16 @@ public class Planet {
 		return name;
 	}
 	
+	public Outpost getOutpost() {
+		return outpost;
+	}
+	
 	@Override
 	public String toString() {
-		return "Planet " + name + (shipPartFound ? " does not have a ship part." : " has a ship part.");
+		String output = "Planet " + name + "\n";
+		output += "This planet " + (shipPartFound ? "does not have a ship part.\n" : "has a ship part.\n");
+		output += (outpost == null ? "There is no outpost on this planet.\n"
+				: "There is an outpost named " + outpost.getName() + " on this planet.\n");
+		return output;
 	}
 }
