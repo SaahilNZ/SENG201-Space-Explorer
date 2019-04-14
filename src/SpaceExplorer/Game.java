@@ -9,9 +9,11 @@ public class Game {
 	private static Game instance;
 	
 	private ArrayList<Planet> planets;
+	private ArrayList<Item> allItems;
 	
 	private Game() {
 		planets = new ArrayList<Planet>();
+		allItems = new ArrayList<Item>();
 	}
 	
 	public static Game getCurrentGame() {
@@ -19,6 +21,10 @@ public class Game {
 			instance = new Game();
 		}
 		return instance;
+	}
+	
+	public ArrayList<Item> getItems() {
+		return allItems;
 	}
 	
 	public static void main(String[] args) {
