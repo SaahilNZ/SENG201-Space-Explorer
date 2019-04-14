@@ -4,6 +4,7 @@ public abstract class Item {
 	protected int id;
 	protected int price;
 	protected boolean canBeFound;
+	protected boolean canBeSold;
 	protected String name;
 	
 	public int getId() {
@@ -16,6 +17,10 @@ public abstract class Item {
 	
 	public boolean canBeFound() {
 		return canBeFound;
+	}
+	
+	public boolean canBeSold() {
+		return canBeSold;
 	}
 	
 	public abstract void viewObject();
