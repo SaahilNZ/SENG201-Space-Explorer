@@ -7,6 +7,7 @@ public class Planet {
 	
 	public Planet(String name, Outpost outpost) {
 		this.name = name;
+		this.hasShipPart = true;
 		this.outpost = outpost;
 	}
 	
