@@ -119,7 +119,22 @@ public class StaticData {
     };
     
     public static final String[] OUTPOST_NAMES = {
-    	"Omicron"
+    	"Omicron",
+    	"Zune",
+    	"Zircon",
+    	"Oxide",
+    	"Solar",
+    	"Lunar",
+    	"Stellar",
+    	"Nebula",
+    	"Carbon",
+    	"Diamond",
+    	"Hellas",
+    	"Ishtar",
+    	"Emerald",
+    	"Ruby",
+    	"Sapphire",
+    	"Olympus"
     };
     
     public static final String[] OUTPOST_SUFFIXES = {
@@ -127,6 +142,7 @@ public class StaticData {
     	" City",
     	" Outpost",
     	" Town",
-    	" Village"
+    	" Village",
+    	" Coast"
     };
 }
