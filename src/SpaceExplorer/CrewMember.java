@@ -11,6 +11,26 @@ public class CrewMember {
 		name = memberName;
 	}
 	
+	public int getHealth() {
+		return health;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getHunger() {
+		return hunger;
+	}
+	
+	public int getTiredness() {
+		return tiredness;
+	}
+	
+	public int getActions() {
+		return actionsLeft;
+	}
+	
 	public void damageCrew(int damage) {
 		health -= damage;
 	}
@@ -19,8 +39,18 @@ public class CrewMember {
 		tiredness = 100;
 	}
 	
-	public int getHealth() {
-		return health;
+	public void heal(int restore) {
+		health += restore;
+		if(health >= 100) {
+			health = 100;
+		}
+	}
+	
+	public void eat(int food) {
+		hunger += food;
+		if(hunger >= 100) {
+			hunger = 100;
+		}
 	}
 	
 	public void viewStatus() {
@@ -33,23 +63,23 @@ public class CrewMember {
 	}
 	
 	public void use() {
-		//Placeholder method
+		//Use an item (both medical and food)
 	}
 	
 	public void repairShip() {
-		//Placeholder method
+		//Repair the ship
 	}
 	
 	public void searchPlanet() {
-		//Placeholder method
+		//Search a planet
 	}
 	
 	public void pilotShip() {
-		//Placeholder method
+		//Pilot the ship. Requires 2 actions and another pilot
 	}
 	
 	public void visitOutpost() {
-		//Placeholder method
+		//Visits an outpost
 	}
 	
 	public void purchaseItem() {
