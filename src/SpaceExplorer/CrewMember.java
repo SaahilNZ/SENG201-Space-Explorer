@@ -1,11 +1,14 @@
 package SpaceExplorer;
 
-public class CrewMember {
+public abstract class CrewMember {
 	private String name;
 	private int health = 100;
+	private int maxHealth = 100;
 	private int hunger = 100;
+	private int maxHunger = 100;
 	private int tiredness = 100;
 	private int actionsLeft = 2;
+	private boolean hasPlague = false;
 	
 	public CrewMember(String memberName) {
 		name = memberName;
@@ -31,6 +34,10 @@ public class CrewMember {
 		return actionsLeft;
 	}
 	
+	public boolean hasPlague() {
+		return hasPlague;
+	}
+	
 	public void damageCrew(int damage) {
 		health -= damage;
 	}
@@ -41,16 +48,20 @@ public class CrewMember {
 	
 	public void heal(int restore) {
 		health += restore;
-		if(health >= 100) {
-			health = 100;
+		if(health >= maxHealth) {
+			health = maxHealth;
 		}
 	}
 	
 	public void eat(int food) {
 		hunger += food;
-		if(hunger >= 100) {
-			hunger = 100;
+		if(hunger >= maxHunger) {
+			hunger = maxHunger;
 		}
+	}
+	
+	public void setPlague(boolean status) {
+		hasPlague = status;
 	}
 	
 	public void viewStatus() {
@@ -85,5 +96,4 @@ public class CrewMember {
 	public void purchaseItem() {
 		//Placeholder method
 	}
-	
 }
