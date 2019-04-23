@@ -15,6 +15,10 @@ public abstract class Item {
 		return price;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public boolean canBeFound() {
 		return canBeFound;
 	}
