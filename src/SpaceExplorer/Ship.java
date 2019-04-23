@@ -11,6 +11,10 @@ public class Ship {
 		this.health = maxHealth;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public int damageShip(int amount) {
 		health = Math.max(0, health - amount);
 		return health;
