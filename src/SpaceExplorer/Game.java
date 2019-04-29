@@ -12,6 +12,7 @@ public class Game {
 	private ArrayList<Planet> planets;
 	private ArrayList<Item> allItems;
 	private int desiredDays;
+	private int currentDay = 0;
 	
 	private Game() {
 		planets = new ArrayList<Planet>();
@@ -36,11 +37,14 @@ public class Game {
 		selectDays();
 		generatePlanets();
 
+		System.out.println();
 		System.out.println("Planets:");
 		
 		for (Planet planet : planets) {
 			System.out.println(planet.toString());
 		}
+
+		newDay();
 	}
 
 	private void selectDays() {
@@ -50,7 +54,7 @@ public class Game {
 		while (days < 3 || days > 10) {
 			try {
 				System.out.print("(Min. 3, Max. 10): ");
-				String daysStr = scanner.next();
+				String daysStr = scanner.nextLine();
 				days = Integer.parseInt(daysStr);
 				if (days < 3 || days > 10) {
 					System.out.println("Please enter a valid number between 3 and 10.");
@@ -75,6 +79,14 @@ public class Game {
 			Outpost outpost = new Outpost(outpostNameGenerator.generateName());
 			planets.add(new Planet(planetNameGenerator.generateName(), outpost));
 		}
+	}
+
+	private void newDay() {
+		this.currentDay += 1;
+	}
+
+	private void quitGame() {
+		System.exit(0);
 	}
 	
 	public static void main(String[] args) {
