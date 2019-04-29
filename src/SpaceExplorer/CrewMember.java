@@ -1,12 +1,13 @@
 package SpaceExplorer;
 
-public abstract class CrewMember {
+public class CrewMember {
 	private String name;
 	private int health = 100;
 	private int maxHealth = 100;
 	private int hunger = 100;
 	private int maxHunger = 100;
 	private int tiredness = 100;
+	private int maxTiredness = 100;
 	private int actionsLeft = 2;
 	private boolean hasPlague = false;
 	
@@ -43,7 +44,7 @@ public abstract class CrewMember {
 	}
 	
 	public void sleep() {
-		tiredness = 100;
+		tiredness = maxTiredness;
 	}
 	
 	public void heal(int restore) {
