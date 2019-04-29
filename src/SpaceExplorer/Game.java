@@ -11,6 +11,7 @@ public class Game {
 	
 	private ArrayList<Planet> planets;
 	private ArrayList<Item> allItems;
+	private Crew crew;
 	private int desiredDays;
 	private int currentDay = 0;
 	
@@ -29,6 +30,10 @@ public class Game {
 	public ArrayList<Item> getItems() {
 		return allItems;
 	}
+
+	public int getCurrentDay() {
+		return currentDay;
+	}
 	
 	private void startGame() {
 		System.out.println("Space Explorer");
@@ -36,6 +41,7 @@ public class Game {
 
 		selectDays();
 		generatePlanets();
+		createCrew();
 
 		System.out.println();
 		System.out.println("Planets:");
@@ -54,7 +60,7 @@ public class Game {
 		while (days < 3 || days > 10) {
 			try {
 				System.out.print("(Min. 3, Max. 10): ");
-				String daysStr = scanner.nextLine();
+				String daysStr = scanner.nextLine().trim();
 				days = Integer.parseInt(daysStr);
 				if (days < 3 || days > 10) {
 					System.out.println("Please enter a valid number between 3 and 10.");
@@ -63,7 +69,6 @@ public class Game {
 				System.out.println("Please enter a valid number between 3 and 10.");
 			}
 		}
-		scanner.close();
 		this.desiredDays = days;
 	}
 
@@ -78,6 +83,46 @@ public class Game {
 		for (int i = 0; i < numPlanets; i++) {
 			Outpost outpost = new Outpost(outpostNameGenerator.generateName());
 			planets.add(new Planet(planetNameGenerator.generateName(), outpost));
+		}
+	}
+
+	private void createCrew() {
+		Scanner scanner = new Scanner(System.in);
+
+		String crewName = "";
+		boolean inputValid = false;
+		System.out.println("Please enter a crew name:");
+		while (!inputValid) {
+			System.out.print("Crew name: ");
+			crewName = scanner.nextLine().trim();
+			if (crewName.isEmpty()) {
+				System.out.println("Please enter a valid crew name.");
+			} else {
+				System.out.println("Your crew will be called '" + crewName + "'. Is this correct?");
+				System.out.print("(Y/N): ");
+				String confirm = scanner.nextLine().trim().toLowerCase();
+				if (confirm.equals("y") || confirm.equals("yes")) {
+					inputValid = true;
+				}
+			}
+		}
+
+		String shipName = "";
+		inputValid = false;
+		System.out.println("Please enter a ship name:");
+		while (!inputValid) {
+			System.out.print("Ship name: ");
+			shipName = scanner.nextLine().trim();
+			if (shipName.isEmpty()) {
+				System.out.println("Please enter a valid ship name.");
+			} else {
+				System.out.println("Your ship will be called the Starship " + shipName + ". Is this correct?");
+				System.out.print("(Y/N): ");
+				String confirm = scanner.nextLine().trim().toLowerCase();
+				if (confirm.equals("y") || confirm.equals("yes")) {
+					inputValid = true;
+				}
+			}
 		}
 	}
 
