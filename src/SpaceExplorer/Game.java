@@ -3,7 +3,7 @@ package SpaceExplorer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import SpaceExplorer.CrewMembers.CrewMember;
+import SpaceExplorer.CrewMembers.*;
 import SpaceExplorer.Utilities.NameGenerator;
 import SpaceExplorer.Utilities.StaticData;
 
@@ -47,9 +47,13 @@ public class Game {
 		generatePlanets();
 		createCrew();
 
+		System.out.println("Crew Members:");
+		for (CrewMember crewMember : crew.getCrewMembers()) {
+			System.out.println(crewMember.toString());
+		}
 		System.out.println();
+
 		System.out.println("Planets:");
-		
 		for (Planet planet : planets) {
 			System.out.println(planet.toString());
 		}
@@ -170,14 +174,16 @@ public class Game {
 			System.out.println();
 			switch (selection) {
 				case "1":
-					displayCrewMemberTypes();
+					CrewMember crewMember = createCrewMember(scanner);
+					if (crewMember != null) {
+						crewMembers.add(crewMember);
+					}
 					break;
 				case "2":
 					displayCreateCrewHelp(scanner);
 					break;
 				default:
-					System.out.println("Invalid option entered.");
-					System.out.println();
+					System.out.println("Invalid option entered.\n");
 					break;
 			}
 		}
@@ -185,15 +191,82 @@ public class Game {
 		return crewMembers;
 	}
 
-	private void displayCrewMemberTypes() {
-		System.out.println("Crew Member Types:\n");
-		System.out.println("1 - Space Marine");
-		System.out.println("2 - Scout");
-		System.out.println("3 - Mechanic");
-		System.out.println("4 - Doctor");
-		System.out.println("5 - Chef");
-		System.out.println("6 - Space Bard");
+	private CrewMember createCrewMember(Scanner scanner) {
+		CrewMember crewMember = null;
+		boolean isValid = false;
+		while (!isValid) {
+			System.out.println("Crew Member Types:\n");
+			System.out.println("1 - Space Marine");
+			System.out.println("2 - Scout");
+			System.out.println("3 - Mechanic");
+			System.out.println("4 - Doctor");
+			System.out.println("5 - Chef");
+			System.out.println("6 - Space Bard");
+			System.out.print("(Selection): ");
+			String selection = scanner.nextLine().trim();
+			if ("123456".contains(selection)) {
+				System.out.println("\nWhat do you want to name your new crew member?");
+				System.out.print("(Name): ");
+				String name = scanner.nextLine().trim();
+				System.out.println();
+				String confirm;
+				switch (selection) {
+					case "1":
+						System.out.println("Create a new Space Marine named " + name + "?");
+						System.out.print("(Y/N): ");
+						confirm = scanner.nextLine().trim().toLowerCase();
+						if (confirm.equals("y") || confirm.equals("yes")) {
+							crewMember = new SpaceMarine(name);
+						}
+						break;
+					case "2":
+						System.out.println("Create a new Scout named " + name + "?");
+						System.out.print("(Y/N): ");
+						confirm = scanner.nextLine().trim().toLowerCase();
+						if (confirm.equals("y") || confirm.equals("yes")) {
+							crewMember = new Scout(name);
+						}
+						break;
+					case "3":
+						System.out.println("Create a new Mechanic named " + name + "?");
+						System.out.print("(Y/N): ");
+						confirm = scanner.nextLine().trim().toLowerCase();
+						if (confirm.equals("y") || confirm.equals("yes")) {
+							crewMember = new Mechanic(name);
+						}
+						break;
+					case "4":
+						System.out.println("Create a new Doctor named " + name + "?");
+						System.out.print("(Y/N): ");
+						confirm = scanner.nextLine().trim().toLowerCase();
+						if (confirm.equals("y") || confirm.equals("yes")) {
+							crewMember = new Doctor(name);
+						}
+						break;
+					case "5":
+						System.out.println("Create a new Chef named " + name + "?");
+						System.out.print("(Y/N): ");
+						confirm = scanner.nextLine().trim().toLowerCase();
+						if (confirm.equals("y") || confirm.equals("yes")) {
+							crewMember = new Chef(name);
+						}
+						break;
+					case "6":
+						System.out.println("Create a new Space Bard named " + name + "?");
+						System.out.print("(Y/N): ");
+						confirm = scanner.nextLine().trim().toLowerCase();
+						if (confirm.equals("y") || confirm.equals("yes")) {
+							crewMember = new SpaceBard(name);
+						}
+						break;
+				}
+				isValid = true;
+			} else {
+				System.out.println("Invalid option entered.\n");
+			}
+		}
 		System.out.println();
+		return crewMember;
 	}
 
 	private void displayCreateCrewHelp(Scanner scanner) {

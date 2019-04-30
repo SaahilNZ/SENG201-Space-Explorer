@@ -1,18 +1,31 @@
 package SpaceExplorer.CrewMembers;
 
-public class CrewMember {
+public abstract class CrewMember {
+	public static final int DEFAULT_HEALTH = 100;
+	public static final int DEFAULT_HUNGER = 100;
+	public static final int DEFAULT_TIREDNESS = 100; 
+
+	private String crewClass;
 	private String name;
-	private int health = 100;
-	private int maxHealth = 100;
-	private int hunger = 100;
-	private int maxHunger = 100;
-	private int tiredness = 100;
-	private int maxTiredness = 100;
+	private int health;
+	private int maxHealth;
+	private int hunger;
+	private int maxHunger;
+	private int tiredness;
+	private int maxTiredness;
 	private int actionsLeft = 2;
 	private boolean hasPlague = false;
 	
-	public CrewMember(String name) {
+	public CrewMember(String name, String crewClass, int maxHealth,
+		int maxHunger, int maxTiredness) {
 		this.name = name;
+		this.crewClass = crewClass;
+		this.maxHealth = maxHealth;
+		this.health = maxHealth;
+		this.maxHunger = maxHunger;
+		this.hunger = maxHunger;
+		this.maxTiredness = maxTiredness;
+		this.tiredness = maxTiredness;
 	}
 	
 	public int getHealth() {
@@ -96,5 +109,10 @@ public class CrewMember {
 	
 	public void purchaseItem() {
 		//Placeholder method
+	}
+
+	@Override
+	public String toString() {
+		return name + " - " + crewClass;
 	}
 }

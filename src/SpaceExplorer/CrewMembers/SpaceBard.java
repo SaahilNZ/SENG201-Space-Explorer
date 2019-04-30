@@ -1,13 +1,8 @@
 package SpaceExplorer.CrewMembers;
 
-public class SpaceBard extends CrewMember{
-	private int health = 90;
-	private int maxHealth = 90;
-	private int tiredness = 90;
-	private int maxTiredness = 90;
-
+public class SpaceBard extends CrewMember {
 	public SpaceBard(String name) {
-		super(name);
+		super(name, "Space Bard", 90, DEFAULT_HUNGER, 90);
 	}
 	
 	public void performMusic() {
