@@ -149,19 +149,21 @@ public class Game {
 	private ArrayList<CrewMember> createCrewMembers(Scanner scanner) {
 		ArrayList<CrewMember> crewMembers = new ArrayList<>();
 		int crewCount = -1;
-		System.out.println("How many crew members would you like to have?");
 		while (crewCount < 2 || crewCount > 4) {
 			try {
+				System.out.println("How many crew members would you like to have?");
 				System.out.print("(Min. 2, Max. 4): ");
 				String crewStr = scanner.nextLine().trim();
 				crewCount = Integer.parseInt(crewStr);
 				if (crewCount < 2 || crewCount > 4) {
+					System.out.println();
 					System.out.println("Please enter a valid number between 2 and 4.");
 				}
+				System.out.println();
 			} catch (NumberFormatException e) {
-				System.out.println("Please enter a valid number between 2 and 4.");
+				System.out.println();
+				System.out.println("Please enter a valid number between 2 and 4.\n");
 			}
-			System.out.println();
 		}
 
 		System.out.println("Crew Member Setup:\n");
