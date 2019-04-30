@@ -1,5 +1,7 @@
 package SpaceExplorer;
 
+import SpaceExplorer.CrewMembers.CrewMember;
+
 import java.util.ArrayList;
 
 public class Crew {
@@ -11,14 +13,14 @@ public class Crew {
 	private int shipPiecesFound;
 	
 	public Crew(ArrayList<CrewMember> crewMembers, String crewName, Ship ship,
-			ArrayList<MedicalItem> startingMedItems, ArrayList<FoodItem> startingFoodItems,
-			int startingMoney) {
+				int startingMoney, ArrayList<Item> startingItems) {
 		this.crewMembers = crewMembers;
 		this.crewName = crewName;
 		this.ship = ship;
-		this.items = new ArrayList<Item>();
-		this.items.addAll(startingFoodItems);
-		this.items.addAll(startingMedItems);
+		this.items = new ArrayList<>();
+		if (startingItems != null) {
+			this.items.addAll(startingItems);
+		}
 		this.money = startingMoney;
 		this.shipPiecesFound = 0;
 	}

@@ -1,5 +1,7 @@
 package SpaceExplorer;
 
+import SpaceExplorer.CrewMembers.CrewMember;
+
 public class RandomEventController {
 	private static final int DAMAGE_AMOUNT = 10;
 	

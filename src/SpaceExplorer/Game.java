@@ -3,10 +3,13 @@ package SpaceExplorer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import SpaceExplorer.CrewMembers.CrewMember;
 import SpaceExplorer.Utilities.NameGenerator;
 import SpaceExplorer.Utilities.StaticData;
 
 public class Game {
+	private static final int STARTING_MONEY = 200;
+
 	private static Game instance;
 	
 	private ArrayList<Planet> planets;
@@ -14,7 +17,7 @@ public class Game {
 	private Crew crew;
 	private int desiredDays;
 	private int currentDay = 0;
-	
+
 	private Game() {
 		planets = new ArrayList<Planet>();
 		allItems = new ArrayList<Item>();
@@ -87,6 +90,7 @@ public class Game {
 	}
 
 	private void createCrew() {
+		System.out.println("Crew Setup:\n");
 		Scanner scanner = new Scanner(System.in);
 
 		String crewName = "";
@@ -107,8 +111,16 @@ public class Game {
 			}
 		}
 
+		Ship ship = createShip(scanner);
+		ArrayList<CrewMember> crewMembers = createCrewMembers(scanner);
+
+
+		this.crew = new Crew(crewMembers, crewName, ship, STARTING_MONEY, null);
+	}
+
+	private Ship createShip(Scanner scanner) {
 		String shipName = "";
-		inputValid = false;
+		boolean inputValid = false;
 		System.out.println("Please enter a ship name:");
 		while (!inputValid) {
 			System.out.print("Ship name: ");
@@ -122,6 +134,134 @@ public class Game {
 				if (confirm.equals("y") || confirm.equals("yes")) {
 					inputValid = true;
 				}
+			}
+		}
+		return new Ship(shipName, 200, 200);
+	}
+
+	private ArrayList<CrewMember> createCrewMembers(Scanner scanner) {
+		ArrayList<CrewMember> crewMembers = new ArrayList<>();
+		int crewCount = -1;
+		System.out.println("How many crew members would you like to have?");
+		while (crewCount < 2 || crewCount > 4) {
+			try {
+				System.out.print("(Min. 2, Max. 4): ");
+				String crewStr = scanner.nextLine().trim();
+				crewCount = Integer.parseInt(crewStr);
+				if (crewCount < 2 || crewCount > 4) {
+					System.out.println("Please enter a valid number between 2 and 4.");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Please enter a valid number between 2 and 4.");
+			}
+		}
+
+		System.out.println("Crew Member Setup:\n");
+		while (crewMembers.size() < crewCount) {
+			System.out.println("Please make a selection:");
+			System.out.println("1 - Create a crew member");
+			System.out.println("2 - Help");
+			System.out.print("(Selection): ");
+			String selection = scanner.nextLine().trim();
+			switch (selection) {
+				case "1":
+					displayCrewMemberTypes();
+					break;
+				case "2":
+					displayCreateCrewHelp(scanner);
+					break;
+				default:
+					System.out.println("Invalid option entered.");
+					break;
+			}
+		}
+
+		return crewMembers;
+	}
+
+	private void displayCrewMemberTypes() {
+		System.out.println("Crew Member Types:\n");
+		System.out.println("1 - Space Marine");
+		System.out.println("2 - Scout");
+		System.out.println("3 - Mechanic");
+		System.out.println("4 - Doctor");
+		System.out.println("5 - Chef");
+		System.out.println("6 - Space Bard");
+	}
+
+	private void displayCreateCrewHelp(Scanner scanner) {
+		String selection = "";
+		while (!selection.equals("7")) {
+			System.out.println("Which class would you like to view?\n");
+			System.out.println("1 - Space Marine");
+			System.out.println("2 - Scout");
+			System.out.println("3 - Mechanic");
+			System.out.println("4 - Doctor");
+			System.out.println("5 - Chef");
+			System.out.println("6 - Space Bard");
+			System.out.println("7 - Exit Help");
+			selection = scanner.nextLine().trim();
+			switch (selection) {
+				case "1":
+					System.out.println("Space Marine:\n");
+					System.out.println("*Description*\n");
+					System.out.println("Stats:");
+					System.out.println("Max Health: ");
+					System.out.println("Max Hunger: ");
+					System.out.println();
+					System.out.println("Special ability:");
+					System.out.println("*Special ability description*");
+					break;
+				case "2":
+					System.out.println("Scout:\n");
+					System.out.println("*Description*\n");
+					System.out.println("Stats:");
+					System.out.println("Max Health: ");
+					System.out.println("Max Hunger: ");
+					System.out.println();
+					System.out.println("Special ability:");
+					System.out.println("*Special ability description*");
+					break;
+				case "3":
+					System.out.println("Mechanic:\n");
+					System.out.println("*Description*\n");
+					System.out.println("Stats:");
+					System.out.println("Max Health: ");
+					System.out.println("Max Hunger: ");
+					System.out.println();
+					System.out.println("Special ability:");
+					System.out.println("*Special ability description*");
+					break;
+				case "4":
+					System.out.println("Doctor:\n");
+					System.out.println("*Description*\n");
+					System.out.println("Stats:");
+					System.out.println("Max Health: ");
+					System.out.println("Max Hunger: ");
+					System.out.println();
+					System.out.println("Special ability:");
+					System.out.println("*Special ability description*");
+					break;
+				case "5":
+					System.out.println("Chef:\n");
+					System.out.println("*Description*\n");
+					System.out.println("Stats:");
+					System.out.println("Max Health: ");
+					System.out.println("Max Hunger: ");
+					System.out.println();
+					System.out.println("Special ability:");
+					System.out.println("*Special ability description*");
+					break;
+				case "6":
+					System.out.println("Space Bard:\n");
+					System.out.println("*Description*\n");
+					System.out.println("Stats:");
+					System.out.println("Max Health: ");
+					System.out.println("Max Hunger: ");
+					System.out.println();
+					System.out.println("Special ability:");
+					System.out.println("*Special ability description*");
+					break;
 			}
 		}
 	}
