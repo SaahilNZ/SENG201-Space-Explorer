@@ -43,6 +43,7 @@ public class Game {
 		System.out.println();
 
 		selectDays();
+		System.out.println();
 		generatePlanets();
 		createCrew();
 
@@ -110,6 +111,7 @@ public class Game {
 				}
 			}
 		}
+		System.out.println();
 
 		Ship ship = createShip(scanner);
 		ArrayList<CrewMember> crewMembers = createCrewMembers(scanner);
@@ -135,6 +137,7 @@ public class Game {
 					inputValid = true;
 				}
 			}
+			System.out.println();
 		}
 		return new Ship(shipName, 200, 200);
 	}
@@ -154,6 +157,7 @@ public class Game {
 			} catch (NumberFormatException e) {
 				System.out.println("Please enter a valid number between 2 and 4.");
 			}
+			System.out.println();
 		}
 
 		System.out.println("Crew Member Setup:\n");
@@ -163,6 +167,7 @@ public class Game {
 			System.out.println("2 - Help");
 			System.out.print("(Selection): ");
 			String selection = scanner.nextLine().trim();
+			System.out.println();
 			switch (selection) {
 				case "1":
 					displayCrewMemberTypes();
@@ -172,6 +177,7 @@ public class Game {
 					break;
 				default:
 					System.out.println("Invalid option entered.");
+					System.out.println();
 					break;
 			}
 		}
@@ -187,6 +193,7 @@ public class Game {
 		System.out.println("4 - Doctor");
 		System.out.println("5 - Chef");
 		System.out.println("6 - Space Bard");
+		System.out.println();
 	}
 
 	private void displayCreateCrewHelp(Scanner scanner) {
@@ -200,6 +207,7 @@ public class Game {
 			System.out.println("5 - Chef");
 			System.out.println("6 - Space Bard");
 			System.out.println("7 - Exit Help");
+			System.out.print("(Selection): ");
 			selection = scanner.nextLine().trim();
 			switch (selection) {
 				case "1":
@@ -263,6 +271,7 @@ public class Game {
 					System.out.println("*Special ability description*");
 					break;
 			}
+			System.out.println();
 		}
 	}
 
