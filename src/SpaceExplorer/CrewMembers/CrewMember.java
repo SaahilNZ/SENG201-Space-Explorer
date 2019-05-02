@@ -15,6 +15,7 @@ public abstract class CrewMember {
 	private int maxTiredness;
 	private int actionsLeft = 2;
 	private boolean hasPlague = false;
+	private boolean isAlive = true;
 	
 	public CrewMember(String name, String crewClass, int maxHealth,
 		int maxHunger, int maxTiredness) {
@@ -52,42 +53,80 @@ public abstract class CrewMember {
 		return hasPlague;
 	}
 	
+	public boolean alive() {
+		return isAlive;
+	}
+	
 	public void damageCrew(int damage) {
 		health -= damage;
+		if (health <= 0) {
+			health = 0;
+			isAlive = false;
+		}
 	}
 	
 	public void sleep() {
-		tiredness = maxTiredness;
+		if (actionsLeft > 0){
+			tiredness = maxTiredness;
+			actionsLeft -= 1;
+		}else {
+			System.out.println(name + " is out of actions for the day");
+		}
 	}
 	
 	public void heal(int restore) {
-		health += restore;
-		if(health >= maxHealth) {
-			health = maxHealth;
+		if (isAlive) {
+			health += restore;
+			if(health >= maxHealth) {
+				health = maxHealth;
+			}
+		}else {
+			System.out.println(name + " is dead");
 		}
 	}
 	
 	public void eat(int food) {
-		hunger += food;
-		if(hunger >= maxHunger) {
-			hunger = maxHunger;
+		if (actionsLeft > 0) {
+			hunger += food;
+			actionsLeft -= 1;
+			if(hunger >= maxHunger) {
+				hunger = maxHunger;
+			}
+		}else {
+			System.out.println(name + " is out of actions for the day");
 		}
 	}
 	
 	public void setPlague(boolean status) {
 		hasPlague = status;
+		if(status) {
+			damageCrew(10);
+		}
 	}
 	
 	public void viewStatus() {
 		//For command line application
 		System.out.println(name + "'s status:");
+		System.out.println("Class: " + crewClass);
 		System.out.println("Health: " + health + "%");
 		System.out.println("Hunger: " + hunger + "%");
 		System.out.println("Tiredness: " + tiredness + "%");
 		System.out.println("Actions left: " + actionsLeft);
+		if(isAlive) {System.out.println("They are alive");
+		}else {System.out.println("They are dead");}
 	}
 	
-	public void use() {
+	public void becomeTired(int exhaustion) {
+		tiredness -= exhaustion;
+		if (tiredness<0) {tiredness = 0;}
+	}
+	
+	public void becomeHungry(int hungeryness) {
+		hunger -= hungeryness;
+		if(hunger<0) {hunger = 0;}
+	}
+	
+	public void useItem() {
 		//Use an item (both medical and food)
 	}
 	
