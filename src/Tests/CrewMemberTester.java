@@ -9,16 +9,15 @@ import SpaceExplorer.CrewMembers.Scout;
 //Remaining tests to write: useItem, repairShip, searchPlanet, pilotShip, visitOutpost, purchaseItem
 class CrewMemberTester {
 	
+	private Scout testCrew;
+	
 	@BeforeEach
 	public void init() {
-		//Would like to have the testCrew created before each test, 
-		//but can't get it working for some reason
+		testCrew = new Scout("Claptrap");
 	}
 	
 	@Test
 	public void healthTest() {
-		Scout testCrew = new Scout("Claptrap");
-		
 		int startHealth = testCrew.getHealth();
 		
 		//Basic tests for functionality of damage and heal
@@ -34,8 +33,6 @@ class CrewMemberTester {
 	
 	@Test
 	public void deathTest() {
-		Scout testCrew = new Scout("Claptrap");
-		
 		//Makes sure members start alive
 		assertEquals(true, testCrew.alive());
 		
@@ -51,8 +48,6 @@ class CrewMemberTester {
 	
 	@Test
 	public void tiredTest() {
-		Scout testCrew = new Scout("Claptrap");
-		
 		int startTired = testCrew.getTiredness();
 		
 		//Tests if a crew member's tiredness can change
@@ -78,8 +73,6 @@ class CrewMemberTester {
 	@Test
 	public void hungerTest() {
 		//Hunger tests mirror those in tiredTest()
-		Scout testCrew = new Scout("Claptrap");
-		
 		int startHunger = testCrew.getHunger();
 		
 		testCrew.becomeHungry(60);
@@ -100,8 +93,6 @@ class CrewMemberTester {
 	
 	@Test
 	public void plagueTest() {
-		Scout testCrew = new Scout("Claptrap");
-		
 		int startHealth = testCrew.getHealth();
 		
 		//Checks plague status can be changed, and that it damages the crew member afflicted
