@@ -1,12 +1,19 @@
 package SpaceExplorer.CrewMembers;
 
+import SpaceExplorer.Ship;
+
 public class Mechanic extends CrewMember {
 	public Mechanic(String name) {
 		super(name, "Mechanic", DEFAULT_HEALTH, DEFAULT_HUNGER, DEFAULT_TIREDNESS);
 	}
 	
 	@Override
-	public void repairShip() {
-		//Repair the ship
+	public void repairShip(Ship ship) {
+		if (super.getActions()>0) {
+			super.takeAction();
+			ship.repairShield(60);
+			ship.repairShip(40);
+		}
 	}
+	
 }
