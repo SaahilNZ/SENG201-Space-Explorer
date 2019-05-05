@@ -10,10 +10,10 @@ public class ItemFactory {
 		return new MedicalItem(id, name, price, canBeFound, canBeSold, restoreAmount, curesPlague);
 	}
 	
-	public static FoodItem createFoodItem(String name, int price,
+	public static FoodItem createFoodItem(String name, String cookedName, int price,
 			boolean canBeFound, boolean canBeSold, int hungerAmount) {
 		int id = itemId;
 		itemId++;
-		return new FoodItem(id, name, price, canBeFound, canBeSold, hungerAmount);
+		return new FoodItem(id, name, cookedName, price, canBeFound, canBeSold, hungerAmount);
 	}
 }
