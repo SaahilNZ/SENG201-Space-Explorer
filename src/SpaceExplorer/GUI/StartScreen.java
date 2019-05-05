@@ -50,14 +50,14 @@ public class StartScreen {
 		frmStartScreen.setTitle("Space Explorer");
 		frmStartScreen.setName("Start Screen");
 		frmStartScreen.setResizable(false);
-		frmStartScreen.setBounds(100, 100, 600, 480);
+		frmStartScreen.setBounds(100, 100, 640, 480);
 		frmStartScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStartScreen.getContentPane().setLayout(null);
 		
 		JLabel lblSpaceExplorer = new JLabel("Space Explorer");
 		lblSpaceExplorer.setFont(new Font("Tahoma", Font.PLAIN, 48));
 		lblSpaceExplorer.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSpaceExplorer.setBounds(12, 12, 570, 194);
+		lblSpaceExplorer.setBounds(12, 12, 610, 194);
 		frmStartScreen.getContentPane().add(lblSpaceExplorer);
 		
 		JButton btnStartGame = new JButton("Start Game");
@@ -68,7 +68,7 @@ public class StartScreen {
 			}
 		});
 		btnStartGame.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnStartGame.setBounds(12, 219, 570, 100);
+		btnStartGame.setBounds(12, 219, 610, 100);
 		frmStartScreen.getContentPane().add(btnStartGame);
 		
 		JButton btnQuitGame = new JButton("Quit Game");
@@ -79,7 +79,7 @@ public class StartScreen {
 			}
 		});
 		btnQuitGame.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnQuitGame.setBounds(12, 332, 570, 100);
+		btnQuitGame.setBounds(12, 332, 610, 100);
 		frmStartScreen.getContentPane().add(btnQuitGame);
 	}
 
