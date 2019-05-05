@@ -58,6 +58,15 @@ public abstract class CrewMember {
 	}
 	
 	/**
+	 * Getter function for the crew member's maximum health
+	 * 
+	 * @return				The crew member's max health
+	 */
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+	
+	/**
 	 * Getter functions for the crew member's name
 	 * 
 	 * @return				The crew member's name
@@ -76,12 +85,30 @@ public abstract class CrewMember {
 	}
 	
 	/**
+	 * Getter function for the crew member's maximum hunger
+	 * 
+	 * @return				The crew member's max hunger level
+	 */
+	public int getMaxHunger() {
+		return maxHunger;
+	}
+	
+	/**
 	 * Getter function for the crew member's tiredness
 	 * 
 	 * @return				The crew member's level of tiredness
 	 */
 	public int getTiredness() {
 		return tiredness;
+	}
+	
+	/**
+	 * Getter function for the crew member's maximum tiredness
+	 * 
+	 * @return				The crew member's max level of tiredness
+	 */
+	public int getMaxTiredness() {
+		return maxTiredness;
 	}
 	
 	/**
