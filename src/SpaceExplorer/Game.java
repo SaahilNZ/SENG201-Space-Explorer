@@ -1,9 +1,13 @@
 package SpaceExplorer;
 
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import SpaceExplorer.CrewMembers.*;
+import SpaceExplorer.GUI.StartScreen;
 import SpaceExplorer.Utilities.NameGenerator;
 import SpaceExplorer.Utilities.StaticData;
 
@@ -11,6 +15,8 @@ public class Game {
 	private static final int STARTING_MONEY = 200;
 
 	private static Game instance;
+	
+	private Scanner scanner;
 	
 	private ArrayList<Planet> planets;
 	private ArrayList<Item> allItems;
@@ -21,6 +27,7 @@ public class Game {
 	private Game() {
 		planets = new ArrayList<Planet>();
 		allItems = new ArrayList<Item>();
+		scanner = new Scanner(System.in);
 	}
 	
 	public static Game getCurrentGame() {
@@ -38,7 +45,7 @@ public class Game {
 		return currentDay;
 	}
 	
-	private void startGame() {
+	public void startGame() {
 		System.out.println("Space Explorer");
 		System.out.println();
 
@@ -62,7 +69,6 @@ public class Game {
 	}
 
 	private void selectDays() {
-		Scanner scanner = new Scanner(System.in);
 		int days = -1;
 		System.out.println("How many days would you like the game to last?");
 		while (days < 3 || days > 10) {
@@ -96,8 +102,6 @@ public class Game {
 
 	private void createCrew() {
 		System.out.println("Crew Setup:\n");
-		Scanner scanner = new Scanner(System.in);
-
 		String crewName = "";
 		boolean inputValid = false;
 		System.out.println("Please enter a crew name:");
@@ -117,14 +121,14 @@ public class Game {
 		}
 		System.out.println();
 
-		Ship ship = createShip(scanner);
-		ArrayList<CrewMember> crewMembers = createCrewMembers(scanner);
+		Ship ship = createShip();
+		ArrayList<CrewMember> crewMembers = createCrewMembers();
 
 
 		this.crew = new Crew(crewMembers, crewName, ship, STARTING_MONEY, null);
 	}
 
-	private Ship createShip(Scanner scanner) {
+	private Ship createShip() {
 		String shipName = "";
 		boolean inputValid = false;
 		System.out.println("Please enter a ship name:");
@@ -146,7 +150,7 @@ public class Game {
 		return new Ship(shipName, 200, 200);
 	}
 
-	private ArrayList<CrewMember> createCrewMembers(Scanner scanner) {
+	private ArrayList<CrewMember> createCrewMembers() {
 		ArrayList<CrewMember> crewMembers = new ArrayList<>();
 		int crewCount = -1;
 		while (crewCount < 2 || crewCount > 4) {
@@ -176,13 +180,13 @@ public class Game {
 			System.out.println();
 			switch (selection) {
 				case "1":
-					CrewMember crewMember = createCrewMember(scanner);
+					CrewMember crewMember = createCrewMember();
 					if (crewMember != null) {
 						crewMembers.add(crewMember);
 					}
 					break;
 				case "2":
-					displayCreateCrewHelp(scanner);
+					displayCreateCrewHelp();
 					break;
 				default:
 					System.out.println("Invalid option entered.\n");
@@ -193,7 +197,7 @@ public class Game {
 		return crewMembers;
 	}
 
-	private CrewMember createCrewMember(Scanner scanner) {
+	private CrewMember createCrewMember() {
 		CrewMember crewMember = null;
 		boolean isValid = false;
 		while (!isValid) {
@@ -271,7 +275,7 @@ public class Game {
 		return crewMember;
 	}
 
-	private void displayCreateCrewHelp(Scanner scanner) {
+	private void displayCreateCrewHelp() {
 		String selection = "";
 		while (!selection.equals("7")) {
 			System.out.println("Which class would you like to view?\n");
@@ -361,12 +365,8 @@ public class Game {
 		this.currentDay += 1;
 	}
 
-	private void quitGame() {
+	public void quitGame() {
+		scanner.close();
 		System.exit(0);
-	}
-	
-	public static void main(String[] args) {
-		Game game = Game.getCurrentGame();
-		game.startGame();
 	}
 }
