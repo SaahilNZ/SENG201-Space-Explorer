@@ -30,21 +30,7 @@ class CrewMemberTester {
 		assertEquals(startHealth, testCrew.getHealth());
 		
 	}
-	
-	@Test
-	public void deathTest() {
-		//Makes sure members start alive
-		assertEquals(true, testCrew.alive());
-		
-		//Tests if death is possible
-		testCrew.damageCrew(200);
-		assertEquals(false, testCrew.alive());
-		
-		//Makes sure members stay dead
-		testCrew.heal(300);
-		assertEquals(0, testCrew.getHealth());
-		assertEquals(false, testCrew.alive());	
-	}
+
 	
 	@Test
 	public void tiredTest() {

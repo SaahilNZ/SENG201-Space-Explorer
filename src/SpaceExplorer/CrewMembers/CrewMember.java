@@ -26,7 +26,6 @@ public abstract class CrewMember {
 	private int maxTiredness;
 	private int actionsLeft = 2;
 	private boolean hasPlague = false;
-	private boolean isAlive = true;
 	
 	/**
 	 * A basic constructor for the CrewMember class
@@ -103,15 +102,6 @@ public abstract class CrewMember {
 		return hasPlague;
 	}
 	
-	/**
-	 * Getter function for if the crew member is alive
-	 * 
-	 * @return				True if the crew member is alive, false otherwise
-	 */
-	public boolean alive() {
-		//This function is likely pointless
-		return isAlive;
-	}
 	
 	/**
 	 * Reduces the number of actions the crew member has remaining
@@ -130,7 +120,7 @@ public abstract class CrewMember {
 	public void damageCrew(int damage) {
 		health = Math.max(0, health-damage);
 		if (health == 0) {
-			isAlive = false;
+			//Unsure how to remove a crew member from the crew at the moment
 		}
 	}
 	
@@ -189,8 +179,6 @@ public abstract class CrewMember {
 		System.out.println("Hunger: " + hunger + "%");
 		System.out.println("Tiredness: " + tiredness + "%");
 		System.out.println("Actions left: " + actionsLeft);
-		if(isAlive) {System.out.println("They are alive");//Potentially pointless as crew members are
-		}else {System.out.println("They are dead");}      //meant to be removed from the crew upon death
 	}
 	
 	/**
@@ -199,7 +187,7 @@ public abstract class CrewMember {
 	 * @param exhaustion				Amount the crew member's tiredness levels are reduced by
 	 */
 	public void becomeTired(int exhaustion) {
-		tiredness = Math.min(0, tiredness-exhaustion);
+		tiredness = Math.max(0, tiredness-exhaustion);
 	}
 	
 	/**
@@ -208,7 +196,7 @@ public abstract class CrewMember {
 	 * @param hungeryness				Amount the crew member's hunger levels are reduces by
 	 */
 	public void becomeHungry(int hungeryness) {
-		hunger = Math.min(0, health-hungeryness);
+		hunger = Math.max(0, hunger-hungeryness);
 	}
 	
 	/**

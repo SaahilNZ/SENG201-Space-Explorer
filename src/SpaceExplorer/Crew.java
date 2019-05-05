@@ -54,4 +54,8 @@ public class Crew {
 	public ArrayList<CrewMember> getCrewMembers() {
 		return crewMembers;
 	}
+	
+	public void removeMember(CrewMember member) {
+		//Not quite sure how to handle removing a crew member at the moment
+	}
 }
