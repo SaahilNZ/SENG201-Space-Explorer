@@ -3,13 +3,11 @@ package SpaceExplorer.GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import SpaceExplorer.Game;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -81,9 +79,5 @@ public class StartScreen {
 		btnQuitGame.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnQuitGame.setBounds(12, 332, 610, 100);
 		frmStartScreen.getContentPane().add(btnQuitGame);
-	}
-
-	public JFrame getFrame() {
-		return frmStartScreen;
 	}
 }
