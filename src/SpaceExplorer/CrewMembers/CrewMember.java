@@ -1,5 +1,6 @@
 package SpaceExplorer.CrewMembers;
 
+import SpaceExplorer.FoodItem;
 import SpaceExplorer.MedicalItem;
 import SpaceExplorer.Planet;
 import SpaceExplorer.Ship;
@@ -173,9 +174,9 @@ public abstract class CrewMember {
 	 * 
 	 * @param food				Amount of hunger restored to the crew member
 	 */
-	public void eat(int food) {
+	public void eat(FoodItem food) {
 		if (actionsLeft > 0) {
-			hunger = Math.min(maxHunger, hunger+food);
+			hunger = Math.min(maxHunger, hunger + food.getHungerAmount());
 			actionsLeft -= 1;
 		}
 	}
@@ -183,13 +184,9 @@ public abstract class CrewMember {
 	/**
 	 * Sets the crew member's plague status. Does damage to the crew member if they get the plague
 	 * 
-	 * @param status			True for plague. False otherwise
 	 */
-	public void setPlague(boolean status) {
-		hasPlague = status;
-		if(status) {
-			damageCrew(10);
-		}
+	public void getPlague() {
+		hasPlague = true;
 	}
 	
 	/**

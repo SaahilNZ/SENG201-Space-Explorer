@@ -24,8 +24,6 @@ public class FoodItem extends Item {
 		if (isCooked != true) {
 			hungerAmount += 20;
 			isCooked = true;
-		}else {
-			System.out.println("This has already been cooked.");
 		}
 	}
 

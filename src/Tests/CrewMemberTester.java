@@ -1,6 +1,7 @@
 package Tests;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -58,37 +59,21 @@ class CrewMemberTester {
 	
 	@Test
 	public void hungerTest() {
-		//Hunger tests mirror those in tiredTest()
 		int startHunger = testCrew.getHunger();
-		
+		//Checks a crew member can become hungry
 		testCrew.becomeHungry(60);
 		assertEquals(startHunger-60, testCrew.getHunger());
 		
-		testCrew.eat(60);
-		assertEquals(startHunger, testCrew.getHunger());
-		assertEquals(1, testCrew.getActions());
-		
-		testCrew.eat(10);
-		testCrew.becomeHungry(10);
-		testCrew.eat(10);
-		assertEquals(startHunger - 10, testCrew.getHunger());
-		
+		//Makes sure hunger can't fall below 0
 		testCrew.becomeHungry(200);
 		assertEquals(0, testCrew.getHunger());
 	}
 	
 	@Test
 	public void plagueTest() {
-		int startHealth = testCrew.getHealth();
-		
-		//Checks plague status can be changed, and that it damages the crew member afflicted
-		testCrew.setPlague(true);
+		//Checks plague status can be applied
+		testCrew.getPlague();
 		assertEquals(true, testCrew.hasPlague());
-		assertEquals(startHealth - 10, testCrew.getHealth());
-		
-		//Checks plague can be removed
-		testCrew.setPlague(false);
-		assertEquals(false, testCrew.hasPlague());
 	}
 	
 
