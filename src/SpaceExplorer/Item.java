@@ -28,6 +28,7 @@ public abstract class Item {
 	}
 	
 	public abstract void viewObject();
+		
 	
 	@Override
 	public String toString() {

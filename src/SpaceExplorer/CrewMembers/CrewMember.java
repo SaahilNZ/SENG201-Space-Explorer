@@ -3,8 +3,6 @@ package SpaceExplorer.CrewMembers;
 import SpaceExplorer.MedicalItem;
 import SpaceExplorer.Planet;
 import SpaceExplorer.Ship;
-import SpaceExplorer.Crew;
-import SpaceExplorer.Game;
 
 /**
  * This class implements a crew member and their associated functionality.
@@ -28,7 +26,6 @@ public abstract class CrewMember {
 	private int maxTiredness;
 	private int actionsLeft = 2;
 	private boolean hasPlague = false;
-	private boolean isAlive = true;
 	
 	/**
 	 * A basic constructor for the CrewMember class
@@ -149,9 +146,6 @@ public abstract class CrewMember {
 	 */
 	public void damageCrew(int damage) {
 		health = Math.max(0, health-damage);
-		if (health == 0) {
-			isAlive = false;
-		}
 	}
 	
 	/**

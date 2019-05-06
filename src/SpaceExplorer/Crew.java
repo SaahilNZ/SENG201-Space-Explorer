@@ -35,6 +35,10 @@ public class Crew {
 		return money;
 	}
 	
+	public int currentMoney() {
+		return money;
+	}
+	
 	public int getShipPieces() {
 		return shipPiecesFound;
 	}
