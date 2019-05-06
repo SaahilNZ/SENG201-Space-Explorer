@@ -37,6 +37,10 @@ public class Game {
 		return instance;
 	}
 	
+	public Crew getCrew() {
+		return crew;
+	}
+	
 	public ArrayList<Item> getItems() {
 		return allItems;
 	}

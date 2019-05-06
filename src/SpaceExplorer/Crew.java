@@ -56,6 +56,6 @@ public class Crew {
 	}
 	
 	public void removeMember(CrewMember member) {
-		//Not quite sure how to handle removing a crew member at the moment
+		crewMembers.remove(member);
 	}
 }

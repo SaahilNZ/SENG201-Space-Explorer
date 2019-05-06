@@ -5,8 +5,4 @@ public class SpaceMarine extends CrewMember {
 		super(name, "Space Marine", 120, DEFAULT_TIREDNESS, 110);
 	}
 	
-	public void defendShip() {
-		//Defends the ship
-	}
-	
 }

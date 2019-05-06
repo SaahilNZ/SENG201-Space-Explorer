@@ -91,6 +91,5 @@ class CrewMemberTester {
 		assertEquals(false, testCrew.hasPlague());
 	}
 	
-	
 
 }
