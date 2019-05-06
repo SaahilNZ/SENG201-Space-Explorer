@@ -8,19 +8,21 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JSplitPane;
 import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
-import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class CreateCrewMemberDialog extends JDialog {
+public class CreateCrewMemberDialog extends JDialog implements ActionListener {
 
 	private final JPanel pnlContent = new JPanel();
 	private JTextField txtCrewMemberName;
+	private String selectedCrewType = "Space Marine";
 
 	/**
 	 * Create the dialog.
@@ -54,30 +56,49 @@ public class CreateCrewMemberDialog extends JDialog {
 			{
 				JPanel pnlSplitLeft = new JPanel();
 				spCrewTypes.setLeftComponent(pnlSplitLeft);
+				ButtonGroup crewTypes = new ButtonGroup();
 				pnlSplitLeft.setLayout(new BoxLayout(pnlSplitLeft, BoxLayout.Y_AXIS));
 				{
 					JRadioButton rbSpaceMarine = new JRadioButton("Space Marine");
+					rbSpaceMarine.setActionCommand("Space Marine");
+					rbSpaceMarine.addActionListener(this);
+					crewTypes.add(rbSpaceMarine);
 					rbSpaceMarine.setSelected(true);
 					pnlSplitLeft.add(rbSpaceMarine);
 				}
 				{
 					JRadioButton rbScout = new JRadioButton("Scout");
+					rbScout.setActionCommand("Scout");
+					rbScout.addActionListener(this);
+					crewTypes.add(rbScout);
 					pnlSplitLeft.add(rbScout);
 				}
 				{
 					JRadioButton rbMechanic = new JRadioButton("Mechanic");
+					rbMechanic.setActionCommand("Mechanic");
+					rbMechanic.addActionListener(this);
+					crewTypes.add(rbMechanic);
 					pnlSplitLeft.add(rbMechanic);
 				}
 				{
 					JRadioButton rbDoctor = new JRadioButton("Doctor");
+					rbDoctor.setActionCommand("Doctor");
+					rbDoctor.addActionListener(this);
+					crewTypes.add(rbDoctor);
 					pnlSplitLeft.add(rbDoctor);
 				}
 				{
 					JRadioButton rbChef = new JRadioButton("Chef");
+					rbChef.setActionCommand("Chef");
+					rbChef.addActionListener(this);
+					crewTypes.add(rbChef);
 					pnlSplitLeft.add(rbChef);
 				}
 				{
 					JRadioButton rbSpaceBard = new JRadioButton("Space Bard");
+					rbSpaceBard.setActionCommand("Space Bard");
+					rbSpaceBard.addActionListener(this);
+					crewTypes.add(rbSpaceBard);
 					pnlSplitLeft.add(rbSpaceBard);
 				}
 			}
@@ -117,4 +138,15 @@ public class CreateCrewMemberDialog extends JDialog {
 		}
 	}
 
+	public String getCrewMemberName() {
+		return txtCrewMemberName.getText();
+	}
+	
+	public String getCrewMemberType() {
+		return selectedCrewType;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		selectedCrewType = e.getActionCommand();
+	}
 }
