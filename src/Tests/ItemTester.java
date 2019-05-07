@@ -29,7 +29,7 @@ private FoodItem burger;
 		//Tests health is restored correctly and plague can be removed
 		int startHealth = testCrew.getHealth();
 		testCrew.damageCrew(30);
-		testCrew.getPlague();
+		testCrew.setPlague(true);
 		testCrew.useItem(healthPod);
 		assertEquals(startHealth-10, testCrew.getHealth());
 		assertEquals(false, testCrew.hasPlague());
@@ -37,7 +37,7 @@ private FoodItem burger;
 		//Ensures an item can't be used after all actions consumed
 		testCrew.sleep();
 		testCrew.damageCrew(20);
-		testCrew.getPlague();
+		testCrew.setPlague(true);
 		testCrew.useItem(healthPod);
 		assertEquals(true, testCrew.hasPlague());
 		assertEquals(startHealth-30, testCrew.getHealth());

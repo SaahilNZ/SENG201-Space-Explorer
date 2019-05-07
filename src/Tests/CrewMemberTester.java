@@ -72,7 +72,7 @@ class CrewMemberTester {
 	@Test
 	public void plagueTest() {
 		//Checks plague status can be applied
-		testCrew.getPlague();
+		testCrew.setPlague(true);
 		assertEquals(true, testCrew.hasPlague());
 	}
 	

@@ -185,8 +185,8 @@ public abstract class CrewMember {
 	 * Sets the crew member's plague status. Does damage to the crew member if they get the plague
 	 * 
 	 */
-	public void getPlague() {
-		hasPlague = true;
+	public void setPlague(boolean status) {
+		this.hasPlague = status;
 	}
 	
 	/**
