@@ -117,7 +117,7 @@ public class SetupScreen extends JDialog {
 			lstCrewList = new JList<>(crewListModel);
 			lstCrewList.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent arg0) {
-					btnRemove.setEnabled(arg0.getFirstIndex() != -1);
+					btnRemove.setEnabled(lstCrewList.getSelectedIndex() != -1);
 				}
 			});
 			lstCrewList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -159,6 +159,11 @@ public class SetupScreen extends JDialog {
 					}
 					if (crewMember != null) {						
 						crewListModel.addElement(crewMember);
+						int crewCount = crewListModel.size();
+						btnConfirm.setEnabled(crewCount >= 2);
+						if (crewCount >= 4) {
+							btnAdd.setEnabled(false);
+						}
 					}
 				}
 			});
@@ -166,6 +171,15 @@ public class SetupScreen extends JDialog {
 			pnlListButtons.add(btnAdd);
 			
 			btnRemove = new JButton("Remove");
+			btnRemove.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					crewListModel.remove(lstCrewList.getSelectedIndex());
+					lstCrewList.clearSelection();
+					if (crewListModel.size() < 4) {
+						btnAdd.setEnabled(true);
+					}
+				}
+			});
 			btnRemove.setEnabled(false);
 			btnRemove.setAlignmentX(Component.CENTER_ALIGNMENT);
 			pnlListButtons.add(btnRemove);
