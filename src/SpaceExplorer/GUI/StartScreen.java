@@ -64,6 +64,7 @@ public class StartScreen {
 				Game game = Game.getCurrentGame();
 				SetupScreen setup = new SetupScreen(frmStartScreen);
 				setup.setVisible(true);
+				game.setupGame(setup.getDays(), setup.getCrew());
 			}
 		});
 		btnStartGame.setFont(new Font("Tahoma", Font.PLAIN, 30));

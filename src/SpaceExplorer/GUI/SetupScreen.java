@@ -11,6 +11,8 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.SwingConstants;
 
+import SpaceExplorer.Crew;
+import SpaceExplorer.Ship;
 import SpaceExplorer.CrewMembers.*;
 import jdk.internal.org.objectweb.asm.util.CheckAnnotationAdapter;
 
@@ -18,13 +20,17 @@ import java.awt.FlowLayout;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.CompoundBorder;
 
 public class SetupScreen extends JDialog {
 
@@ -35,6 +41,9 @@ public class SetupScreen extends JDialog {
 	private JButton btnAdd;
 	private JButton btnRemove;
 	private JButton btnConfirm;
+	
+	private Crew crew;
+	private JTextField txtShipName;
 	
 	/**
 	 * Create the dialog.
@@ -95,6 +104,18 @@ public class SetupScreen extends JDialog {
 						pnlCrewName.add(txtCrewName);
 					}
 				}
+				
+				JPanel pnlShipName = new JPanel();
+				FlowLayout flowLayout_1 = (FlowLayout) pnlShipName.getLayout();
+				flowLayout_1.setAlignment(FlowLayout.LEFT);
+				pnlVerticalContent.add(pnlShipName);
+				
+				JLabel lblShipName = new JLabel("Ship Name:");
+				pnlShipName.add(lblShipName);
+				
+				txtShipName = new JTextField();
+				pnlShipName.add(txtShipName);
+				txtShipName.setColumns(36);
 				
 				JPanel pnlCrewMemberHeader = new JPanel();
 				pnlVerticalContent.add(pnlCrewMemberHeader);
@@ -188,9 +209,38 @@ public class SetupScreen extends JDialog {
 			getContentPane().add(pnlFooter, BorderLayout.SOUTH);
 			{				
 				btnConfirm = new JButton("Confirm");
+				btnConfirm.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (txtCrewName.getText().length() > 0) {
+							if (txtShipName.getText().length() > 0) {
+								Ship ship = new Ship(txtShipName.getText(), 200, 200);
+								ArrayList<CrewMember> crewMembers = new ArrayList<CrewMember>();
+								for (Object crewMember : crewListModel.toArray()) {
+									crewMembers.add((CrewMember)crewMember);
+								}
+								crew = new Crew(crewMembers, txtCrewName.getText(), ship, 200, null);
+								setVisible(false);
+							} else {
+								JOptionPane.showMessageDialog(parent, "Please name your ship.",
+										"Error", JOptionPane.ERROR_MESSAGE);
+							}
+						} else {
+							JOptionPane.showMessageDialog(parent, "Please name your crew.",
+									"Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				});
 				btnConfirm.setEnabled(false);
 				pnlFooter.add(btnConfirm);
 			}
 		}
+	}
+	
+	public Crew getCrew() {
+		return this.crew;
+	}
+	
+	public int getDays() {
+		return sldDays.getValue();
 	}
 }

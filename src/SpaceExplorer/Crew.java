@@ -3,6 +3,7 @@ package SpaceExplorer;
 import SpaceExplorer.CrewMembers.CrewMember;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Crew {
 	private ArrayList<CrewMember> crewMembers;
@@ -12,9 +13,10 @@ public class Crew {
 	private int money;
 	private int shipPiecesFound;
 	
-	public Crew(ArrayList<CrewMember> crewMembers, String crewName, Ship ship,
-				int startingMoney, ArrayList<Item> startingItems) {
-		this.crewMembers = crewMembers;
+	public Crew(Collection<CrewMember> crewMembers, String crewName, Ship ship,
+				int startingMoney, Collection<Item> startingItems) {
+		this.crewMembers = new ArrayList<>();
+		this.crewMembers.addAll(crewMembers);
 		this.crewName = crewName;
 		this.ship = ship;
 		this.items = new ArrayList<>();

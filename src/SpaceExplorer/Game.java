@@ -71,6 +71,12 @@ public class Game {
 
 		newDay();
 	}
+	
+	public void setupGame(int days, Crew crew) {
+		this.desiredDays = days;
+		this.crew = crew;
+		generatePlanets();
+	}
 
 	private void selectDays() {
 		int days = -1;
