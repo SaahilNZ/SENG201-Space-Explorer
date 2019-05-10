@@ -1,27 +1,23 @@
 package SpaceExplorer;
 
-import java.awt.EventQueue;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import javax.swing.JFrame;
 
 import SpaceExplorer.CrewMembers.*;
-import SpaceExplorer.GUI.StartScreen;
 import SpaceExplorer.Utilities.NameGenerator;
 import SpaceExplorer.Utilities.StaticData;
 
 public class Game {
-	private static final int STARTING_MONEY = 200;
+	public static final int STARTING_MONEY = 200;
 
 	private static Game instance;
 	
-	
+	private Planet currentPlanet;
 	private ArrayList<Planet> planets;
 	private ArrayList<Item> allItems;
 	private Crew crew;
 	private int desiredDays;
 	private int currentDay = 0;
+	private int totalShipParts;
 
 	private Game() {
 		planets = new ArrayList<Planet>();
@@ -39,6 +35,10 @@ public class Game {
 		return crew;
 	}
 	
+	public Planet getCurrentPlanet() {
+		return this.currentPlanet;
+	}
+	
 	public ArrayList<Item> getItems() {
 		return allItems;
 	}
@@ -47,13 +47,19 @@ public class Game {
 		return currentDay;
 	}
 	
+	public int getTotalShipParts() {
+		return totalShipParts;
+	}
+	
 	public void startGame() {
+		currentPlanet = planets.get(0);
 		newDay();
 	}
 	
 	public void setupGame(int days, Crew crew) {
 		this.desiredDays = days;
 		this.crew = crew;
+		createItems();
 		generatePlanets();
 	}
 
@@ -70,8 +76,12 @@ public class Game {
 			planets.add(new Planet(planetNameGenerator.generateName(), outpost));
 		}
 	}
+	
+	private void createItems() {
+		// TODO: create and add items to the allItems array
+	}
 
-	private void newDay() {
+	public void newDay() {
 		this.currentDay += 1;
 	}
 

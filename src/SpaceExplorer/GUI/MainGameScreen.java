@@ -1,0 +1,187 @@
+package SpaceExplorer.GUI;
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Rectangle;
+import java.awt.Component;
+import javax.swing.JTabbedPane;
+import javax.swing.JSplitPane;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.Box;
+import javax.swing.JTextPane;
+
+import SpaceExplorer.Game;
+
+import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class MainGameScreen extends JDialog {
+	
+	private JLabel lblPlanetDescription;
+	private JLabel lblShipName;
+	private JLabel lblShipStats;
+	private JLabel lblCurrentDay;
+	
+	private Game game;
+	
+	/**
+	 * Create the dialog.
+	 */
+	public MainGameScreen(JFrame parent) {
+		super(parent, true);
+		
+		game = Game.getCurrentGame();
+		
+		setTitle("Space Explorer");
+		setBounds(100, 100, 640, 480);
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		JTabbedPane tabsMainContainer = new JTabbedPane(JTabbedPane.TOP);
+		getContentPane().add(tabsMainContainer);
+		
+		JPanel pnlGameInfo = new JPanel();
+		tabsMainContainer.addTab("Game Information", null, pnlGameInfo, null);
+		pnlGameInfo.setLayout(new BorderLayout(0, 0));
+		
+		JSplitPane spGameInfo = new JSplitPane();
+		spGameInfo.setResizeWeight(0.5);
+		pnlGameInfo.add(spGameInfo);
+		
+		JPanel pnlPlanetInfo = new JPanel();
+		spGameInfo.setLeftComponent(pnlPlanetInfo);
+		pnlPlanetInfo.setLayout(new BorderLayout(0, 0));
+		
+		JPanel pnlPlanet = new JPanel();
+		pnlPlanetInfo.add(pnlPlanet, BorderLayout.NORTH);
+		pnlPlanet.setLayout(new BoxLayout(pnlPlanet, BoxLayout.Y_AXIS));
+		
+		JLabel lblPlanetName = new JLabel(game.getCurrentPlanet().toString());
+		pnlPlanet.add(lblPlanetName);
+		lblPlanetName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		pnlPlanet.add(verticalStrut);
+		
+		lblPlanetDescription = new JLabel(game.getCurrentPlanet().getDescription());
+		pnlPlanet.add(lblPlanetDescription);
+		
+		JPanel pnlPlanetButtons = new JPanel();
+		pnlPlanetInfo.add(pnlPlanetButtons, BorderLayout.SOUTH);
+		pnlPlanetButtons.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnSearchPlanet = new JButton("Search Planet");
+		pnlPlanetButtons.add(btnSearchPlanet, BorderLayout.NORTH);
+		
+		JButton btnVisitOutpost = new JButton("Visit Outpost");
+		pnlPlanetButtons.add(btnVisitOutpost, BorderLayout.SOUTH);
+		
+		Component verticalStrut_3 = Box.createVerticalStrut(10);
+		pnlPlanetButtons.add(verticalStrut_3, BorderLayout.CENTER);
+		
+		JPanel pnlShipInfo = new JPanel();
+		spGameInfo.setRightComponent(pnlShipInfo);
+		pnlShipInfo.setLayout(new BorderLayout(0, 0));
+		
+		JPanel pnlShip = new JPanel();
+		pnlShipInfo.add(pnlShip, BorderLayout.NORTH);
+		pnlShip.setLayout(new BoxLayout(pnlShip, BoxLayout.Y_AXIS));
+		
+		lblShipName = new JLabel(game.getCrew().getShip().toString());
+		lblShipName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		pnlShip.add(lblShipName);
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(20);
+		pnlShip.add(verticalStrut_1);
+		
+		String shipStats = game.getCrew().getShip().getStatus();
+		shipStats += "\nShip parts found: " + game.getCrew().getShipPieces() + "/" + game.getTotalShipParts();
+		lblShipStats = new JLabel(shipStats);
+		pnlShip.add(lblShipStats);
+		
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		pnlShip.add(verticalStrut_2);
+		
+		lblCurrentDay = new JLabel("Current Day: " + game.getCurrentDay());
+		pnlShip.add(lblCurrentDay);
+		
+		JButton btnNextDay = new JButton("Next Day");
+		btnNextDay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				game.newDay();
+			}
+		});
+		pnlShipInfo.add(btnNextDay, BorderLayout.SOUTH);
+		
+		JPanel pnlCrewControls = new JPanel();
+		tabsMainContainer.addTab("Crew Controls", null, pnlCrewControls, null);
+		pnlCrewControls.setLayout(null);
+		
+		JButton btnViewCrew = new JButton("View Crew");
+		btnViewCrew.setBounds(10, 36, 100, 100);
+		pnlCrewControls.add(btnViewCrew);
+		
+		JLabel lblActions = new JLabel("Regular Actions:");
+		lblActions.setBounds(10, 11, 89, 14);
+		pnlCrewControls.add(lblActions);
+		
+		JButton btnPilotShip = new JButton("Pilot Ship");
+		btnPilotShip.setBounds(120, 36, 100, 100);
+		pnlCrewControls.add(btnPilotShip);
+		
+		JButton btnUseItem = new JButton("Use Item");
+		btnUseItem.setBounds(10, 147, 100, 100);
+		pnlCrewControls.add(btnUseItem);
+		
+		JButton btnSleep = new JButton("Sleep");
+		btnSleep.setBounds(120, 147, 100, 100);
+		pnlCrewControls.add(btnSleep);
+		
+		JButton btnCookFood = new JButton("Cook Food");
+		btnCookFood.setBounds(304, 36, 100, 100);
+		pnlCrewControls.add(btnCookFood);
+		
+		JButton btnPerformMusic = new JButton("Perform Music");
+		btnPerformMusic.setBounds(304, 147, 100, 100);
+		pnlCrewControls.add(btnPerformMusic);
+		
+		JLabel lblClassActions = new JLabel("Crew Actions:");
+		lblClassActions.setBounds(304, 11, 89, 14);
+		pnlCrewControls.add(lblClassActions);
+		
+		JButton btnRepairShip = new JButton("Repair Ship");
+		btnRepairShip.setBounds(10, 258, 100, 100);
+		pnlCrewControls.add(btnRepairShip);
+		
+		JButton btnHealCrewMember = new JButton("Heal Crew");
+		btnHealCrewMember.setBounds(414, 36, 100, 94);
+		pnlCrewControls.add(btnHealCrewMember);
+		
+		JButton btnCurePlague = new JButton("Cure Plague");
+		btnCurePlague.setBounds(414, 147, 100, 100);
+		pnlCrewControls.add(btnCurePlague);
+		
+		JTextPane txtpnNoteCrewActions = new JTextPane();
+		txtpnNoteCrewActions.setEditable(false);
+		txtpnNoteCrewActions.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		txtpnNoteCrewActions.setBackground(SystemColor.control);
+		txtpnNoteCrewActions.setText("NOTE: Crew Actions can only be taken by certain types of crew members");
+		txtpnNoteCrewActions.setBounds(304, 258, 210, 100);
+		pnlCrewControls.add(txtpnNoteCrewActions);
+	}
+	
+	private void refreshDialog() {
+		
+		invalidate();
+		validate();
+		repaint();
+	}
+}

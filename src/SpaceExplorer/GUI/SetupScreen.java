@@ -12,6 +12,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.SwingConstants;
 
 import SpaceExplorer.Crew;
+import SpaceExplorer.Game;
 import SpaceExplorer.Ship;
 import SpaceExplorer.CrewMembers.*;
 import jdk.internal.org.objectweb.asm.util.CheckAnnotationAdapter;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.CompoundBorder;
+import javax.swing.Box;
 
 public class SetupScreen extends JDialog {
 
@@ -201,6 +203,9 @@ public class SetupScreen extends JDialog {
 					}
 				}
 			});
+			
+			Component verticalStrut = Box.createVerticalStrut(20);
+			pnlListButtons.add(verticalStrut);
 			btnRemove.setEnabled(false);
 			btnRemove.setAlignmentX(Component.CENTER_ALIGNMENT);
 			pnlListButtons.add(btnRemove);
@@ -218,7 +223,7 @@ public class SetupScreen extends JDialog {
 								for (Object crewMember : crewListModel.toArray()) {
 									crewMembers.add((CrewMember)crewMember);
 								}
-								crew = new Crew(crewMembers, txtCrewName.getText(), ship, 200, null);
+								crew = new Crew(crewMembers, txtCrewName.getText(), ship, Game.STARTING_MONEY, null);
 								setVisible(false);
 							} else {
 								JOptionPane.showMessageDialog(parent, "Please name your ship.",

@@ -23,12 +23,17 @@ public class Planet {
 		return outpost;
 	}
 	
+	public String getDescription() {
+		String output = (outpost == null ? "There is no outpost on this planet.\n"
+				: "There is an outpost named " + outpost.getName() + " on this planet.\n");
+		output += "\n";
+		output += "Scans indicate that there " + (hasShipPart ? "is a ship part located on this planet.\n"
+				: "are no ship parts on this planet.");
+		return output;
+	}
+	
 	@Override
 	public String toString() {
-		String output = "Planet " + name + "\n";
-		output += "This planet " + (hasShipPart ? "has a ship part.\n" : "does not have a ship part.\n");
-		output += (outpost == null ? "There is no outpost on this planet.\n"
-				: "There is an outpost named " + outpost.getName() + " on this planet.\n");
-		return output;
+		return "Planet " + name;
 	}
 }

@@ -39,15 +39,14 @@ public class Ship {
 		return shield;
 	}
 	
-	public void viewStatus() {
-		System.out.println("Starship " + name);
-		System.out.println("Health: " + health + "/" + maxHealth);
-		System.out.println("Shield: " + shield + "/" + maxShield);
-		System.out.println();
+	public String getStatus() {
+		String output = "Health: " + health + "/" + maxHealth + "\n";
+		output += "Shield: " + shield + "/" + maxShield + "\n";
+		return output;
 	}
 	
 	@Override
 	public String toString() {
-		return name;
+		return "Starship " + name;
 	}
 }

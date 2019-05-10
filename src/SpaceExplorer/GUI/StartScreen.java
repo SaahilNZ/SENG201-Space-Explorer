@@ -62,9 +62,10 @@ public class StartScreen {
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Game game = Game.getCurrentGame();
-				SetupScreen setup = new SetupScreen(frmStartScreen);
-				setup.setVisible(true);
-				game.setupGame(setup.getDays(), setup.getCrew());
+//				SetupScreen setup = new SetupScreen(frmStartScreen);
+//				setup.setVisible(true);
+//				game.setupGame(setup.getDays(), setup.getCrew());
+				MainGameScreen mainGame = new MainGameScreen(frmStartScreen);
 			}
 		});
 		btnStartGame.setFont(new Font("Tahoma", Font.PLAIN, 30));
