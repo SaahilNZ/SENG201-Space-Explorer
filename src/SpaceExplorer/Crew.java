@@ -64,4 +64,17 @@ public class Crew {
 	public void removeMember(CrewMember member) {
 		crewMembers.remove(member);
 	}
+	
+	public int pruneCrewMembers() {
+		crewMembers.removeIf(crewMember -> crewMember.getHealth() <= 0);
+		return crewMembers.size();
+	}
+	
+	public void addItem(Item item) {
+		items.add(item);
+	}
+	
+	public boolean removeItem(Item item) {
+		return items.remove(item);
+	}
 }

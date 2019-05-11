@@ -8,6 +8,7 @@ public class Outpost {
 	
 	public Outpost(String name) {
 		this.name = name;
+		this.inventory = new ArrayList<Item>();
 	}
 	
 	public String getName() {
@@ -18,10 +19,12 @@ public class Outpost {
 		// refresh the inventory
 	}
 	
-	public void viewItems() {
-		for (Item item : inventory) {
-			item.viewObject();
-		}
+	public ArrayList<Item> getInventory() {
+		return inventory;
+	}
+	
+	public boolean removeItem(Item item) {
+		return inventory.remove(item);
 	}
 	
 	@Override

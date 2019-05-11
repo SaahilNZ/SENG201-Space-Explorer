@@ -16,6 +16,7 @@ import javax.swing.JTextPane;
 
 import SpaceExplorer.Game;
 import SpaceExplorer.GUI.Actions.ViewCrewDialog;
+import SpaceExplorer.GUI.Actions.VisitOutpostDialog;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -84,6 +85,13 @@ public class MainGameScreen extends JDialog {
 		pnlPlanetButtons.add(btnSearchPlanet, BorderLayout.NORTH);
 		
 		JButton btnVisitOutpost = new JButton("Visit Outpost");
+		btnVisitOutpost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VisitOutpostDialog dialog = new VisitOutpostDialog(parent,
+						game.getCurrentPlanet().getOutpost(), game.getCrew());
+				dialog.setVisible(true);
+			}
+		});
 		pnlPlanetButtons.add(btnVisitOutpost, BorderLayout.SOUTH);
 		
 		Component verticalStrut_3 = Box.createVerticalStrut(10);
