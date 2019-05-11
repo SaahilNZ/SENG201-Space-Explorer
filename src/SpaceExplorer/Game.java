@@ -15,8 +15,9 @@ public class Game {
 	private ArrayList<Planet> planets;
 	private ArrayList<Item> allItems;
 	private Crew crew;
+	private RandomEventController randomEventController;
 	private int desiredDays;
-	private int currentDay = 0;
+	private int currentDay = 1;
 	private int totalShipParts;
 
 	private Game() {
@@ -53,12 +54,12 @@ public class Game {
 	
 	public void startGame() {
 		currentPlanet = planets.get(0);
-		newDay();
 	}
 	
 	public void setupGame(int days, Crew crew) {
 		this.desiredDays = days;
 		this.crew = crew;
+		this.randomEventController = new RandomEventController();
 		createItems();
 		generatePlanets();
 		startGame();
@@ -84,6 +85,7 @@ public class Game {
 
 	public void newDay() {
 		this.currentDay += 1;
+		randomEventController.rollRandomEvents(crew);
 	}
 
 	public void quitGame() {

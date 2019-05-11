@@ -39,6 +39,14 @@ public class Ship {
 		return shield;
 	}
 	
+	public int getShieldLevel() {
+		return shield;
+	}
+	
+	public int getHealth() {
+		return health;
+	}
+	
 	public String getStatus() {
 		String output = "Health: " + health + "/" + maxHealth + "\n";
 		output += "Shield: " + shield + "/" + maxShield + "\n";
