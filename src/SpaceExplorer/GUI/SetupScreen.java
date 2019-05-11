@@ -15,7 +15,6 @@ import SpaceExplorer.Crew;
 import SpaceExplorer.Game;
 import SpaceExplorer.Ship;
 import SpaceExplorer.CrewMembers.*;
-import jdk.internal.org.objectweb.asm.util.CheckAnnotationAdapter;
 
 import java.awt.FlowLayout;
 import javax.swing.JSlider;
@@ -26,12 +25,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.Box;
 
 public class SetupScreen extends JDialog {

@@ -1,10 +1,11 @@
-package SpaceExplorer.GUI;
+package SpaceExplorer.GUI.Actions;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -12,6 +13,8 @@ import SpaceExplorer.CrewMembers.CrewMember;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.BoxLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CrewMemberDetails extends JDialog {
 
@@ -20,26 +23,24 @@ public class CrewMemberDetails extends JDialog {
 	private JLabel lblHealthText;
 	private JLabel lblHungerText;
 	private JLabel lblTirednessText;
-	
-	// To refresh the dialog, use:
-	// frame.invalidate();
-	// frame.validate();
-	// frame.repaint();
 
 	/**
 	 * Create the dialog.
 	 */
-	public CrewMemberDetails(CrewMember crewMember) {
+	public CrewMemberDetails(JFrame parent, CrewMember crewMember) {
+		super(parent, true);
 		setTitle(crewMember.getName());
-		setBounds(100, 100, 640, 480);
+		setBounds(100, 100, 480, 240);
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel pnlHeader = new JPanel();
+			FlowLayout flowLayout = (FlowLayout) pnlHeader.getLayout();
+			flowLayout.setAlignment(FlowLayout.LEFT);
 			getContentPane().add(pnlHeader, BorderLayout.NORTH);
 			{
 				lblCrewMemberName = new JLabel(crewMember.getName());
 				pnlHeader.add(lblCrewMemberName);
-				lblCrewMemberName.setFont(new Font("Tahoma", Font.PLAIN, 32));
+				lblCrewMemberName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			}
 		}
 		pnlContent.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,9 +57,9 @@ public class CrewMemberDetails extends JDialog {
 						pnlVerticalContent.add(pnlHealth);
 						pnlHealth.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 						JLabel lblHealth = new JLabel("Health:");
-						lblHealth.setFont(new Font("Tahoma", Font.PLAIN, 24));
+						lblHealth.setFont(new Font("Tahoma", Font.PLAIN, 12));
 						lblHealthText = new JLabel(crewMember.getHealth() + "/" + crewMember.getMaxHealth());
-						lblHealthText.setFont(new Font("Tahoma", Font.PLAIN, 24));
+						lblHealthText.setFont(new Font("Tahoma", Font.PLAIN, 12));
 						{					
 							pnlHealth.add(lblHealth);
 							pnlHealth.add(lblHealthText);
@@ -69,9 +70,9 @@ public class CrewMemberDetails extends JDialog {
 						pnlVerticalContent.add(pnlHunger);
 						pnlHunger.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 						JLabel lblHunger = new JLabel("Hunger:");
-						lblHunger.setFont(new Font("Tahoma", Font.PLAIN, 24));
+						lblHunger.setFont(new Font("Tahoma", Font.PLAIN, 12));
 						lblHungerText = new JLabel(crewMember.getHunger() + "/" + crewMember.getMaxHunger());
-						lblHungerText.setFont(new Font("Tahoma", Font.PLAIN, 24));
+						lblHungerText.setFont(new Font("Tahoma", Font.PLAIN, 12));
 						{
 							pnlHunger.add(lblHunger);
 							pnlHunger.add(lblHungerText);
@@ -82,9 +83,9 @@ public class CrewMemberDetails extends JDialog {
 						pnlVerticalContent.add(pnlTiredness);
 						pnlTiredness.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 						JLabel lblTiredness = new JLabel("Tiredness:");
-						lblTiredness.setFont(new Font("Tahoma", Font.PLAIN, 24));
+						lblTiredness.setFont(new Font("Tahoma", Font.PLAIN, 12));
 						lblTirednessText = new JLabel(crewMember.getTiredness() + "/" + crewMember.getMaxTiredness());
-						lblTirednessText.setFont(new Font("Tahoma", Font.PLAIN, 24));
+						lblTirednessText.setFont(new Font("Tahoma", Font.PLAIN, 12));
 						{
 							pnlTiredness.add(lblTiredness);
 							pnlTiredness.add(lblTirednessText);
@@ -95,7 +96,7 @@ public class CrewMemberDetails extends JDialog {
 						pnlVerticalContent.add(pnlPlague);
 						pnlPlague.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 						JLabel lblPlague = new JLabel(crewMember.hasPlague() ? "Infected with the space plague." : "");
-						lblPlague.setFont(new Font("Tahoma", Font.PLAIN, 24));
+						lblPlague.setFont(new Font("Tahoma", Font.PLAIN, 12));
 						{
 							pnlPlague.add(lblPlague);
 						}
@@ -108,7 +109,13 @@ public class CrewMemberDetails extends JDialog {
 			pnlDialogButtons.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(pnlDialogButtons, BorderLayout.SOUTH);
 			{
-				JButton btnOkay = new JButton("OK");
+				JButton btnOkay = new JButton("Close");
+				btnOkay.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+						dispose();
+					}
+				});
 				btnOkay.setActionCommand("OK");
 				pnlDialogButtons.add(btnOkay);
 				getRootPane().setDefaultButton(btnOkay);

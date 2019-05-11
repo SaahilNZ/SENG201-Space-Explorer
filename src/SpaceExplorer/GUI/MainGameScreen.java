@@ -1,13 +1,9 @@
 package SpaceExplorer.GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Rectangle;
 import java.awt.Component;
 import javax.swing.JTabbedPane;
 import javax.swing.JSplitPane;
@@ -19,6 +15,7 @@ import javax.swing.Box;
 import javax.swing.JTextPane;
 
 import SpaceExplorer.Game;
+import SpaceExplorer.GUI.Actions.ViewCrewDialog;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -134,6 +131,12 @@ public class MainGameScreen extends JDialog {
 		pnlCrewControls.setLayout(null);
 		
 		JButton btnViewCrew = new JButton("<html><center>View Crew</center></html>");
+		btnViewCrew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewCrewDialog dialog = new ViewCrewDialog(parent, game.getCrew());
+				dialog.setVisible(true);
+			}
+		});
 		btnViewCrew.setBounds(10, 36, 100, 100);
 		pnlCrewControls.add(btnViewCrew);
 		

@@ -2,7 +2,6 @@ package SpaceExplorer;
 
 import java.util.ArrayList;
 
-import SpaceExplorer.CrewMembers.*;
 import SpaceExplorer.Utilities.NameGenerator;
 import SpaceExplorer.Utilities.StaticData;
 

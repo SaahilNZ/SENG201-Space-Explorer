@@ -20,8 +20,6 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
 
 public class CreateCrewMemberDialog extends JDialog implements ActionListener {
 	private static final HashMap<String, String> CREW_INFORMATION = new HashMap<String, String>() {
