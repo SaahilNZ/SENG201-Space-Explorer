@@ -36,6 +36,7 @@ public class MainGameScreen extends JDialog {
 	 */
 	public MainGameScreen(JFrame parent) {
 		super(parent, true);
+		setResizable(false);
 		
 		game = Game.getCurrentGame();
 		

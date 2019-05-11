@@ -29,6 +29,7 @@ public class CrewMemberDetails extends JDialog {
 	 */
 	public CrewMemberDetails(JFrame parent, CrewMember crewMember) {
 		super(parent, true);
+		setResizable(false);
 		setTitle(crewMember.getName());
 		setBounds(100, 100, 480, 240);
 		getContentPane().setLayout(new BorderLayout());

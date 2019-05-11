@@ -39,6 +39,7 @@ public class ViewCrewDialog extends JDialog {
 	 */
 	public ViewCrewDialog(JFrame parent, Crew crew) {
 		super(parent, true);
+		setResizable(false);
 		setTitle("Crew");
 		setBounds(100, 100, 640, 480);
 		getContentPane().setLayout(new BorderLayout());

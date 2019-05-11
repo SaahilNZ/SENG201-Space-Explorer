@@ -29,6 +29,7 @@ public class ItemDetails extends JDialog {
 	 */
 	public ItemDetails(JFrame parent, Item item) {
 		super(parent, true);
+		setResizable(false);
 		setBounds(100, 100, 480, 240);
 		getContentPane().setLayout(new BorderLayout());
 		pnlContent.setBorder(new EmptyBorder(5, 5, 5, 5));
