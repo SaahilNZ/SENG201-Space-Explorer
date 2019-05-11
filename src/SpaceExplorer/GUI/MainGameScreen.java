@@ -26,9 +26,10 @@ import java.awt.event.ActionEvent;
 
 public class MainGameScreen extends JDialog {
 	
-	private JLabel lblPlanetDescription;
+	private JLabel lblPlanetName;
+	private JTextPane txtpnPlanetDescription;
 	private JLabel lblShipName;
-	private JLabel lblShipStats;
+	private JTextPane txtpnShipStats;
 	private JLabel lblCurrentDay;
 	
 	private Game game;
@@ -64,15 +65,18 @@ public class MainGameScreen extends JDialog {
 		pnlPlanetInfo.add(pnlPlanet, BorderLayout.NORTH);
 		pnlPlanet.setLayout(new BoxLayout(pnlPlanet, BoxLayout.Y_AXIS));
 		
-		JLabel lblPlanetName = new JLabel(game.getCurrentPlanet().toString());
+		lblPlanetName = new JLabel(game.getCurrentPlanet().toString());
 		pnlPlanet.add(lblPlanetName);
 		lblPlanetName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
 		pnlPlanet.add(verticalStrut);
 		
-		lblPlanetDescription = new JLabel(game.getCurrentPlanet().getDescription());
-		pnlPlanet.add(lblPlanetDescription);
+		txtpnPlanetDescription = new JTextPane();
+		txtpnPlanetDescription.setEditable(false);
+		txtpnPlanetDescription.setBackground(SystemColor.control);
+		txtpnPlanetDescription.setText(game.getCurrentPlanet().getDescription());
+		pnlPlanet.add(txtpnPlanetDescription);
 		
 		JPanel pnlPlanetButtons = new JPanel();
 		pnlPlanetInfo.add(pnlPlanetButtons, BorderLayout.SOUTH);
@@ -104,8 +108,11 @@ public class MainGameScreen extends JDialog {
 		
 		String shipStats = game.getCrew().getShip().getStatus();
 		shipStats += "\nShip parts found: " + game.getCrew().getShipPieces() + "/" + game.getTotalShipParts();
-		lblShipStats = new JLabel(shipStats);
-		pnlShip.add(lblShipStats);
+		txtpnShipStats = new JTextPane();
+		txtpnShipStats.setEditable(false);
+		txtpnShipStats.setBackground(SystemColor.control);
+		txtpnShipStats.setText(shipStats);
+		pnlShip.add(txtpnShipStats);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
 		pnlShip.add(verticalStrut_2);
@@ -117,6 +124,7 @@ public class MainGameScreen extends JDialog {
 		btnNextDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				game.newDay();
+				refreshDialog();
 			}
 		});
 		pnlShipInfo.add(btnNextDay, BorderLayout.SOUTH);
@@ -179,6 +187,13 @@ public class MainGameScreen extends JDialog {
 	}
 	
 	private void refreshDialog() {
+		lblPlanetName.setText(game.getCurrentPlanet().toString());
+		txtpnPlanetDescription.setText(game.getCurrentPlanet().getDescription());
+		txtpnShipStats.setText(game.getCrew().getShip().getStatus());
+		lblCurrentDay.setText("Current Day: " + game.getCurrentDay());
+		String shipStats = game.getCrew().getShip().getStatus();
+		shipStats += "\nShip parts found: " + game.getCrew().getShipPieces() + "/" + game.getTotalShipParts();
+		txtpnShipStats.setText(shipStats);
 		
 		invalidate();
 		validate();

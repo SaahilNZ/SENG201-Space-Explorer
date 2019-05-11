@@ -61,6 +61,7 @@ public class Game {
 		this.crew = crew;
 		createItems();
 		generatePlanets();
+		startGame();
 	}
 
 	private void generatePlanets() {
