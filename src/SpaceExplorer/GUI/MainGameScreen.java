@@ -133,47 +133,47 @@ public class MainGameScreen extends JDialog {
 		tabsMainContainer.addTab("Crew Controls", null, pnlCrewControls, null);
 		pnlCrewControls.setLayout(null);
 		
-		JButton btnViewCrew = new JButton("View Crew");
+		JButton btnViewCrew = new JButton("<html><center>View Crew</center></html>");
 		btnViewCrew.setBounds(10, 36, 100, 100);
 		pnlCrewControls.add(btnViewCrew);
 		
 		JLabel lblActions = new JLabel("Regular Actions:");
-		lblActions.setBounds(10, 11, 89, 14);
+		lblActions.setBounds(10, 11, 210, 14);
 		pnlCrewControls.add(lblActions);
 		
-		JButton btnPilotShip = new JButton("Pilot Ship");
+		JButton btnPilotShip = new JButton("<html><center>Pilot Ship</center></html>");
 		btnPilotShip.setBounds(120, 36, 100, 100);
 		pnlCrewControls.add(btnPilotShip);
 		
-		JButton btnUseItem = new JButton("Use Item");
+		JButton btnUseItem = new JButton("<html><center>Use Item</center></html>");
 		btnUseItem.setBounds(10, 147, 100, 100);
 		pnlCrewControls.add(btnUseItem);
 		
-		JButton btnSleep = new JButton("Sleep");
+		JButton btnSleep = new JButton("<html><center>Sleep</center></html>");
 		btnSleep.setBounds(120, 147, 100, 100);
 		pnlCrewControls.add(btnSleep);
 		
-		JButton btnCookFood = new JButton("Cook Food");
+		JButton btnCookFood = new JButton("<html><center>Cook Food</center></html>");
 		btnCookFood.setBounds(304, 36, 100, 100);
 		pnlCrewControls.add(btnCookFood);
 		
-		JButton btnPerformMusic = new JButton("Perform Music");
+		JButton btnPerformMusic = new JButton("<html><center>Perform Music</center></html>");
 		btnPerformMusic.setBounds(304, 147, 100, 100);
 		pnlCrewControls.add(btnPerformMusic);
 		
 		JLabel lblClassActions = new JLabel("Crew Actions:");
-		lblClassActions.setBounds(304, 11, 89, 14);
+		lblClassActions.setBounds(304, 11, 210, 14);
 		pnlCrewControls.add(lblClassActions);
 		
-		JButton btnRepairShip = new JButton("Repair Ship");
+		JButton btnRepairShip = new JButton("<html><center>Repair Ship</center></html>");
 		btnRepairShip.setBounds(10, 258, 100, 100);
 		pnlCrewControls.add(btnRepairShip);
 		
-		JButton btnHealCrewMember = new JButton("Heal Crew");
+		JButton btnHealCrewMember = new JButton("<html><center>Heal Crew</center></html>");
 		btnHealCrewMember.setBounds(414, 36, 100, 94);
 		pnlCrewControls.add(btnHealCrewMember);
 		
-		JButton btnCurePlague = new JButton("Cure Plague");
+		JButton btnCurePlague = new JButton("<html><center>Cure Plague</center></html>");
 		btnCurePlague.setBounds(414, 147, 100, 100);
 		pnlCrewControls.add(btnCurePlague);
 		
