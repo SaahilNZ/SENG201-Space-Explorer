@@ -64,9 +64,11 @@ public class StartScreen {
 				Game game = Game.getCurrentGame();
 				SetupScreen setup = new SetupScreen(frmStartScreen);
 				setup.setVisible(true);
-				game.setupGame(setup.getDays(), setup.getCrew());
-				MainGameScreen mainGame = new MainGameScreen(frmStartScreen);
-				mainGame.setVisible(true);
+				if (setup.getStatusCode() == 0) {					
+					game.setupGame(setup.getDays(), setup.getCrew());
+					MainGameScreen mainGame = new MainGameScreen(frmStartScreen);
+					mainGame.setVisible(true);
+				}
 			}
 		});
 		btnStartGame.setFont(new Font("Tahoma", Font.PLAIN, 30));

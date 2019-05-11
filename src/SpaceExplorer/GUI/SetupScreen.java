@@ -38,6 +38,7 @@ public class SetupScreen extends JDialog {
 
 	private JSlider sldDays;
 	private JTextField txtCrewName;
+	private JTextField txtShipName;
 	private JList<CrewMember> lstCrewList;
 	private DefaultListModel<CrewMember> crewListModel;
 	private JButton btnAdd;
@@ -45,7 +46,7 @@ public class SetupScreen extends JDialog {
 	private JButton btnConfirm;
 	
 	private Crew crew;
-	private JTextField txtShipName;
+	private int statusCode = -1;
 	
 	/**
 	 * Create the dialog.
@@ -224,6 +225,7 @@ public class SetupScreen extends JDialog {
 									crewMembers.add((CrewMember)crewMember);
 								}
 								crew = new Crew(crewMembers, txtCrewName.getText(), ship, Game.STARTING_MONEY, null);
+								statusCode = 0;
 								setVisible(false);
 							} else {
 								JOptionPane.showMessageDialog(parent, "Please name your ship.",
@@ -247,5 +249,9 @@ public class SetupScreen extends JDialog {
 	
 	public int getDays() {
 		return sldDays.getValue();
+	}
+	
+	public int getStatusCode() {
+		return this.statusCode;
 	}
 }
