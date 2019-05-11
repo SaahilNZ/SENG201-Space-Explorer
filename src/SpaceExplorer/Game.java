@@ -59,6 +59,7 @@ public class Game {
 		this.desiredDays = days;
 		this.crew = crew;
 		this.randomEventController = new RandomEventController();
+		this.totalShipParts = (this.desiredDays * 2) / 3;
 		createItems();
 		generatePlanets();
 		startGame();
