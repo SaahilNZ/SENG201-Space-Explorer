@@ -95,6 +95,7 @@ public class MainGameScreen extends JDialog {
 					CrewMember crewMember = dialog.getSelectedCrewMember();
 					String message = crewMember.searchPlanet(game.getCrew(), game.getCurrentPlanet());
 					JOptionPane.showMessageDialog(parent, message, "Search Results", JOptionPane.INFORMATION_MESSAGE);
+					refreshDialog();
 				}
 				dialog.dispose();
 				if (game.getCrew().getShipPieces() >= game.getTotalShipParts()) {
