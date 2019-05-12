@@ -1,7 +1,5 @@
 package SpaceExplorer.CrewMembers;
 
-import java.util.Random;
-
 import SpaceExplorer.Crew;
 import SpaceExplorer.Planet;
 

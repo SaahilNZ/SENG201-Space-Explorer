@@ -193,6 +193,19 @@ public class MainGameScreen extends JDialog {
 		pnlCrewControls.add(btnUseItem);
 		
 		JButton btnSleep = new JButton("<html><center>Sleep</center></html>");
+		btnSleep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SelectCrewMemberDialog dialog = new SelectCrewMemberDialog(parent,
+						game.getCrew().getCrewMembers());
+				dialog.setVisible(true);
+				if (dialog.getStatusCode() == 0) {
+					JOptionPane.showMessageDialog(parent, dialog.getSelectedCrewMember().sleep(),
+							"Sleep", JOptionPane.INFORMATION_MESSAGE);
+					refreshDialog();
+				}
+				dialog.dispose();
+			}
+		});
 		btnSleep.setBounds(120, 147, 100, 100);
 		pnlCrewControls.add(btnSleep);
 		
@@ -209,6 +222,19 @@ public class MainGameScreen extends JDialog {
 		pnlCrewControls.add(lblClassActions);
 		
 		JButton btnRepairShip = new JButton("<html><center>Repair Ship</center></html>");
+		btnRepairShip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SelectCrewMemberDialog dialog = new SelectCrewMemberDialog(parent,
+						game.getCrew().getCrewMembers());
+				dialog.setVisible(true);
+				if (dialog.getStatusCode() == 0) {
+					JOptionPane.showMessageDialog(parent, dialog.getSelectedCrewMember().repairShip(game.getCrew().getShip()),
+							"Repair Ship", JOptionPane.INFORMATION_MESSAGE);
+					refreshDialog();
+				}
+				dialog.dispose();
+			}
+		});
 		btnRepairShip.setBounds(10, 258, 100, 100);
 		pnlCrewControls.add(btnRepairShip);
 		

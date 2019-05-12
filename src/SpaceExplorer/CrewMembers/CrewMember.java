@@ -161,12 +161,18 @@ public abstract class CrewMember {
 	/**
 	 * The crew member sleeps, restoring their tiredness levels to full.
 	 * 
+	 * @return 						A message stating what has occurred
 	 */
-	public void sleep() {
-		if (actionsLeft > 0){
+	public String sleep() {
+		String message = "";
+		if (actionsLeft > 0) {
+			message += getName() + " has rested, and is no longer tired.";
 			tiredness = 0;
 			takeAction();
+		} else {
+			message += getName() + " does not have enough actions left to sleep.";
 		}
+		return message;
 	}
 	
 	/**
@@ -256,13 +262,21 @@ public abstract class CrewMember {
 	 * Repairs the ships health and shield levels
 	 * 
 	 * @param ship				The ship the crew members are in
+	 * @return					A message stating what has occurred
 	 */
-	public void repairShip(Ship ship) {
-		if (actionsLeft>0) {
+	public String repairShip(Ship ship) {
+		String message = "";
+		if (actionsLeft > 0) {
 			ship.repairShield(20);
 			ship.repairShip(10);
+			message += getName() + " has repaired the " + ship.toString() + ".\n";
+			message += "The " + ship.toString() + "'s shields have been restored by 20 points.\n";
+			message += "The " + ship.toString() + "'s health has been restored by 10 points.\n";
 			takeAction();
+		} else {
+			message += getName() + " does not have enough actions left to repair the ship.";
 		}
+		return message;
 	}
 	
 	/**
