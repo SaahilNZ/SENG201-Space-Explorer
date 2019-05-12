@@ -18,12 +18,14 @@ import javax.swing.JTextPane;
 
 import SpaceExplorer.Game;
 import SpaceExplorer.CrewMembers.CrewMember;
+import SpaceExplorer.CrewMembers.SpaceBard;
 import SpaceExplorer.GUI.Actions.SelectCrewMemberDialog;
 import SpaceExplorer.GUI.Actions.ViewCrewDialog;
 import SpaceExplorer.GUI.Actions.VisitOutpostDialog;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class MainGameScreen extends JDialog {
@@ -214,6 +216,23 @@ public class MainGameScreen extends JDialog {
 		pnlCrewControls.add(btnCookFood);
 		
 		JButton btnPerformMusic = new JButton("<html><center>Perform Music</center></html>");
+		btnPerformMusic.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<CrewMember> bards = new ArrayList<CrewMember>();
+				for (CrewMember crewMember : game.getCrew().getCrewMembers()) {
+					if (crewMember instanceof SpaceBard) bards.add(crewMember);
+				}
+				SelectCrewMemberDialog dialog = new SelectCrewMemberDialog(parent, bards);
+				dialog.setVisible(true);
+				if (dialog.getStatusCode() == 0) {
+					JOptionPane.showMessageDialog(parent,
+							((SpaceBard)dialog.getSelectedCrewMember()).performMusic(game.getCrew().getCrewMembers()),
+							"Perform Music", JOptionPane.INFORMATION_MESSAGE);
+					refreshDialog();
+				}
+				dialog.dispose();
+			}
+		});
 		btnPerformMusic.setBounds(304, 147, 100, 100);
 		pnlCrewControls.add(btnPerformMusic);
 		
