@@ -8,7 +8,10 @@ public class Chef extends CrewMember {
 	}
 	
 	public void cook(FoodItem food) {
-		food.cookFood();
+		if (getActions() > 0) {			
+			food.cookFood();
+			takeAction();
+		}
 	}
 	
 }

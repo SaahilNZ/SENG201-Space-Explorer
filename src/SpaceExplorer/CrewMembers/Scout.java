@@ -9,6 +9,9 @@ public class Scout extends CrewMember {
 	
 	@Override
 	public void searchPlanet(Planet planet) {
-		//Search a planet. The scout has more items returned for a planet search than any other class.
+		if (getActions() > 0) {
+			//Search a planet. The scout has more items returned for a planet search than any other class.
+			takeAction();
+		}
 	}
 }

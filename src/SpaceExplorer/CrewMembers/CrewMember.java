@@ -1,6 +1,7 @@
 package SpaceExplorer.CrewMembers;
 
 import SpaceExplorer.FoodItem;
+import SpaceExplorer.Item;
 import SpaceExplorer.MedicalItem;
 import SpaceExplorer.Planet;
 import SpaceExplorer.Ship;
@@ -44,9 +45,9 @@ public abstract class CrewMember {
 		this.maxHealth = maxHealth;
 		this.health = maxHealth;
 		this.maxHunger = maxHunger;
-		this.hunger = maxHunger;
+		this.hunger = 0;
 		this.maxTiredness = maxTiredness;
-		this.tiredness = maxTiredness;
+		this.tiredness = 0;
 	}
 	
 	/**
@@ -158,7 +159,7 @@ public abstract class CrewMember {
 	public void sleep() {
 		if (actionsLeft > 0){
 			tiredness = maxTiredness;
-			actionsLeft -= 1;
+			takeAction();
 		}
 	}
 	
@@ -169,19 +170,6 @@ public abstract class CrewMember {
 	 */
 	public void heal(int restore) {
 		health = Math.min(maxHealth, health+restore);
-	}
-	
-	/**
-	 * The crew member consumes a food item and restores their hunger
-	 * 
-	 * @param food				Amount of hunger restored to the crew member
-	 */
-	public void eat(FoodItem food) {
-		if (actionsLeft > 0) {
-			hunger = Math.min(maxHunger, hunger + food.getHungerAmount());
-			tiredness = Math.min(maxTiredness, tiredness + food.getTiredAmount());
-			actionsLeft -= 1;
-		}
 	}
 	
 	/**
@@ -211,31 +199,50 @@ public abstract class CrewMember {
 	 * @param exhaustion				Amount the crew member's tiredness levels are reduced by
 	 */
 	public void becomeTired(int exhaustion) {
-		tiredness = Math.max(0, tiredness-exhaustion);
+		tiredness = Math.min(tiredness + exhaustion, maxTiredness);
+	}
+	
+	public void decreaseTiredness(int restoreAmount) {
+		tiredness = Math.max(0, tiredness - restoreAmount);
 	}
 	
 	/**
 	 * Increases how hungry the crew member is
 	 * 
-	 * @param hungeryness				Amount the crew member's hunger levels are reduces by
+	 * @param hungerAmount				Amount the crew member's hunger levels are increased by
 	 */
-	public void becomeHungry(int hungeryness) {
-		hunger = Math.max(0, hunger-hungeryness);
+	public void increaseHunger(int hungerAmount) {
+		hunger = Math.min(maxHunger, hunger + hungerAmount);
 	}
 	
 	/**
-	 * Uses a medical item on the crew member. Restores health and cures plague based on
-	 * what the medical item can do.
+	 * Decreases how hungry the crew member is
 	 * 
-	 * @param item					An item of the MedicalItem class
+	 * @param restoreAmount
 	 */
-	public void useItem(MedicalItem item) {
-		if (actionsLeft>0) {
-			actionsLeft -= 1;
-			health += item.getRestoreAmount();
-			if (item.curesPlague()) {
-				hasPlague = false;
+	public void decreaseHunger(int restoreAmount) {
+		hunger = Math.max(0, hunger - restoreAmount);
+	}
+	
+	/**
+	 * Uses an item on the crew member.
+	 * If the item is a medical item, it restores health and cures plague based on
+	 * what the medical item can do.
+	 * If the item is a food item, it restores hunger.
+	 * 
+	 * @param item					An item to use on the crew member
+	 */
+	public void useItem(Item item) {
+		if (actionsLeft > 0) {
+			if (item instanceof MedicalItem) {				
+				heal(((MedicalItem)item).getRestoreAmount());
+				if (((MedicalItem)item).curesPlague()) {
+					setPlague(false);
+				}
+			} else if (item instanceof FoodItem) {
+				decreaseHunger(((FoodItem)item).getHungerAmount());
 			}
+			takeAction();
 		}
 	}
 	
@@ -246,9 +253,9 @@ public abstract class CrewMember {
 	 */
 	public void repairShip(Ship ship) {
 		if (actionsLeft>0) {
-			actionsLeft -= 1;
 			ship.repairShield(20);
 			ship.repairShip(10);
+			takeAction();
 		}
 	}
 	
@@ -267,7 +274,9 @@ public abstract class CrewMember {
 	 * 
 	 */
 	public void pilotShip() {
-		//Pilot the ship. Requires 2 actions and another pilot
+		if (actionsLeft > 0) {			
+			takeAction();
+		}
 	}
 	
 	/**

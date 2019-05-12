@@ -61,11 +61,11 @@ class CrewMemberTester {
 	public void hungerTest() {
 		int startHunger = testCrew.getHunger();
 		//Checks a crew member can become hungry
-		testCrew.becomeHungry(60);
+		testCrew.increaseHunger(60);
 		assertEquals(startHunger-60, testCrew.getHunger());
 		
 		//Makes sure hunger can't fall below 0
-		testCrew.becomeHungry(200);
+		testCrew.increaseHunger(200);
 		assertEquals(0, testCrew.getHunger());
 	}
 	

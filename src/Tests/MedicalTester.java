@@ -47,8 +47,4 @@ class MedicalTester {
 		assertEquals(true, testCrew.hasPlague());
 		assertEquals(startHealth-20, testCrew.getHealth());
 	}
-		
-	
-	
-
 }

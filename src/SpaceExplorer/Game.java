@@ -58,6 +58,8 @@ public class Game {
 	}
 	
 	public void setupGame(int days, Crew crew) {
+		this.score = 0;
+		this.gameWon = false;
 		this.desiredDays = days;
 		this.crew = crew;
 		this.randomEventController = new RandomEventController();

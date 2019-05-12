@@ -10,9 +10,9 @@ public class Mechanic extends CrewMember {
 	@Override
 	public void repairShip(Ship ship) {
 		if (super.getActions()>0) {
-			super.takeAction();
 			ship.repairShield(60);
 			ship.repairShip(40);
+			super.takeAction();
 		}
 	}
 	

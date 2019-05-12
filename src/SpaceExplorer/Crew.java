@@ -75,7 +75,10 @@ public class Crew {
 			if (crewMember.hasPlague()) {
 				crewMember.damageCrew(20);
 			}
-			crewMember.setActions(crewMember.getTiredness() > 0 ? 2 : 1);
+			if (crewMember.getHunger() >= crewMember.getMaxHunger()) {
+				crewMember.damageCrew(20);
+			}
+			crewMember.setActions(crewMember.getTiredness() < crewMember.getMaxTiredness() ? 2 : 1);
 		}
 		return pruneCrewMembers();
 	}

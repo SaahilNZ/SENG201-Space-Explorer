@@ -6,11 +6,18 @@ public class Doctor extends CrewMember {
     }
 
 	public void curePlague(CrewMember member) {
-		member.setPlague(false);
+		if (getActions() >= 2) {			
+			member.setPlague(false);
+			takeAction();
+			takeAction();
+		}
 	}
 	
 	public void heal(CrewMember member) {
-		member.heal(20);
+		if (getActions() > 0) {
+			member.heal(20);
+			takeAction();
+		}
 	}
 	
 }

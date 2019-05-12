@@ -68,6 +68,7 @@ public class StartScreen {
 					game.setupGame(setup.getDays(), setup.getCrew());
 					MainGameScreen mainGame = new MainGameScreen(frmStartScreen);
 					mainGame.setVisible(true);
+					// TODO: Display game over/victory
 				}
 			}
 		});
