@@ -25,29 +25,30 @@ class FoodTester {
 	public void hungerTest() {
 		//Tests hunger is restored correctly
 		int startHunger = testCrew.getHunger();
-		testCrew.becomeHungry(50);
-		testCrew.eat(burger);
-		assertEquals(startHunger-30, testCrew.getHunger());
+		testCrew.increaseHunger(50);
+		testCrew.useItem(burger);
+		assertEquals(startHunger+30, testCrew.getHunger());
 	}
 	
 	@Test
 	public void eatingTest() {
 		//Checks food can't be eaten when no actions remain
 		int startHunger = testCrew.getHunger();
-		testCrew.becomeHungry(50);
+		testCrew.increaseHunger(50);
 		testCrew.sleep();
 		testCrew.sleep();
-		testCrew.eat(burger);
-		assertEquals(startHunger-50, testCrew.getHunger());
+		testCrew.useItem(burger);
+		assertEquals(startHunger+50, testCrew.getHunger());
 	}
 	
 	@Test
 	public void tiredTest() {
 		//Tests tiredness is restored correctly
+		//#BUGGED
 		int startTired = testCrew.getTiredness();
 		testCrew.becomeTired(60);
-		testCrew.eat(coffee);
-		assertEquals(startTired-10, testCrew.getTiredness());
+		testCrew.useItem(coffee);
+		assertEquals(startTired+10, testCrew.getTiredness());
 	}
 
 }

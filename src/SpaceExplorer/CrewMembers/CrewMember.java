@@ -158,7 +158,7 @@ public abstract class CrewMember {
 	 */
 	public void sleep() {
 		if (actionsLeft > 0){
-			tiredness = maxTiredness;
+			tiredness = 0;
 			takeAction();
 		}
 	}

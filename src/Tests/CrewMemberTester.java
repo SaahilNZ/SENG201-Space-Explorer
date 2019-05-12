@@ -39,22 +39,23 @@ class CrewMemberTester {
 		
 		//Tests if a crew member's tiredness can change
 		testCrew.becomeTired(60);
-		assertEquals(startTired-60, testCrew.getTiredness());
+		assertEquals(startTired+60, testCrew.getTiredness());
 		
 		//Tests if sleeping will reset a crew member's tiredness, and take one action
 		testCrew.sleep();
 		assertEquals(startTired, testCrew.getTiredness());
 		assertEquals(1, testCrew.getActions());
 		
-		//Ensures crew members can't sleep after all actions are depleted
+		//Ensures crew members can't sleep after all actions are depleted 
+		//#BUGGED
 		testCrew.sleep();
 		testCrew.becomeTired(10);
 		testCrew.sleep();
-		assertEquals(startTired - 10, testCrew.getTiredness());
+		assertEquals(startTired+10, testCrew.getTiredness());
 		
 		//Makes sure tiredness cannot fall below 0
 		testCrew.becomeTired(200);
-		assertEquals(0, testCrew.getTiredness());
+		assertEquals(testCrew.getMaxTiredness(), testCrew.getTiredness());
 	}
 	
 	@Test
@@ -62,11 +63,11 @@ class CrewMemberTester {
 		int startHunger = testCrew.getHunger();
 		//Checks a crew member can become hungry
 		testCrew.increaseHunger(60);
-		assertEquals(startHunger-60, testCrew.getHunger());
+		assertEquals(startHunger+60, testCrew.getHunger());
 		
 		//Makes sure hunger can't fall below 0
 		testCrew.increaseHunger(200);
-		assertEquals(0, testCrew.getHunger());
+		assertEquals(testCrew.getMaxHunger(), testCrew.getHunger());
 	}
 	
 	@Test
