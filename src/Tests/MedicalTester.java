@@ -1,60 +1,54 @@
 package Tests;
 
 import static org.junit.Assert.assertEquals;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import SpaceExplorer.FoodItem;
 import SpaceExplorer.MedicalItem;
 import SpaceExplorer.CrewMembers.Scout;
 
-class ItemTester {
+class MedicalTester {
 	
-private Scout testCrew;
-private MedicalItem healthPod;
-private FoodItem burger;
+	private Scout testCrew;
+	private MedicalItem healthPod;
 	
 	@BeforeEach
 	public void init() {
 		testCrew = new Scout("Claptrap");
 		healthPod = new MedicalItem(1, "Health Pod", 20, true, true, 20, true);
-		burger = new FoodItem(1, "Burger", "Cooked Burger", 20, true, true, 20);
+	}
+	
+	@Test
+	public void healthTest() {
+		//Tests health is restored correctly
+		int startHealth = testCrew.getHealth();
+		testCrew.damageCrew(30);
+		testCrew.useItem(healthPod);
+		assertEquals(startHealth-10, testCrew.getHealth());
+	}
+	
+	@Test
+	public void plagueTest() {	
+		//Tests plague can be cured
+		testCrew.setPlague(true);
+		testCrew.useItem(healthPod);
+		assertEquals(false, testCrew.hasPlague());
 	}
 	
 	
 	@Test
-	public void medicalTest() {
-		//Tests health is restored correctly and plague can be removed
-		int startHealth = testCrew.getHealth();
-		testCrew.damageCrew(30);
-		testCrew.setPlague(true);
-		testCrew.useItem(healthPod);
-		assertEquals(startHealth-10, testCrew.getHealth());
-		assertEquals(false, testCrew.hasPlague());
-		
+	public void useageTest() {
 		//Ensures an item can't be used after all actions consumed
+		int startHealth = testCrew.getHealth();
+		testCrew.sleep();
 		testCrew.sleep();
 		testCrew.damageCrew(20);
 		testCrew.setPlague(true);
 		testCrew.useItem(healthPod);
 		assertEquals(true, testCrew.hasPlague());
-		assertEquals(startHealth-30, testCrew.getHealth());
-		
+		assertEquals(startHealth-20, testCrew.getHealth());
 	}
+		
 	
-	@Test
-	public void foodTest() {
-		//Tests hunger is restored correctly
-		int startHunger = testCrew.getHunger();
-		testCrew.becomeHungry(50);
-		testCrew.eat(burger);
-		assertEquals(startHunger-30, testCrew.getHunger());
-		
-		//Checks food can't be eaten when no actions remain
-		testCrew.eat(burger);
-		testCrew.eat(burger);
-		assertEquals(startHunger-10, testCrew.getHunger());
-	}
+	
 
 }

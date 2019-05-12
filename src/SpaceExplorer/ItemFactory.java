@@ -11,9 +11,9 @@ public class ItemFactory {
 	}
 	
 	public static FoodItem createFoodItem(String name, String cookedName, int price,
-			boolean canBeFound, boolean canBeSold, int hungerAmount) {
+			boolean canBeFound, boolean canBeSold, int hungerAmount, int tiredAmount) {
 		int id = itemId;
 		itemId++;
-		return new FoodItem(id, name, cookedName, price, canBeFound, canBeSold, hungerAmount);
+		return new FoodItem(id, name, cookedName, price, canBeFound, canBeSold, hungerAmount, tiredAmount);
 	}
 }

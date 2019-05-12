@@ -177,6 +177,7 @@ public abstract class CrewMember {
 	public void eat(FoodItem food) {
 		if (actionsLeft > 0) {
 			hunger = Math.min(maxHunger, hunger + food.getHungerAmount());
+			tiredness = Math.min(maxTiredness, tiredness + food.getTiredAmount());
 			actionsLeft -= 1;
 		}
 	}
