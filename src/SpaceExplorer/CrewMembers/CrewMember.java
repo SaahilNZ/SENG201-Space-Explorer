@@ -133,10 +133,12 @@ public abstract class CrewMember {
 	
 	/**
 	 * Reduces the number of actions the crew member has remaining
+	 * Also increases the crew member's tiredness
 	 * 
 	 */
 	public void takeAction() {
 		actionsLeft -= 1;
+		becomeTired(20);
 	}
 	
 	/**
@@ -266,6 +268,15 @@ public abstract class CrewMember {
 	 */
 	public void pilotShip() {
 		//Pilot the ship. Requires 2 actions and another pilot
+	}
+	
+	/**
+	 * Sets the amount of actions the crew member can take
+	 * 
+	 * @param actions				Amount of actions
+	 */
+	public void setActions(int actions) {
+		this.actionsLeft = actions;
 	}
 
 	@Override

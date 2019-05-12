@@ -18,6 +18,8 @@ public class Game {
 	private int desiredDays;
 	private int currentDay = 1;
 	private int totalShipParts;
+	private int score;
+	private boolean gameWon = false;
 
 	private Game() {
 		planets = new ArrayList<Planet>();
@@ -83,9 +85,29 @@ public class Game {
 		// TODO: create and add items to the allItems array
 	}
 
-	public void newDay() {
+	/**
+	 * Proceeds to the next day, and returns whether or not the game should continue
+	 * 
+	 * @return			Is the game active
+	 */
+	public boolean newDay() {
 		this.currentDay += 1;
 		randomEventController.rollRandomEvents(crew);
+		boolean gameStatus = crew.newDay() > 0;
+		if (gameStatus) {
+			if (currentDay > desiredDays) {
+				gameStatus = false;
+			}
+		}
+		return gameStatus;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public boolean getWinStatus() {
+		return gameWon;
 	}
 
 	public void quitGame() {

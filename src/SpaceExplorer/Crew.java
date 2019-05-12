@@ -70,6 +70,16 @@ public class Crew {
 		return crewMembers.size();
 	}
 	
+	public int newDay() {
+		for (CrewMember crewMember : this.crewMembers) {
+			if (crewMember.hasPlague()) {
+				crewMember.damageCrew(20);
+			}
+			crewMember.setActions(crewMember.getTiredness() > 0 ? 2 : 1);
+		}
+		return pruneCrewMembers();
+	}
+	
 	public void addItem(Item item) {
 		items.add(item);
 	}
