@@ -56,7 +56,7 @@ public class ViewCrewDialog extends JDialog {
 				flowLayout.setAlignment(FlowLayout.LEFT);
 				pnlVerticalContent.add(pnlCrewName);
 				{
-					JLabel lblCrewName = new JLabel("Crew Name");
+					JLabel lblCrewName = new JLabel(crew.getCrewName());
 					lblCrewName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 					pnlCrewName.add(lblCrewName);
 				}
