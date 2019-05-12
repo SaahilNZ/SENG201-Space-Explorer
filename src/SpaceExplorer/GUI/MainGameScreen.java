@@ -9,6 +9,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JSplitPane;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.Box;
@@ -129,8 +131,15 @@ public class MainGameScreen extends JDialog {
 		JButton btnNextDay = new JButton("Next Day");
 		btnNextDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				game.newDay();
-				refreshDialog();
+				boolean gameStatus = game.newDay();
+				if (gameStatus) {					
+					refreshDialog();
+				} else {
+					JOptionPane.showMessageDialog(parent, "You have either run out of days, or all your crew members are dead.\nBetter luck next time!",
+							"Game Over", JOptionPane.INFORMATION_MESSAGE);
+					setVisible(false);
+					dispose();
+				}
 			}
 		});
 		pnlShipInfo.add(btnNextDay, BorderLayout.SOUTH);
