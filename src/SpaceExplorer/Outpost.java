@@ -29,9 +29,6 @@ public class Outpost {
 	
 	@Override
 	public String toString() {
-		String output = "Outpost name: " + name + "\n";
-		output += "Inventory:\n";
-		// append items
-		return output;
+		return name;
 	}
 }
