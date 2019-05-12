@@ -111,6 +111,10 @@ public class Game {
 	public boolean getWinStatus() {
 		return gameWon;
 	}
+	
+	public void setWinStatus(boolean status) {
+		gameWon = status;
+	}
 
 	public void quitGame() {
 		System.exit(0);

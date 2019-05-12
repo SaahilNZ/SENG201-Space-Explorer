@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
-public class SelectCrewMember extends JDialog {
+public class SelectCrewMemberDialog extends JDialog {
 
 	private final JPanel pnlContent = new JPanel();
 	private DefaultListModel<CrewMember> crewMemberModel;
@@ -34,7 +34,7 @@ public class SelectCrewMember extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SelectCrewMember(JFrame parent, Collection<CrewMember> crewMembers) {
+	public SelectCrewMemberDialog(JFrame parent, Collection<CrewMember> crewMembers) {
 		setTitle("Select Crew Member");
 		setResizable(false);
 		setBounds(100, 100, 340, 420);

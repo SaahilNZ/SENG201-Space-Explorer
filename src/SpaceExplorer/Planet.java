@@ -32,6 +32,10 @@ public class Planet {
 		return output;
 	}
 	
+	public void findShipPart() {
+		hasShipPart = false;
+	}
+	
 	@Override
 	public String toString() {
 		return "Planet " + name;

@@ -1,5 +1,8 @@
 package SpaceExplorer.CrewMembers;
 
+import java.util.Random;
+
+import SpaceExplorer.Crew;
 import SpaceExplorer.FoodItem;
 import SpaceExplorer.Item;
 import SpaceExplorer.MedicalItem;
@@ -16,7 +19,10 @@ import SpaceExplorer.Ship;
 public abstract class CrewMember {
 	public static final int DEFAULT_HEALTH = 100;
 	public static final int DEFAULT_HUNGER = 100;
-	public static final int DEFAULT_TIREDNESS = 100; 
+	public static final int DEFAULT_TIREDNESS = 100;
+	public static final int SHIP_PART_CHANCE = 40;
+	public static final int MONEY_CHANCE = 20;
+	public static final int ITEM_CHANCE = 20;
 
 	private String crewClass;
 	private String name;
@@ -263,10 +269,41 @@ public abstract class CrewMember {
 	 * Searches the current planet and has a random chance of giving the player a 
 	 * ship part, food/medical item, money or nothing
 	 * 
+	 * @param crew					The crew to add found items to
 	 * @param planet				The current planet
 	 */
-	public void searchPlanet(Planet planet) {
-		//Search a planet
+	public String searchPlanet(Crew crew, Planet planet) {
+		String message = "";
+		if (actionsLeft > 0) {
+			message += getName() + " searches " + planet.toString() + ":\n";
+			message += searchPlanetOnce(crew, planet);
+			takeAction();
+		} else {
+			message += getName() + " doesn't have enough actions left to search the planet.";
+		}
+		return message;
+	}
+	
+	protected String searchPlanetOnce(Crew crew, Planet planet) {
+		String message = "";
+		
+		Random random = new Random();
+		int search = random.nextInt(100);
+		if (planet.hasShipPart() && search < SHIP_PART_CHANCE) {
+			planet.findShipPart();
+			crew.findShipPiece();
+			message += "Found a ship part!\n";
+		} else if (search < SHIP_PART_CHANCE + MONEY_CHANCE) {
+			int money = 20 + random.nextInt(81);
+			crew.receiveMoney(money);
+			message += "Found $" + money + ".\n";
+		} else if (search < SHIP_PART_CHANCE + MONEY_CHANCE + ITEM_CHANCE) {
+			// add a random item
+			message += "Found an item.\n";
+		} else {
+			message += "Nothing found from this search.\n";
+		}
+		return message;
 	}
 	
 	/**

@@ -1,5 +1,8 @@
 package SpaceExplorer.CrewMembers;
 
+import java.util.Random;
+
+import SpaceExplorer.Crew;
 import SpaceExplorer.Planet;
 
 public class Scout extends CrewMember {
@@ -8,10 +11,17 @@ public class Scout extends CrewMember {
 	}
 	
 	@Override
-	public void searchPlanet(Planet planet) {
+	public String searchPlanet(Crew crew, Planet planet) {
+		String message = "";
 		if (getActions() > 0) {
-			//Search a planet. The scout has more items returned for a planet search than any other class.
+			message += getName() + " searches " + planet.toString() + " twice:\n";
+			message += searchPlanetOnce(crew, planet);
+			message += searchPlanetOnce(crew, planet);
 			takeAction();
+		} else {
+			message = getName() + " doesn't have enough actions left to search the planet.";
 		}
+		
+		return message;
 	}
 }

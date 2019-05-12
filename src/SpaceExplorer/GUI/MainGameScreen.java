@@ -17,6 +17,8 @@ import javax.swing.Box;
 import javax.swing.JTextPane;
 
 import SpaceExplorer.Game;
+import SpaceExplorer.CrewMembers.CrewMember;
+import SpaceExplorer.GUI.Actions.SelectCrewMemberDialog;
 import SpaceExplorer.GUI.Actions.ViewCrewDialog;
 import SpaceExplorer.GUI.Actions.VisitOutpostDialog;
 
@@ -84,6 +86,25 @@ public class MainGameScreen extends JDialog {
 		pnlPlanetButtons.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnSearchPlanet = new JButton("Search Planet");
+		btnSearchPlanet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SelectCrewMemberDialog dialog = new SelectCrewMemberDialog(parent,
+						game.getCrew().getCrewMembers());
+				dialog.setVisible(true);
+				if (dialog.getStatusCode() == 0) {
+					CrewMember crewMember = dialog.getSelectedCrewMember();
+					String message = crewMember.searchPlanet(game.getCrew(), game.getCurrentPlanet());
+					JOptionPane.showMessageDialog(parent, message, "Search Results", JOptionPane.INFORMATION_MESSAGE);
+				}
+				dialog.dispose();
+				if (game.getCrew().getShipPieces() >= game.getTotalShipParts()) {
+					game.setWinStatus(true);
+					JOptionPane.showMessageDialog(parent, "You've found all the ship parts!",
+							"Congratulations", JOptionPane.INFORMATION_MESSAGE);
+					setVisible(false);
+				}
+			}
+		});
 		pnlPlanetButtons.add(btnSearchPlanet, BorderLayout.NORTH);
 		
 		JButton btnVisitOutpost = new JButton("Visit Outpost");

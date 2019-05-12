@@ -83,6 +83,10 @@ public class Crew {
 		return pruneCrewMembers();
 	}
 	
+	public void findShipPiece() {
+		shipPiecesFound += 1;
+	}
+	
 	public void addItem(Item item) {
 		items.add(item);
 	}
