@@ -22,15 +22,4 @@ public class MedicalItem extends Item {
 	public boolean curesPlague() {
 		return curesPlague;
 	}
-
-	@Override
-	public void viewObject() {
-		System.out.println("Name: " + name);
-		System.out.println("Price: " + price);
-		System.out.println("Restores " + restoreAmount + " lost health point(s)");
-		if (curesPlague) {
-			System.out.println("This item cures Space Plague");
-		}
-		System.out.println();
-	}
 }

@@ -25,10 +25,7 @@ public abstract class Item {
 	
 	public boolean canBeSold() {
 		return canBeSold;
-	}
-	
-	public abstract void viewObject();
-		
+	}	
 	
 	@Override
 	public String toString() {

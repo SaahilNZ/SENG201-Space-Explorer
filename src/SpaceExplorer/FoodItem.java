@@ -33,13 +33,4 @@ public class FoodItem extends Item {
 			name = cookedName;
 		}
 	}
-
-	@Override
-	public void viewObject() {
-		System.out.println("Name: " + name);
-		System.out.println("Price: " + price);
-		System.out.println("Restores " + hungerAmount + " point(s) of hunger");
-		System.out.println();
-	}
-
 }
