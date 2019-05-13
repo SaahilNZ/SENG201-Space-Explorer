@@ -13,7 +13,7 @@ public class Chef extends CrewMember {
 			message += getName() + " has successfully cooked the " + food.getName() + ".";
 			food.cookFood();
 		} else {
-			
+			message += getName() + " does not have enough actions left to cook food.";
 		}
 		return message;
 	}
