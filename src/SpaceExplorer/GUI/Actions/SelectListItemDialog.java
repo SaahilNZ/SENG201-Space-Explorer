@@ -21,24 +21,20 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
-public class SelectCrewMemberDialog extends JDialog {
+public class SelectListItemDialog<T> extends JDialog {
 
 	private final JPanel pnlContent = new JPanel();
-	private DefaultListModel<CrewMember> crewMemberModel;
-	private JList<CrewMember> lstCrewMembers;
+	private DefaultListModel<T> listModel;
+	private JList<T> lstCrewMembers;
 	private JButton btnOk;
 	
-	private CrewMember selectedCrewMember;
+	private T selectedItem;
 	private int statusCode = -1;
 
 	/**
 	 * Create the dialog.
 	 */
-	public SelectCrewMemberDialog(JFrame parent, Collection<CrewMember> crewMembers) {
-		this(parent, crewMembers, "Select Crew Member");
-	}
-	
-	public SelectCrewMemberDialog(JFrame parent, Collection<CrewMember> crewMembers, String title) {
+	public SelectListItemDialog(JFrame parent, Collection<T> listItems, String title) {
 		super(parent, true);
 		setTitle(title);
 		setResizable(false);
@@ -52,9 +48,9 @@ public class SelectCrewMemberDialog extends JDialog {
 			pnlContent.add(lblSelectCrewMember, BorderLayout.NORTH);
 		}
 		{
-			crewMemberModel = new DefaultListModel<CrewMember>();
-			for (CrewMember crewMember : crewMembers) {
-				crewMemberModel.addElement(crewMember);
+			listModel = new DefaultListModel<T>();
+			for (T listItem : listItems) {
+				listModel.addElement(listItem);
 			}
 			lstCrewMembers = new JList<>();
 			lstCrewMembers.addListSelectionListener(new ListSelectionListener() {
@@ -63,7 +59,7 @@ public class SelectCrewMemberDialog extends JDialog {
 				}
 			});
 			lstCrewMembers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			lstCrewMembers.setModel(crewMemberModel);
+			lstCrewMembers.setModel(listModel);
 			pnlContent.add(lstCrewMembers, BorderLayout.CENTER);
 		}
 		{
@@ -75,7 +71,7 @@ public class SelectCrewMemberDialog extends JDialog {
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						statusCode = 0;
-						selectedCrewMember = lstCrewMembers.getSelectedValue();
+						selectedItem = lstCrewMembers.getSelectedValue();
 						setVisible(false);
 					}
 				});
@@ -102,7 +98,7 @@ public class SelectCrewMemberDialog extends JDialog {
 		return statusCode;
 	}
 	
-	public CrewMember getSelectedCrewMember() {
-		return selectedCrewMember;
+	public T getSelectedItem() {
+		return selectedItem;
 	}
 }

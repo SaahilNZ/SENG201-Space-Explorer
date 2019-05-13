@@ -19,7 +19,7 @@ import javax.swing.JTextPane;
 import SpaceExplorer.Game;
 import SpaceExplorer.CrewMembers.CrewMember;
 import SpaceExplorer.CrewMembers.SpaceBard;
-import SpaceExplorer.GUI.Actions.SelectCrewMemberDialog;
+import SpaceExplorer.GUI.Actions.SelectListItemDialog;
 import SpaceExplorer.GUI.Actions.ViewCrewDialog;
 import SpaceExplorer.GUI.Actions.VisitOutpostDialog;
 
@@ -90,11 +90,11 @@ public class MainGameScreen extends JDialog {
 		JButton btnSearchPlanet = new JButton("Search Planet");
 		btnSearchPlanet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SelectCrewMemberDialog dialog = new SelectCrewMemberDialog(parent,
-						game.getCrew().getCrewMembers());
+				SelectListItemDialog<CrewMember> dialog = new SelectListItemDialog<CrewMember>(parent,
+						game.getCrew().getCrewMembers(), "Select Crew Member");
 				dialog.setVisible(true);
 				if (dialog.getStatusCode() == 0) {
-					CrewMember crewMember = dialog.getSelectedCrewMember();
+					CrewMember crewMember = dialog.getSelectedItem();
 					String message = crewMember.searchPlanet(game.getCrew(), game.getCurrentPlanet());
 					JOptionPane.showMessageDialog(parent, message, "Search Results", JOptionPane.INFORMATION_MESSAGE);
 					refreshDialog();
@@ -197,11 +197,11 @@ public class MainGameScreen extends JDialog {
 		JButton btnSleep = new JButton("<html><center>Sleep</center></html>");
 		btnSleep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SelectCrewMemberDialog dialog = new SelectCrewMemberDialog(parent,
-						game.getCrew().getCrewMembers());
+				SelectListItemDialog<CrewMember> dialog = new SelectListItemDialog<CrewMember>(parent,
+						game.getCrew().getCrewMembers(), "Select Crew Member");
 				dialog.setVisible(true);
 				if (dialog.getStatusCode() == 0) {
-					JOptionPane.showMessageDialog(parent, dialog.getSelectedCrewMember().sleep(),
+					JOptionPane.showMessageDialog(parent, dialog.getSelectedItem().sleep(),
 							"Sleep", JOptionPane.INFORMATION_MESSAGE);
 					refreshDialog();
 				}
@@ -218,15 +218,15 @@ public class MainGameScreen extends JDialog {
 		JButton btnPerformMusic = new JButton("<html><center>Perform Music</center></html>");
 		btnPerformMusic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<CrewMember> bards = new ArrayList<CrewMember>();
+				ArrayList<SpaceBard> bards = new ArrayList<SpaceBard>();
 				for (CrewMember crewMember : game.getCrew().getCrewMembers()) {
-					if (crewMember instanceof SpaceBard) bards.add(crewMember);
+					if (crewMember instanceof SpaceBard) bards.add((SpaceBard)crewMember);
 				}
-				SelectCrewMemberDialog dialog = new SelectCrewMemberDialog(parent, bards);
+				SelectListItemDialog<SpaceBard> dialog = new SelectListItemDialog<SpaceBard>(parent, bards, "Select Space Bard");
 				dialog.setVisible(true);
 				if (dialog.getStatusCode() == 0) {
 					JOptionPane.showMessageDialog(parent,
-							((SpaceBard)dialog.getSelectedCrewMember()).performMusic(game.getCrew().getCrewMembers()),
+							((SpaceBard)dialog.getSelectedItem()).performMusic(game.getCrew().getCrewMembers()),
 							"Perform Music", JOptionPane.INFORMATION_MESSAGE);
 					refreshDialog();
 				}
@@ -243,11 +243,11 @@ public class MainGameScreen extends JDialog {
 		JButton btnRepairShip = new JButton("<html><center>Repair Ship</center></html>");
 		btnRepairShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SelectCrewMemberDialog dialog = new SelectCrewMemberDialog(parent,
-						game.getCrew().getCrewMembers());
+				SelectListItemDialog<CrewMember> dialog = new SelectListItemDialog<CrewMember>(parent,
+						game.getCrew().getCrewMembers(), "Select Crew Member");
 				dialog.setVisible(true);
 				if (dialog.getStatusCode() == 0) {
-					JOptionPane.showMessageDialog(parent, dialog.getSelectedCrewMember().repairShip(game.getCrew().getShip()),
+					JOptionPane.showMessageDialog(parent, dialog.getSelectedItem().repairShip(game.getCrew().getShip()),
 							"Repair Ship", JOptionPane.INFORMATION_MESSAGE);
 					refreshDialog();
 				}
