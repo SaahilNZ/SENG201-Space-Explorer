@@ -170,7 +170,8 @@ public class Game {
 			score += item.getPrice();
 		}
 		score -= crewCount * 500;
-		score -= (2000 * crewCount - crew.getCrewMembers().size());
+		score -= (2000 * (crewCount - crew.getCrewMembers().size()));
+		score -= (1000 * (totalShipParts - crew.getShipPieces()));
 		for (CrewMember crewMember : crew.getCrewMembers()) {
 			score -= crewMember.getHunger();
 			score -= crewMember.getTiredness();

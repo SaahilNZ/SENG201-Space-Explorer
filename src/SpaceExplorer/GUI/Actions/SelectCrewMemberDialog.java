@@ -35,8 +35,12 @@ public class SelectCrewMemberDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public SelectCrewMemberDialog(JFrame parent, Collection<CrewMember> crewMembers) {
+		this(parent, crewMembers, "Select Crew Member");
+	}
+	
+	public SelectCrewMemberDialog(JFrame parent, Collection<CrewMember> crewMembers, String title) {
 		super(parent, true);
-		setTitle("Select Crew Member");
+		setTitle(title);
 		setResizable(false);
 		setBounds(100, 100, 340, 420);
 		getContentPane().setLayout(new BorderLayout());
