@@ -2,6 +2,7 @@ package SpaceExplorer;
 
 import java.util.ArrayList;
 
+import SpaceExplorer.CrewMembers.CrewMember;
 import SpaceExplorer.Utilities.NameGenerator;
 import SpaceExplorer.Utilities.StaticData;
 
@@ -18,8 +19,8 @@ public class Game {
 	private int desiredDays;
 	private int currentDay = 1;
 	private int totalShipParts;
-	private int score;
 	private boolean gameWon = false;
+	private int crewCount;
 
 	private Game() {
 		planets = new ArrayList<Planet>();
@@ -58,12 +59,12 @@ public class Game {
 	}
 	
 	public void setupGame(int days, Crew crew) {
-		this.score = 0;
 		this.gameWon = false;
 		this.desiredDays = days;
 		this.crew = crew;
 		this.randomEventController = new RandomEventController();
 		this.totalShipParts = (this.desiredDays * 2) / 3;
+		this.crewCount = crew.getCrewMembers().size();
 		createItems();
 		generatePlanets();
 		startGame();
@@ -163,7 +164,26 @@ public class Game {
 		return gameStatus;
 	}
 	
-	public int getScore() {
+	public int calculateScore() {
+		int score = 10000;
+		for (Item item : crew.getItems()) {
+			score += item.getPrice();
+		}
+		score -= crewCount * 500;
+		score -= (2000 * crewCount - crew.getCrewMembers().size());
+		for (CrewMember crewMember : crew.getCrewMembers()) {
+			score -= crewMember.getHunger();
+			score -= crewMember.getTiredness();
+			if (crewMember.hasPlague()) score -= 200;
+		}
+		score += crew.currentMoney();
+		if (!gameWon) {
+			if (score > 0) {
+				score /= 2;
+			} else {
+				score *= 2;
+			}
+		}
 		return score;
 	}
 	
