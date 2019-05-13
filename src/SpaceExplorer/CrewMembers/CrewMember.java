@@ -145,9 +145,13 @@ public abstract class CrewMember {
 	 * Also increases the crew member's tiredness
 	 * 
 	 */
-	public void takeAction() {
-		actionsLeft -= 1;
-		becomeTired(20);
+	public boolean takeAction() {
+		if (actionsLeft > 0) {
+			actionsLeft -= 1;
+			becomeTired(20);
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -167,8 +171,7 @@ public abstract class CrewMember {
 	 */
 	public String sleep() {
 		String message = "";
-		if (actionsLeft > 0) {
-			takeAction();
+		if (takeAction()) {
 			message += getName() + " has rested, and is no longer tired.";
 			tiredness = 0;
 		} else {
@@ -246,19 +249,24 @@ public abstract class CrewMember {
 	 * 
 	 * @param item					An item to use on the crew member
 	 */
-	public void useItem(Item item) {
-		if (actionsLeft > 0) {
+	public String useItem(Item item) {
+		String message = "";
+		if (takeAction()) {
 			if (item instanceof MedicalItem) {				
+				message += getName() + " has used the " + item.getName() + ".";
 				restoreHealth(((MedicalItem)item).getRestoreAmount());
 				if (((MedicalItem)item).curesPlague()) {
 					setPlague(false);
 				}
 			} else if (item instanceof FoodItem) {
+				message += getName() + " has eaten the " + item.getName() + ".";
 				decreaseHunger(((FoodItem)item).getHungerAmount());
 				decreaseTiredness(((FoodItem)item).getTiredAmount());
 			}
-			takeAction();
+		} else {
+			message += getName() + " does not have enough actions to use an item.";
 		}
+		return message;
 	}
 	
 	/**
@@ -269,13 +277,12 @@ public abstract class CrewMember {
 	 */
 	public String repairShip(Ship ship) {
 		String message = "";
-		if (actionsLeft > 0) {
+		if (takeAction()) {
 			ship.repairShield(20);
 			ship.repairShip(10);
 			message += getName() + " has repaired the " + ship.toString() + ".\n";
 			message += "The " + ship.toString() + "'s shields have been restored by 20 points.\n";
 			message += "The " + ship.toString() + "'s health has been restored by 10 points.\n";
-			takeAction();
 		} else {
 			message += getName() + " does not have enough actions left to repair the ship.";
 		}
@@ -291,10 +298,9 @@ public abstract class CrewMember {
 	 */
 	public String searchPlanet(Crew crew, Planet planet) {
 		String message = "";
-		if (actionsLeft > 0) {
+		if (takeAction()) {
 			message += getName() + " searches " + planet.toString() + ":\n";
 			message += searchPlanetOnce(crew, planet);
-			takeAction();
 		} else {
 			message += getName() + " doesn't have enough actions left to search the planet.";
 		}
@@ -354,11 +360,10 @@ public abstract class CrewMember {
 	/**
 	 * Pilots the ship to a new planet. Takes 2 crew members to do so
 	 * 
+	 * @return						Returns whether or not the action was successful
 	 */
-	public void pilotShip() {
-		if (actionsLeft > 0) {			
-			takeAction();
-		}
+	public boolean pilotShip() {
+		return takeAction();
 	}
 	
 	/**

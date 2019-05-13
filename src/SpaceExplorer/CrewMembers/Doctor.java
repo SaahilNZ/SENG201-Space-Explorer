@@ -5,19 +5,28 @@ public class Doctor extends CrewMember {
 		super(name, "Doctor", 80, DEFAULT_HUNGER, DEFAULT_TIREDNESS);
     }
 
-	public void curePlague(CrewMember member) {
-		if (getActions() >= 2) {			
+	public String curePlague(CrewMember member) {
+		String message = "";
+		if (getActions() >= 2) {
+			message += getName() + " has successfully cured " + member.getName() + " of the space plague.";
 			member.setPlague(false);
 			takeAction();
 			takeAction();
+		} else {
+			message += getName() + " does not have enough actions to cure someone of space plague.";
 		}
+		return message;
 	}
 	
-	public void heal(CrewMember member) {
-		if (getActions() > 0) {
+	public String heal(CrewMember member) {
+		String message = "";
+		if (takeAction()) {
+			message += getName() + " has successfully healed " + member.getName() + " for 20 health points.";
 			member.restoreHealth(20);
-			takeAction();
+		} else {
+			message += getName() + " does not have enough actions to heal someone";
 		}
+		return message;
 	}
 	
 }

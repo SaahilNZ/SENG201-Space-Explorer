@@ -11,11 +11,10 @@ public class Scout extends CrewMember {
 	@Override
 	public String searchPlanet(Crew crew, Planet planet) {
 		String message = "";
-		if (getActions() > 0) {
+		if (takeAction()) {
 			message += getName() + " searches " + planet.toString() + " twice:\n";
 			message += searchPlanetOnce(crew, planet);
 			message += searchPlanetOnce(crew, planet);
-			takeAction();
 		} else {
 			message = getName() + " doesn't have enough actions left to search the planet.";
 		}
