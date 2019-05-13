@@ -15,7 +15,7 @@ public class Doctor extends CrewMember {
 	
 	public void heal(CrewMember member) {
 		if (getActions() > 0) {
-			member.heal(20);
+			member.restoreHealth(20);
 			takeAction();
 		}
 	}
