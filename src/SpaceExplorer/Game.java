@@ -84,7 +84,60 @@ public class Game {
 	}
 	
 	private void createItems() {
-		// TODO: create and add items to the allItems array
+		allItems = new ArrayList<Item>();
+		createMedicalItems();
+		createFoodItems();
+	}
+	
+	private void createMedicalItems() {
+		MedicalItem fullRestore = ItemFactory.createMedicalItem("Full Restore",
+				50, false, true, 100, true);
+		allItems.add(fullRestore);
+		MedicalItem essentialOils = ItemFactory.createMedicalItem("Essential Oils",
+				1, true, false, 0, false);
+		allItems.add(essentialOils);
+		MedicalItem pickMeUp = ItemFactory.createMedicalItem("Pick-Me-Up",
+				10, true, true, 20, false);
+		allItems.add(pickMeUp);
+		MedicalItem vaccine = ItemFactory.createMedicalItem("Vaccine",
+				20, false, true, 0, true);
+		allItems.add(vaccine);
+		MedicalItem antibiotics = ItemFactory.createMedicalItem("Antibiotics",
+				30, true, true, 50, false);
+		allItems.add(antibiotics);
+		MedicalItem rustedSyringe = ItemFactory.createMedicalItem("Rusted Syringe",
+				10, true, false, -40, true);
+		allItems.add(rustedSyringe);
+	}
+	
+	private void createFoodItems() {
+		FoodItem steakBurger = ItemFactory.createFoodItem("Steak Burger",
+				"Roasted Steak Burger", 25, false, true, 60, 0);
+		allItems.add(steakBurger);
+		FoodItem gruel = ItemFactory.createFoodItem("Gruel",
+				"Chargruelled Gruel", 5, true, true, 10, 0);
+		allItems.add(gruel);
+		FoodItem hamAndCheese = ItemFactory.createFoodItem("Ham & Cheese Sammy",
+				"Toasted Ham & Cheese Sammy", 15, false, true, 20, 0);
+		allItems.add(hamAndCheese);
+		FoodItem adrenalineChewy = ItemFactory.createFoodItem("Adrenaline Chewy",
+				"Adrenaline Gumball", 80, true, true, -10, 100);
+		allItems.add(adrenalineChewy);
+		FoodItem mocha = ItemFactory.createFoodItem("Mocha",
+				"Roast Bean Mocha", 30, false, true, 0, 10);
+		allItems.add(mocha);
+		FoodItem cigarette = ItemFactory.createFoodItem("Candy Cigarette",
+				"Candy Cuban Cigar", 75, true, true, -20, 40);
+		allItems.add(cigarette);
+		FoodItem goldenEgg = ItemFactory.createFoodItem("Golden Egg",
+				"Omelette of the Gods", 9001, true, false, 80, 100);
+		allItems.add(goldenEgg);
+		FoodItem beetles = ItemFactory.createFoodItem("Beetles",
+				"Beetle Juice", 2, true, false, 5, -10);
+		allItems.add(beetles);
+		FoodItem grapes = ItemFactory.createFoodItem("Grapes",
+				"Torched Grapes", 20, true, false, 15, 0);
+		allItems.add(grapes);
 	}
 
 	/**
@@ -99,6 +152,12 @@ public class Game {
 		if (gameStatus) {
 			if (currentDay > desiredDays) {
 				gameStatus = false;
+			}
+		}
+		for (Planet planet : planets) {
+			Outpost outpost = planet.getOutpost();
+			if (outpost != null) {
+				outpost.refreshInventory();
 			}
 		}
 		return gameStatus;

@@ -1,6 +1,7 @@
 package SpaceExplorer;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Outpost {
 	private final String name;
@@ -9,6 +10,7 @@ public class Outpost {
 	public Outpost(String name) {
 		this.name = name;
 		this.inventory = new ArrayList<Item>();
+		refreshInventory();
 	}
 	
 	public String getName() {
@@ -16,7 +18,17 @@ public class Outpost {
 	}
 	
 	public void refreshInventory() {
-		// refresh the inventory
+		this.inventory = new ArrayList<Item>();
+		ArrayList<Item> purchasableItems = new ArrayList<Item>();
+		for (Item item : Game.getCurrentGame().getItems()) {
+			if (item.canBeSold()) {
+				purchasableItems.add(item);
+			}
+		}
+		Random random = new Random();
+		for (int i = 0; i < 5; i++) {
+			inventory.add(purchasableItems.get(random.nextInt(purchasableItems.size())));
+		}
 	}
 	
 	public ArrayList<Item> getInventory() {
