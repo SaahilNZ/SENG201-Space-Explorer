@@ -166,9 +166,9 @@ public abstract class CrewMember {
 	public String sleep() {
 		String message = "";
 		if (actionsLeft > 0) {
+			takeAction();
 			message += getName() + " has rested, and is no longer tired.";
 			tiredness = 0;
-			takeAction();
 		} else {
 			message += getName() + " does not have enough actions left to sleep.";
 		}
@@ -180,7 +180,7 @@ public abstract class CrewMember {
 	 * 
 	 * @param restore				Amount of health restored to the crew member
 	 */
-	public void heal(int restore) {
+	public void restoreHealth(int restore) {
 		health = Math.min(maxHealth, health+restore);
 	}
 	
@@ -247,12 +247,13 @@ public abstract class CrewMember {
 	public void useItem(Item item) {
 		if (actionsLeft > 0) {
 			if (item instanceof MedicalItem) {				
-				heal(((MedicalItem)item).getRestoreAmount());
+				restoreHealth(((MedicalItem)item).getRestoreAmount());
 				if (((MedicalItem)item).curesPlague()) {
 					setPlague(false);
 				}
 			} else if (item instanceof FoodItem) {
 				decreaseHunger(((FoodItem)item).getHungerAmount());
+				decreaseTiredness(((FoodItem)item).getTiredAmount());
 			}
 			takeAction();
 		}

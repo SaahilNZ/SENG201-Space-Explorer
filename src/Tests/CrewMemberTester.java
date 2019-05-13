@@ -11,23 +11,27 @@ import SpaceExplorer.CrewMembers.Scout;
 class CrewMemberTester {
 	
 	private Scout testCrew;
+	private int startHealth;
+	private int startHunger;
+	private int startTired;
 	
 	@BeforeEach
 	public void init() {
 		testCrew = new Scout("Claptrap");
+		startHealth = testCrew.getHealth();
+		startHunger = testCrew.getHunger();
+		startTired = testCrew.getTiredness();
 	}
 	
 	@Test
 	public void healthTest() {
-		int startHealth = testCrew.getHealth();
-		
 		//Basic tests for functionality of damage and heal
 		testCrew.damageCrew(60);
-		testCrew.heal(10);
+		testCrew.restoreHealth(10);
 		assertEquals(startHealth - 60 + 10, testCrew.getHealth());
 		
 		//Tests health can't get higher than max
-		testCrew.heal(800);
+		testCrew.restoreHealth(800);
 		assertEquals(startHealth, testCrew.getHealth());
 		
 	}
@@ -35,8 +39,6 @@ class CrewMemberTester {
 	
 	@Test
 	public void tiredTest() {
-		int startTired = testCrew.getTiredness();
-		
 		//Tests if a crew member's tiredness can change
 		testCrew.becomeTired(60);
 		assertEquals(startTired+60, testCrew.getTiredness());
@@ -47,7 +49,6 @@ class CrewMemberTester {
 		assertEquals(1, testCrew.getActions());
 		
 		//Ensures crew members can't sleep after all actions are depleted 
-		//#BUGGED
 		testCrew.sleep();
 		testCrew.becomeTired(10);
 		testCrew.sleep();
@@ -60,7 +61,6 @@ class CrewMemberTester {
 	
 	@Test
 	public void hungerTest() {
-		int startHunger = testCrew.getHunger();
 		//Checks a crew member can become hungry
 		testCrew.increaseHunger(60);
 		assertEquals(startHunger+60, testCrew.getHunger());
