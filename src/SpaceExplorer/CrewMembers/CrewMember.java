@@ -1,9 +1,11 @@
 package SpaceExplorer.CrewMembers;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import SpaceExplorer.Crew;
 import SpaceExplorer.FoodItem;
+import SpaceExplorer.Game;
 import SpaceExplorer.Item;
 import SpaceExplorer.MedicalItem;
 import SpaceExplorer.Planet;
@@ -304,20 +306,48 @@ public abstract class CrewMember {
 		
 		Random random = new Random();
 		int search = random.nextInt(100);
-		if (planet.hasShipPart() && search < SHIP_PART_CHANCE) {
-			planet.findShipPart();
-			crew.findShipPiece();
-			message += "Found a ship part!\n";
-		} else if (search < SHIP_PART_CHANCE + MONEY_CHANCE) {
-			int money = 20 + random.nextInt(81);
-			crew.receiveMoney(money);
-			message += "Found $" + money + ".\n";
-		} else if (search < SHIP_PART_CHANCE + MONEY_CHANCE + ITEM_CHANCE) {
-			// add a random item
-			message += "Found an item.\n";
+		if (planet.hasShipPart()) {
+			if (search < SHIP_PART_CHANCE) {
+				planet.findShipPart();
+				crew.findShipPiece();
+				message += "Found a ship part!\n";
+			} else if (search < SHIP_PART_CHANCE + ITEM_CHANCE) {
+				ArrayList<Item> items = new ArrayList<Item>();
+				for (Item item : Game.getCurrentGame().getItems()) {
+					if (item.canBeFound()) {
+						items.add(item);
+					}
+				}
+				Item item = items.get(random.nextInt(items.size()));
+				Game.getCurrentGame().getCrew().addItem(item);
+				message += "Found an item: " + item.getName() + "\n";
+			} else if (search < SHIP_PART_CHANCE + ITEM_CHANCE + MONEY_CHANCE) {
+				int money = 20 + random.nextInt(81);
+				crew.receiveMoney(money);
+				message += "Found $" + money + ".\n";
+			} else {
+				message += "Nothing found from this search.\n";
+			}
 		} else {
-			message += "Nothing found from this search.\n";
+			if (search < SHIP_PART_CHANCE + ITEM_CHANCE) {
+				ArrayList<Item> items = new ArrayList<Item>();
+				for (Item item : Game.getCurrentGame().getItems()) {
+					if (item.canBeFound()) {
+						items.add(item);
+					}
+				}
+				Item item = items.get(random.nextInt(items.size()));
+				Game.getCurrentGame().getCrew().addItem(item);
+				message += "Found an item: " + item.getName() + "\n";
+			} else if (search < SHIP_PART_CHANCE + ITEM_CHANCE + MONEY_CHANCE) {
+				int money = 20 + random.nextInt(81);
+				crew.receiveMoney(money);
+				message += "Found $" + money + ".\n";
+			} else {
+				message += "Nothing found from this search.\n";
+			}
 		}
+		
 		return message;
 	}
 	

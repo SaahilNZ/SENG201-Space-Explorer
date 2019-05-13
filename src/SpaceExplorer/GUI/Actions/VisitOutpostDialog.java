@@ -47,6 +47,7 @@ public class VisitOutpostDialog extends JDialog {
 	 */
 	public VisitOutpostDialog(JFrame parent, Outpost outpost, Crew crew) {
 		super(parent, true);
+		this.crew = crew;
 		setTitle("Outpost");
 		setResizable(false);
 		setBounds(100, 100, 640, 480);
@@ -157,11 +158,12 @@ public class VisitOutpostDialog extends JDialog {
 							if (item instanceof MedicalItem) {
 								itemInfo += "Medical Item\n";
 								itemInfo += "Restores " + ((MedicalItem)item).getRestoreAmount() + " points of health.\n";
-								itemInfo += ((MedicalItem)item).curesPlague() ? "This item cures Space Plague."
-										: "This item does not cure Space Plague.";
+								itemInfo += ((MedicalItem)item).curesPlague() ? "This item cures Space Plague.\n"
+										: "This item does not cure Space Plague.\n";
 							} else if (item instanceof FoodItem) {
 								itemInfo += "Food Item\n";
 								itemInfo += "Restores " + ((FoodItem)item).getHungerAmount() + " points of hunger.\n";
+								itemInfo += "Restores " + ((FoodItem)item).getTiredAmount() + " points of exhaustion.\n";
 							}
 							itemInfo += "Price: $" + item.getPrice();
 							txtpnItemInfo.setText(itemInfo);

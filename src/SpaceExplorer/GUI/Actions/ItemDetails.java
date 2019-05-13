@@ -29,6 +29,7 @@ public class ItemDetails extends JDialog {
 	 */
 	public ItemDetails(JFrame parent, Item item) {
 		super(parent, true);
+		setTitle(item.getName());
 		setResizable(false);
 		setBounds(100, 100, 480, 240);
 		getContentPane().setLayout(new BorderLayout());
@@ -76,7 +77,8 @@ public class ItemDetails extends JDialog {
 					if (item instanceof MedicalItem) { 
 						restoreAmount = "Restores " + ((MedicalItem)item).getRestoreAmount() + " points of health.";
 					} else if (item instanceof FoodItem) {
-						restoreAmount = "Restores " + ((FoodItem)item).getHungerAmount() + " points of hunger.";
+						restoreAmount = "Restores " + ((FoodItem)item).getHungerAmount() + " points of hunger, and "
+								+ ((FoodItem)item).getTiredAmount() + " points of exhaustion.";
 					}
 					JLabel lblRestoreAmount = new JLabel(restoreAmount);
 					pnlRestoreAmount.add(lblRestoreAmount);
