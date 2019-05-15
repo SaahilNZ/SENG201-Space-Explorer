@@ -2,9 +2,18 @@ package Tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import SpaceExplorer.Crew;
+import SpaceExplorer.FoodItem;
+import SpaceExplorer.Item;
+import SpaceExplorer.Outpost;
+import SpaceExplorer.Planet;
+import SpaceExplorer.Ship;
+import SpaceExplorer.CrewMembers.CrewMember;
 import SpaceExplorer.CrewMembers.Scout;
 
 //Remaining tests to write: useItem, repairShip, searchPlanet, pilotShip, visitOutpost, purchaseItem
@@ -75,6 +84,42 @@ class CrewMemberTester {
 		//Checks plague status can be applied
 		testCrew.setPlague(true);
 		assertEquals(true, testCrew.hasPlague());
+	}
+	
+	@Test
+	public void repairTest() {
+		Ship voyager = new Ship("Voyager", 200, 200);
+		voyager.damageShield(100);
+		voyager.damageShip(100);
+		testCrew.repairShip(voyager);
+		assertEquals(120, voyager.getShieldLevel());
+		assertEquals(110, voyager.getHealth());
+		
+		testCrew.takeAction();
+		testCrew.repairShip(voyager);
+		assertEquals(120, voyager.getShieldLevel());
+		assertEquals(110, voyager.getHealth());
+	}
+	
+	
+	@Test
+	public void planetSearchTest() {
+		//I don't know how to properly implement this test
+		//Currently runs an ERROR
+		Ship voyager = new Ship("Voyager", 200, 200);
+		FoodItem burger = new FoodItem(1, "Burger", "Cooked Burger", 20, true, true, 20, 0);
+		ArrayList<Item> testItems = new ArrayList<Item>();
+		testItems.add(burger);
+		ArrayList<CrewMember> testMembers = new ArrayList<CrewMember>();
+		testMembers.add(testCrew);
+		Crew canterbury = new Crew(testMembers, "Canterbury", voyager, 0, testItems);
+		Outpost spaceOutpost = new Outpost("Space Station");
+		Planet jupiter = new Planet("Jupiter", spaceOutpost);
+		testCrew.searchPlanet(canterbury, jupiter);
+		testCrew.searchPlanet(canterbury, jupiter);
+		testCrew.setActions(2);
+		testCrew.searchPlanet(canterbury, jupiter);
+		testCrew.searchPlanet(canterbury, jupiter);
 	}
 	
 

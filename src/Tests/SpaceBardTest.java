@@ -49,4 +49,12 @@ class SpaceBardTest {
 		assertEquals(50, testBard.getTiredness());
 	}
 
+	@Test
+	public void depletedActionsTest() {
+		testBard.takeAction();
+		testBard.takeAction();
+		testCrew1.becomeTired(30);
+		testBard.performMusic(canterbury.getCrewMembers());
+		assertEquals(30, testCrew1.getTiredness());
+	}
 }

@@ -21,12 +21,23 @@ class MechanicTest {
 	}
 	
 	@Test
-	public void repaiTest() {
+	public void repairTest() {
 		canterbury.damageShield(100);
 		canterbury.damageShip(100);
 		testMech.repairShip(canterbury);
 		assertEquals(160, canterbury.getShieldLevel());
 		assertEquals(140, canterbury.getHealth());
+	}
+	
+	@Test
+	public void depletedActionsTest() {
+		testMech.takeAction();
+		testMech.takeAction();
+		canterbury.damageShield(100);
+		canterbury.damageShip(100);
+		testMech.repairShip(canterbury);
+		assertEquals(100, canterbury.getShieldLevel());
+		assertEquals(100, canterbury.getHealth());
 	}
 
 }

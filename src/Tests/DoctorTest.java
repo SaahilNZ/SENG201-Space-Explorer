@@ -52,5 +52,18 @@ class DoctorTest {
 		testDoc.curePlague(testCrew2);
 		assertEquals(testCrew2.hasPlague(), false);
 	}
+	
+	@Test
+	public void actionsTest() {
+		//Tests that heal and cure plague can't be used with no actions remaining
+		testDoc.damageCrew(40);
+		testDoc.setPlague(true);
+		testDoc.takeAction();
+		testDoc.takeAction();
+		testDoc.heal(testDoc);
+		testDoc.curePlague(testDoc);
+		assertEquals(healthDoc - 40, testDoc.getHealth());
+		assertEquals(true, testDoc.hasPlague());
+	}
 
 }

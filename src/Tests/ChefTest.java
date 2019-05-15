@@ -12,11 +12,13 @@ class ChefTest {
 	
 	private Chef testChef;
 	private FoodItem burger;
+	private FoodItem sammy;
 	
 	@BeforeEach
 	public void init() {
 		testChef = new Chef("Claptrap");
 		burger = new FoodItem(1, "Burger", "Cooked Burger", 20, true, true, 20, 0);
+		sammy = new FoodItem(1, "Sammy", "Toasted Sammy", 20, true, true, 20, 0);
 	}
 	
 	@Test
@@ -29,6 +31,9 @@ class ChefTest {
 		assertEquals(burger.getName(), "Cooked Burger");
 		assertEquals(burger.getHungerAmount(), 40);
 		
+		testChef.cook(sammy);
+		assertEquals(sammy.getName(), "Sammy");
+		assertEquals(sammy.getHungerAmount(), 20);
 		assertEquals(0, testChef.getActions());
 	}
 

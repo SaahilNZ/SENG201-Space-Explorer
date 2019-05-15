@@ -51,5 +51,17 @@ class FoodTester {
 		testCrew.useItem(coffee);
 		assertEquals(startTired+30, testCrew.getTiredness());
 	}
+	
+	@Test
+	public void cookTest() {
+		//Tests a food item can be cooked
+		burger.cookFood();
+		assertEquals(burger.getName(), "Cooked Burger");
+		assertEquals(burger.getHungerAmount(), 40);
+		//Makes sure it can't be cooked twice
+		burger.cookFood();
+		assertEquals(burger.getName(), "Cooked Burger");
+		assertEquals(burger.getHungerAmount(), 40);
+	}
 
 }
