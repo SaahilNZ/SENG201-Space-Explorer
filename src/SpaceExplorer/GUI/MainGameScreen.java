@@ -17,8 +17,10 @@ import javax.swing.Box;
 import javax.swing.JTextPane;
 
 import SpaceExplorer.Game;
+import SpaceExplorer.Item;
 import SpaceExplorer.CrewMembers.CrewMember;
 import SpaceExplorer.CrewMembers.SpaceBard;
+import SpaceExplorer.CrewMembers.CrewMember.ActionResult;
 import SpaceExplorer.GUI.Actions.SelectListItemDialog;
 import SpaceExplorer.GUI.Actions.ViewCrewDialog;
 import SpaceExplorer.GUI.Actions.VisitOutpostDialog;
@@ -187,10 +189,40 @@ public class MainGameScreen extends JDialog {
 		pnlCrewControls.add(lblActions);
 		
 		JButton btnPilotShip = new JButton("<html><center>Pilot Ship</center></html>");
+		btnPilotShip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: pilot ship
+			}
+		});
 		btnPilotShip.setBounds(120, 36, 100, 100);
 		pnlCrewControls.add(btnPilotShip);
 		
 		JButton btnUseItem = new JButton("<html><center>Use Item</center></html>");
+		btnUseItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: use an item
+				SelectListItemDialog<CrewMember> crewDialog = new SelectListItemDialog<CrewMember>(parent,
+						game.getCrew().getCrewMembers(), "Select Crew Member");
+				crewDialog.setVisible(true);
+				if (crewDialog.getStatusCode() == 0) {
+					SelectListItemDialog<Item> itemDialog = new SelectListItemDialog<Item>(parent,
+							game.getCrew().getItems(), "Select Item");
+					itemDialog.setVisible(true);
+					if (itemDialog.getStatusCode() == 0) {
+						CrewMember crewMember = crewDialog.getSelectedItem();
+						Item item = itemDialog.getSelectedItem();
+						ActionResult result = crewMember.useItem(item);
+						String message = result.getMessage();
+						if (result.getSuccess()) {
+							if (!game.getCrew().removeItem(item)) {
+								message = "Item not found";
+							}
+						}
+						JOptionPane.showMessageDialog(parent, message, "Use Item", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			}
+		});
 		btnUseItem.setBounds(10, 147, 100, 100);
 		pnlCrewControls.add(btnUseItem);
 		
@@ -212,6 +244,11 @@ public class MainGameScreen extends JDialog {
 		pnlCrewControls.add(btnSleep);
 		
 		JButton btnCookFood = new JButton("<html><center>Cook Food</center></html>");
+		btnCookFood.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: cook food
+			}
+		});
 		btnCookFood.setBounds(304, 36, 100, 100);
 		pnlCrewControls.add(btnCookFood);
 		
@@ -258,10 +295,20 @@ public class MainGameScreen extends JDialog {
 		pnlCrewControls.add(btnRepairShip);
 		
 		JButton btnHealCrewMember = new JButton("<html><center>Heal Crew</center></html>");
+		btnHealCrewMember.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: heal crew
+			}
+		});
 		btnHealCrewMember.setBounds(414, 36, 100, 94);
 		pnlCrewControls.add(btnHealCrewMember);
 		
 		JButton btnCurePlague = new JButton("<html><center>Cure Plague</center></html>");
+		btnCurePlague.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: cure plague
+			}
+		});
 		btnCurePlague.setBounds(414, 147, 100, 100);
 		pnlCrewControls.add(btnCurePlague);
 		

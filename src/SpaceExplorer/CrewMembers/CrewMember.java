@@ -249,8 +249,9 @@ public abstract class CrewMember {
 	 * 
 	 * @param item					An item to use on the crew member
 	 */
-	public String useItem(Item item) {
+	public ActionResult useItem(Item item) {
 		String message = "";
+		boolean success = false;
 		if (takeAction()) {
 			if (item instanceof MedicalItem) {				
 				message += getName() + " has used the " + item.getName() + ".";
@@ -263,10 +264,11 @@ public abstract class CrewMember {
 				decreaseHunger(((FoodItem)item).getHungerAmount());
 				decreaseTiredness(((FoodItem)item).getTiredAmount());
 			}
+			success = true;
 		} else {
 			message += getName() + " does not have enough actions to use an item.";
 		}
-		return message;
+		return new ActionResult(message, success);
 	}
 	
 	/**
@@ -378,5 +380,22 @@ public abstract class CrewMember {
 	@Override
 	public String toString() {
 		return name + " - " + crewClass;
+	}
+	
+	public class ActionResult {
+		private String message;
+		private boolean success;
+		public ActionResult(String message, boolean success) {
+			this.message = message;
+			this.success = success;
+		}
+		
+		public String getMessage() {
+			return message;
+		}
+		
+		public boolean getSuccess() {
+			return success;
+		}
 	}
 }
