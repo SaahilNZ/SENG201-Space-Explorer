@@ -39,6 +39,10 @@ public class FoodItem extends Item {
 			name = cookedName;
 		}
 	}
+	
+	public boolean isCooked() {
+		return isCooked;
+	}
 
 	@Override
 	public Item createCopy() {

@@ -296,7 +296,9 @@ public class MainGameScreen extends JDialog {
 				if (crewDialog.getStatusCode() == 0) {
 					ArrayList<FoodItem> foodItems = new ArrayList<FoodItem>();
 					for (Item item : game.getCrew().getItems()) {
-						if (item instanceof FoodItem) foodItems.add((FoodItem)item);
+						if (item instanceof FoodItem) {
+							if (!((FoodItem)item).isCooked()) foodItems.add((FoodItem)item);
+						}
 					}
 					
 					SelectListItemDialog<FoodItem> itemDialog = new SelectListItemDialog<FoodItem>(parent,
