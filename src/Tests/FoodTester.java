@@ -41,21 +41,21 @@ class FoodTester {
 	 */
 	@Test
 	public void hungerTest() {
-		testCrew.increaseHunger(50);
+		testCrew.modifyHunger(50);
 		testCrew.useItem(burger);
 		assertEquals(startHunger+30, testCrew.getHunger());
 	}
 	
 	/**
-	 * Checks food can't be eaten when no actions remain
+	 * Checks food can't be eaten when no actions remain. Hunger also increases with each sleep action taken
 	 */
 	@Test
 	public void eatingTest() {
-		testCrew.increaseHunger(50);
+		testCrew.modifyHunger(50);
 		testCrew.sleep();
 		testCrew.sleep();
 		testCrew.useItem(burger);
-		assertEquals(startHunger+50, testCrew.getHunger());
+		assertEquals(startHunger+90, testCrew.getHunger());
 	}
 	
 	/**
@@ -63,9 +63,10 @@ class FoodTester {
 	 */
 	@Test
 	public void tiredTest() {
-		testCrew.becomeTired(60);
+		//Tests tiredness is restored correctly
+		testCrew.modifyTiredness(60);
 		testCrew.useItem(coffee);
-		assertEquals(startTired+30, testCrew.getTiredness());
+		assertEquals(startTired+10, testCrew.getTiredness());
 	}
 	
 	/**

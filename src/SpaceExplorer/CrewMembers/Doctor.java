@@ -50,7 +50,7 @@ public class Doctor extends CrewMember {
 		boolean success = false;
 		if (takeAction()) {
 			message += getName() + " has successfully healed " + member.getName() + " for 20 health points.";
-			member.restoreHealth(20);
+			member.modifyHealth(20);
 			success = true;
 		} else {
 			message += getName() + " does not have enough actions to heal someone";
@@ -59,3 +59,4 @@ public class Doctor extends CrewMember {
 	}
 	
 }
+

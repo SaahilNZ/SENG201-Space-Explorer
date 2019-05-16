@@ -91,7 +91,7 @@ class CrewTest {
 	 */
 	@Test
 	public void crewDeathTest() {
-		testDummy1.damageCrew(200);
+		testDummy1.modifyHealth(-200);
 		canterbury.pruneCrewMembers();
 		assertFalse(canterbury.getCrewMembers().contains(testDummy1));
 	}
@@ -104,9 +104,9 @@ class CrewTest {
 	public void newDayTest() {
 		int startHealth = testDummy1.getHealth();
 		testDummy1.setPlague(true);
-		testDummy1.increaseHunger(200);
-		testDummy1.becomeTired(200);
-		testDummy2.damageCrew(200);
+		testDummy1.modifyHunger(200);
+		testDummy1.modifyTiredness(200);
+		testDummy2.modifyHealth(-200);
 		canterbury.newDay();
 		assertEquals(startHealth - 40, testDummy1.getHealth());
 		assertEquals(1, testDummy1.getActions());

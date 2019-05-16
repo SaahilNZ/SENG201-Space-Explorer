@@ -148,22 +148,12 @@ public abstract class CrewMember {
 	public boolean takeAction() {
 		if (actionsLeft > 0) {
 			actionsLeft -= 1;
-			becomeTired(20);
+			modifyTiredness(20);
+			modifyHunger(20);
 			return true;
 		}
 		return false;
 	}
-	
-	/**
-	 * Does damage to the crew member by reducing their health. 
-	 * Kills the crew member if their health drops below 0
-	 * 
-	 * @param damage				Amount of damage dealt to the crew member
-	 */
-	public void damageCrew(int damage) {
-		health = Math.max(0, health-damage);
-	}
-	
 	/**
 	 * The crew member sleeps, restoring their tiredness levels to full.
 	 * 
@@ -183,12 +173,12 @@ public abstract class CrewMember {
 	}
 	
 	/**
-	 * Restores the crew members health
+	 * Modifies the crew member's health
 	 * 
-	 * @param restore				Amount of health restored to the crew member
+	 * @param amount				Amount to modify the crew member's health by
 	 */
-	public void restoreHealth(int restore) {
-		health = Math.min(maxHealth, health+restore);
+	public void modifyHealth(int amount) {
+		health = Math.max(0, Math.min(maxHealth, health+amount));
 	}
 	
 	/**
@@ -200,39 +190,21 @@ public abstract class CrewMember {
 	}
 	
 	/**
-	 * Increases how tired the crew member is
+	 * Modifies the crew member's tiredness
 	 * 
-	 * @param exhaustion				Amount the crew member's tiredness levels are reduced by
+	 * @param amount				Amount to modify the crew member's tiredness levels by
 	 */
-	public void becomeTired(int exhaustion) {
-		tiredness = Math.min(tiredness + exhaustion, maxTiredness);
+	public void modifyTiredness(int amount) {
+		tiredness = Math.max(0, Math.min(tiredness + amount, maxTiredness));
 	}
-	
+
 	/**
-	 * Decreases how tired the crew member is
+	 * Modifies the crew member's hunger
 	 * 
-	 * @param restoreAmount				Amount the crew member's tiredness is reduced by
+	 * @param amount				Amount to modify the crew member's hunger levels by
 	 */
-	public void decreaseTiredness(int restoreAmount) {
-		tiredness = Math.max(0, tiredness - restoreAmount);
-	}
-	
-	/**
-	 * Increases how hungry the crew member is
-	 * 
-	 * @param hungerAmount				Amount the crew member's hunger levels are increased by
-	 */
-	public void increaseHunger(int hungerAmount) {
-		hunger = Math.min(maxHunger, hunger + hungerAmount);
-	}
-	
-	/**
-	 * Decreases how hungry the crew member is
-	 * 
-	 * @param restoreAmount
-	 */
-	public void decreaseHunger(int restoreAmount) {
-		hunger = Math.max(0, hunger - restoreAmount);
+	public void modifyHunger(int amount) {
+		hunger = Math.max(0,Math.min(maxHunger, hunger + amount));
 	}
 	
 	/**
@@ -246,17 +218,18 @@ public abstract class CrewMember {
 	public ActionResult useItem(Item item) {
 		String message = "";
 		boolean success = false;
-		if (takeAction()) {
+		if (actionsLeft > 0) {
+			actionsLeft -= 1;
 			if (item instanceof MedicalItem) {				
 				message += getName() + " has used the " + item.getName() + ".";
-				restoreHealth(((MedicalItem)item).getRestoreAmount());
+				modifyHealth(((MedicalItem)item).getRestoreAmount());
 				if (((MedicalItem)item).curesPlague()) {
 					setPlague(false);
 				}
 			} else if (item instanceof FoodItem) {
 				message += getName() + " has eaten the " + item.getName() + ".";
-				decreaseHunger(((FoodItem)item).getHungerAmount());
-				decreaseTiredness(((FoodItem)item).getTiredAmount());
+				modifyHunger(-((FoodItem)item).getHungerAmount());
+				modifyTiredness(-((FoodItem)item).getTiredAmount());
 			}
 			success = true;
 		} else {

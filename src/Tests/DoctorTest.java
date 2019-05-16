@@ -38,7 +38,7 @@ class DoctorTest {
 	 */
 	@Test
 	public void healSelf() {
-		testDoc.damageCrew(20);
+		testDoc.modifyHealth(-20);
 		testDoc.heal(testDoc);
 		assertEquals(healthDoc, testDoc.getHealth());
 		assertEquals(testDoc.getActions(), 1);
@@ -60,7 +60,7 @@ class DoctorTest {
 	 */
 	@Test
 	public void healOther() {
-		testCrew2.damageCrew(20);
+		testCrew2.modifyHealth(-20);
 		testDoc.heal(testCrew2);
 		assertEquals(healthCrew2, testCrew2.getHealth());
 	}
@@ -80,7 +80,7 @@ class DoctorTest {
 	 */
 	@Test
 	public void actionsTest() {
-		testDoc.damageCrew(40);
+		testDoc.modifyHealth(-40);
 		testDoc.setPlague(true);
 		testDoc.takeAction();
 		testDoc.takeAction();
