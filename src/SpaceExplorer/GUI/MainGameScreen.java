@@ -112,6 +112,7 @@ public class MainGameScreen extends JDialog {
 							"Congratulations", JOptionPane.INFORMATION_MESSAGE);
 					setVisible(false);
 				}
+				pruneCrewMembers();
 			}
 		});
 		pnlPlanetButtons.add(btnSearchPlanet, BorderLayout.NORTH);
@@ -234,6 +235,7 @@ public class MainGameScreen extends JDialog {
 						}
 					}
 				}
+				pruneCrewMembers();
 			}
 		});
 		btnPilotShip.setBounds(120, 36, 100, 100);
@@ -262,6 +264,7 @@ public class MainGameScreen extends JDialog {
 						JOptionPane.showMessageDialog(parent, message, "Use Item", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
+				pruneCrewMembers();
 			}
 		});
 		btnUseItem.setBounds(10, 147, 100, 100);
@@ -279,6 +282,7 @@ public class MainGameScreen extends JDialog {
 					refreshDialog();
 				}
 				dialog.dispose();
+				pruneCrewMembers();
 			}
 		});
 		btnSleep.setBounds(120, 147, 100, 100);
@@ -356,6 +360,7 @@ public class MainGameScreen extends JDialog {
 					refreshDialog();
 				}
 				dialog.dispose();
+				pruneCrewMembers();
 			}
 		});
 		btnRepairShip.setBounds(10, 258, 100, 100);
@@ -382,6 +387,7 @@ public class MainGameScreen extends JDialog {
 						JOptionPane.showMessageDialog(parent, result.getMessage(), "Heal Crew", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
+				pruneCrewMembers();
 			}
 		});
 		btnHealCrewMember.setBounds(414, 36, 100, 94);
@@ -408,6 +414,7 @@ public class MainGameScreen extends JDialog {
 						JOptionPane.showMessageDialog(parent, result.getMessage(), "Cure Plague", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
+				pruneCrewMembers();
 			}
 		});
 		btnCurePlague.setBounds(414, 147, 100, 100);
@@ -420,6 +427,15 @@ public class MainGameScreen extends JDialog {
 		txtpnNoteCrewActions.setText("NOTE: Crew Actions can only be taken by certain types of crew members");
 		txtpnNoteCrewActions.setBounds(304, 258, 210, 100);
 		pnlCrewControls.add(txtpnNoteCrewActions);
+	}
+	
+	private void pruneCrewMembers() {
+		if (!game.pruneCrewMembers()) {
+			JOptionPane.showMessageDialog(getParent(), "You have either run out of days, or all your crew members are dead.\nBetter luck next time!",
+					"Game Over", JOptionPane.INFORMATION_MESSAGE);
+			setVisible(false);
+			dispose();
+		}
 	}
 	
 	private void refreshDialog() {

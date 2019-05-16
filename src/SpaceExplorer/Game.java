@@ -162,14 +162,18 @@ public class Game {
 			if (currentDay > desiredDays) {
 				gameStatus = false;
 			}
-		}
-		for (Planet planet : planets) {
-			Outpost outpost = planet.getOutpost();
-			if (outpost != null) {
-				outpost.refreshInventory();
+			for (Planet planet : planets) {
+				Outpost outpost = planet.getOutpost();
+				if (outpost != null) {
+					outpost.refreshInventory();
+				}
 			}
 		}
 		return gameStatus;
+	}
+	
+	public boolean pruneCrewMembers() {
+		return crew.pruneCrewMembers() > 0;
 	}
 	
 	public int calculateScore() {
