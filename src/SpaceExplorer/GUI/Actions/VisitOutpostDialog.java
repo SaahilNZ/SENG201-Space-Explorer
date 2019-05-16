@@ -122,7 +122,7 @@ public class VisitOutpostDialog extends JDialog {
 							Item item = lstItems.getSelectedValue();
 							if (crew.currentMoney() >= item.getPrice()) {
 								crew.deductMoney(item.getPrice());
-								crew.addItem(item);
+								crew.addItem(item.createCopy());
 								outpost.removeItem(item);
 								itemsModel.removeElement(item);
 								lstItems.clearSelection();

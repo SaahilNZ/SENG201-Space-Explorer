@@ -337,7 +337,7 @@ public abstract class CrewMember {
 					}
 				}
 				Item item = items.get(random.nextInt(items.size()));
-				Game.getCurrentGame().getCrew().addItem(item);
+				Game.getCurrentGame().getCrew().addItem(item.createCopy());
 				message += "Found an item: " + item.getName() + "\n";
 			} else if (search < SHIP_PART_CHANCE + ITEM_CHANCE + MONEY_CHANCE) {
 				int money = 20 + random.nextInt(81);

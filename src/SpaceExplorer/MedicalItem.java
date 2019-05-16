@@ -22,4 +22,10 @@ public class MedicalItem extends Item {
 	public boolean curesPlague() {
 		return curesPlague;
 	}
+
+	@Override
+	public Item createCopy() {
+		Item item = new MedicalItem(id, "" + name, price, canBeFound, canBeSold, restoreAmount, curesPlague);
+		return item;
+	}
 }

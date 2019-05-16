@@ -6,8 +6,14 @@ public class FoodItem extends Item {
 	private String cookedName;
 	private int tiredAmount;
 	
+
 	public FoodItem(int id, String rawName, String cookedName, int price, boolean canBeFound,
 			boolean canBeSold, int hungerAmount, int tiredAmount) {
+		this(id, rawName, cookedName, price, canBeFound, canBeSold, hungerAmount, tiredAmount, false);
+	}
+	
+	public FoodItem(int id, String rawName, String cookedName, int price, boolean canBeFound,
+			boolean canBeSold, int hungerAmount, int tiredAmount, boolean isCooked) {
 		this.id = id;
 		this.name = rawName;
 		this.cookedName = cookedName;
@@ -32,5 +38,12 @@ public class FoodItem extends Item {
 			isCooked = true;
 			name = cookedName;
 		}
+	}
+
+	@Override
+	public Item createCopy() {
+		Item copy = new FoodItem(id, "" + name, "" + cookedName, price, canBeFound,
+			canBeSold, hungerAmount, tiredAmount, isCooked);
+		return copy;
 	}
 }

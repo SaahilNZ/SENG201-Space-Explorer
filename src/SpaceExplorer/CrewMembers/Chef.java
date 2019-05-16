@@ -7,15 +7,17 @@ public class Chef extends CrewMember {
 		super(name, "Chef", DEFAULT_HEALTH, 120, DEFAULT_TIREDNESS);
 	}
 	
-	public String cook(FoodItem food) {
+	public ActionResult cook(FoodItem food) {
 		String message = "";
+		boolean success = false;
 		if (takeAction()) {
 			message += getName() + " has successfully cooked the " + food.getName() + ".";
 			food.cookFood();
+			success = true;
 		} else {
 			message += getName() + " does not have enough actions left to cook food.";
 		}
-		return message;
+		return new ActionResult(message, success);
 	}
 	
 }

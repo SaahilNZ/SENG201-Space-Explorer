@@ -16,9 +16,11 @@ import javax.swing.JButton;
 import javax.swing.Box;
 import javax.swing.JTextPane;
 
+import SpaceExplorer.FoodItem;
 import SpaceExplorer.Game;
 import SpaceExplorer.Item;
 import SpaceExplorer.Planet;
+import SpaceExplorer.CrewMembers.Chef;
 import SpaceExplorer.CrewMembers.CrewMember;
 import SpaceExplorer.CrewMembers.SpaceBard;
 import SpaceExplorer.CrewMembers.CrewMember.ActionResult;
@@ -239,7 +241,6 @@ public class MainGameScreen extends JDialog {
 		JButton btnUseItem = new JButton("<html><center>Use Item</center></html>");
 		btnUseItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: use an item
 				SelectListItemDialog<CrewMember> crewDialog = new SelectListItemDialog<CrewMember>(parent,
 						game.getCrew().getCrewMembers(), "Select Crew Member");
 				crewDialog.setVisible(true);
@@ -286,6 +287,31 @@ public class MainGameScreen extends JDialog {
 		btnCookFood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO: cook food
+				ArrayList<Chef> chefs = new ArrayList<Chef>();
+				for (CrewMember crewMember : game.getCrew().getCrewMembers()) {
+					if (crewMember instanceof Chef) chefs.add((Chef)crewMember);
+				}
+				SelectListItemDialog<Chef> crewDialog = new SelectListItemDialog<Chef>(parent, chefs, "Select Chef");
+				crewDialog.setVisible(true);
+				if (crewDialog.getStatusCode() == 0) {
+					ArrayList<FoodItem> foodItems = new ArrayList<FoodItem>();
+					for (Item item : game.getCrew().getItems()) {
+						if (item instanceof FoodItem) foodItems.add((FoodItem)item);
+					}
+					
+					SelectListItemDialog<FoodItem> itemDialog = new SelectListItemDialog<FoodItem>(parent,
+							foodItems, "Select Food Item");
+					itemDialog.setVisible(true);
+					if (itemDialog.getStatusCode() == 0) {
+						Chef chef = crewDialog.getSelectedItem();
+						FoodItem foodItem = itemDialog.getSelectedItem();
+						ActionResult result = chef.cook(foodItem);
+						String message = result.getMessage();
+						JOptionPane.showMessageDialog(parent, message, "Cook Food", JOptionPane.INFORMATION_MESSAGE);
+						refreshDialog();
+					}
+				}
+				crewDialog.dispose();
 			}
 		});
 		btnCookFood.setBounds(304, 36, 100, 100);

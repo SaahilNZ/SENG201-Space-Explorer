@@ -1,6 +1,6 @@
 package SpaceExplorer;
 
-public abstract class Item {
+public abstract class Item implements Cloneable {
 	protected int id;
 	protected int price;
 	protected boolean canBeFound;
@@ -31,4 +31,6 @@ public abstract class Item {
 	public String toString() {
 		return name;
 	}
+	
+	public abstract Item createCopy();
 }
