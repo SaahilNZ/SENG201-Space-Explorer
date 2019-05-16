@@ -4,11 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import SpaceExplorer.Game;
 
 import java.awt.Font;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -87,5 +91,16 @@ public class StartScreen {
 		btnQuitGame.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnQuitGame.setBounds(12, 332, 610, 100);
 		frmStartScreen.getContentPane().add(btnQuitGame);
+		
+		try {			
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(getClass().getResource("/resources/Metropolis.wav")));
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frmStartScreen, "An error occurred while playing the music.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
 	}
 }
