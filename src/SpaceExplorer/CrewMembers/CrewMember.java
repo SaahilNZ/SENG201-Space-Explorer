@@ -208,6 +208,11 @@ public abstract class CrewMember {
 		tiredness = Math.min(tiredness + exhaustion, maxTiredness);
 	}
 	
+	/**
+	 * Decreases how tired the crew member is
+	 * 
+	 * @param restoreAmount				Amount the crew member's tiredness is reduced by
+	 */
 	public void decreaseTiredness(int restoreAmount) {
 		tiredness = Math.max(0, tiredness - restoreAmount);
 	}
@@ -301,6 +306,13 @@ public abstract class CrewMember {
 		return new ActionResult(message, success);
 	}
 	
+	/**
+	 * Searches the current planet. Only called indirectly through the searchPlanet method
+	 * 
+	 * @param crew					The crew to add fount items to
+	 * @param planet				The planet to search
+	 * @return						A message based on what was found
+	 */
 	protected String searchPlanetOnce(Crew crew, Planet planet) {
 		String message = "";
 		
@@ -360,6 +372,11 @@ public abstract class CrewMember {
 		return new ActionResult("", takeAction());
 	}
 	
+	/**
+	 * Checks a crew member has enough actions left to pilot a ship
+	 * 
+	 * @return				True or false base on whether the crew member has enough actions
+	 */
 	public boolean canPilotShip() {
 		return actionsLeft > 0;
 	}
@@ -378,6 +395,13 @@ public abstract class CrewMember {
 		return name + " - " + crewClass;
 	}
 	
+	/**
+	 * This nested class is used for keeping track of a message and whether the action associated with it was a success
+	 * 
+	 * @author Saahil Hari and Isaac Walton
+	 * @version 1.0, May 2019
+	 *
+	 */
 	public class ActionResult {
 		private String message;
 		private boolean success;
@@ -386,10 +410,20 @@ public abstract class CrewMember {
 			this.success = success;
 		}
 		
+		/**
+		 * Getter method for the message
+		 * 
+		 * @return
+		 */
 		public String getMessage() {
 			return message;
 		}
 		
+		/**
+		 * Getter method for if the action was a success
+		 * 
+		 * @return
+		 */
 		public boolean getSuccess() {
 			return success;
 		}

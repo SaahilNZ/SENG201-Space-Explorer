@@ -8,6 +8,13 @@ import org.junit.jupiter.api.Test;
 import SpaceExplorer.FoodItem;
 import SpaceExplorer.CrewMembers.Scout;
 
+/**
+ * This class tests the functionality of the FoodItem class
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ *
+ */
 class FoodTester {
 	
 	private Scout testCrew;
@@ -16,6 +23,9 @@ class FoodTester {
 	private int startHunger;
 	private int startTired;
 	
+	/**
+	 * Initializes a crew member and food items for testing
+	 */
 	@BeforeEach
 	public void init() {
 		testCrew = new Scout("Claptrap");
@@ -26,17 +36,21 @@ class FoodTester {
 		
 	}
 	
+	/**
+	 * Tests hunger is restored correctly
+	 */
 	@Test
 	public void hungerTest() {
-		//Tests hunger is restored correctly
 		testCrew.increaseHunger(50);
 		testCrew.useItem(burger);
 		assertEquals(startHunger+30, testCrew.getHunger());
 	}
 	
+	/**
+	 * Checks food can't be eaten when no actions remain
+	 */
 	@Test
 	public void eatingTest() {
-		//Checks food can't be eaten when no actions remain
 		testCrew.increaseHunger(50);
 		testCrew.sleep();
 		testCrew.sleep();
@@ -44,17 +58,21 @@ class FoodTester {
 		assertEquals(startHunger+50, testCrew.getHunger());
 	}
 	
+	/**
+	 * Tests tiredness is restored correctly
+	 */
 	@Test
 	public void tiredTest() {
-		//Tests tiredness is restored correctly
 		testCrew.becomeTired(60);
 		testCrew.useItem(coffee);
 		assertEquals(startTired+30, testCrew.getTiredness());
 	}
 	
+	/**
+	 * Tests a food item can be cooked
+	 */
 	@Test
 	public void cookTest() {
-		//Tests a food item can be cooked
 		burger.cookFood();
 		assertEquals(burger.getName(), "Cooked Burger");
 		assertEquals(burger.getHungerAmount(), 40);

@@ -1,10 +1,29 @@
 package SpaceExplorer.CrewMembers;
 
+/**
+ * This class implements a Doctor and its associated functionality
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ *
+ */
 public class Doctor extends CrewMember {
+	
+	/**
+	 * Uses default constructor method of the parent class
+	 * 
+	 * @param name			Name of the doctor
+	 */
 	public Doctor(String name) {
 		super(name, "Doctor", 80, DEFAULT_HUNGER, DEFAULT_TIREDNESS);
     }
-
+	
+	/**
+	 * Takes a crew member and allows the doctor to remove the plague status from it
+	 * 
+	 * @param member			A member of the crew
+	 * @return					A message based on whether the actions was successful or not
+	 */
 	public ActionResult curePlague(CrewMember member) {
 		String message = "";
 		boolean success = false;
@@ -20,6 +39,12 @@ public class Doctor extends CrewMember {
 		return new ActionResult(message, success);
 	}
 	
+	/**
+	 * Takes a crew member and allows the doctor to heal it
+	 * 
+	 * @param member			A member of the crew
+	 * @return					A message based on whether the actions was successful or not
+	 */
 	public ActionResult heal(CrewMember member) {
 		String message = "";
 		boolean success = false;

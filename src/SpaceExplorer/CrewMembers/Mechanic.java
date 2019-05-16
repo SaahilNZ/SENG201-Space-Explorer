@@ -2,11 +2,30 @@ package SpaceExplorer.CrewMembers;
 
 import SpaceExplorer.Ship;
 
+/**
+ * This class implements a Mechanic and its associated functionality
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ *
+ */
 public class Mechanic extends CrewMember {
+	
+	/**
+	 * Uses default constructor method of the parent class
+	 * 
+	 * @param name			Name of the mechanic
+	 */
 	public Mechanic(String name) {
 		super(name, "Mechanic", DEFAULT_HEALTH, DEFAULT_HUNGER, DEFAULT_TIREDNESS);
 	}
 	
+	/**
+	 * Takes a ship and allows a mechanic to restore its shields and health if they have enough actions
+	 * 
+	 * @param ship			The crew's ship
+	 * @return 				A message based on whether the actions was successful or not
+	 */
 	@Override
 	public ActionResult repairShip(Ship ship) {
 		String message = "";

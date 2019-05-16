@@ -28,9 +28,9 @@ public class CreateCrewMemberDialog extends JDialog implements ActionListener {
 			spaceMarine += "Space Marine\n";
 			spaceMarine += "A battle-hardened soldier.\n\n";
 			spaceMarine += "Stats:\n";
-			spaceMarine += "Max Health: 120\n";
-			spaceMarine += "Max Hunger: 100\n";
-			spaceMarine += "Max Tiredness: 110\n";
+			spaceMarine += "Max Health: 140\n";
+			spaceMarine += "Max Hunger: 140\n";
+			spaceMarine += "Max Tiredness: 140\n";
 			spaceMarine += "\n";
 			spaceMarine += "Special ability:\n";
 			spaceMarine += "Lowers the chance that a pirate attack will occur.\n";

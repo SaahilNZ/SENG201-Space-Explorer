@@ -16,6 +16,13 @@ import SpaceExplorer.CrewMembers.Scout;
 import SpaceExplorer.Ship;
 import SpaceExplorer.Item;
 
+/**
+ * This class tests the functionality of the Crew class
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ *
+ */
 class CrewTest {
 	
 	private Scout testDummy1;
@@ -26,6 +33,9 @@ class CrewTest {
 	public ArrayList<Item> items;
 	public Crew canterbury;
 	
+	/**
+	 * Initializes crew members, a ship and a crew for testing
+	 */
 	@BeforeEach
 	public void init() {
 		testDummy1 = new Scout("Claptrap");
@@ -39,11 +49,17 @@ class CrewTest {
 		canterbury = new Crew(testCrew, "Canterbury", dinglebud, 0, items);
 	}
 	
+	/**
+	 * Tests a crew contains all the correct members after creation
+	 */
 	@Test
 	public void createCrew() {
 		assertEquals(testCrew, canterbury.getCrewMembers());
 	}
 	
+	/*
+	 * Tests a crew member can be removed
+	 */
 	@Test
 	public void memberRemoval() {
 		canterbury.removeMember(testDummy1);
@@ -51,6 +67,9 @@ class CrewTest {
 		assertEquals(testCrew, canterbury.getCrewMembers());
 	}
 	
+	/*
+	 * Tests money can be given and taken away from the crew. Also tests extreme values
+	 */
 	@Test
 	public void moneyTester() {
 		canterbury.receiveMoney(200);
@@ -67,13 +86,20 @@ class CrewTest {
 		assertEquals(0, canterbury.currentMoney());
 	}
 	
+	/**
+	 * Tests a crew member is removed correctly after dying
+	 */
 	@Test
 	public void crewDeathTest() {
 		testDummy1.damageCrew(200);
 		canterbury.pruneCrewMembers();
 		assertFalse(canterbury.getCrewMembers().contains(testDummy1));
 	}
-
+	
+	/**
+	 * Tests the new day method of the crew class. Makes sure that values of all crew members are adjusted correctly
+	 * and any dead crew members are removed
+	 */
 	@Test
 	public void newDayTest() {
 		int startHealth = testDummy1.getHealth();
@@ -87,6 +113,9 @@ class CrewTest {
 		assertFalse(canterbury.getCrewMembers().contains(testDummy2));
 	}
 	
+	/**
+	 * Tests an old item list can be loaded into a new crew
+	 */
 	@Test
 	public void loadItems() {
 		FoodItem jello = new FoodItem(1,"Jello", "Mint Jello", 200, true, true, 10, 10);

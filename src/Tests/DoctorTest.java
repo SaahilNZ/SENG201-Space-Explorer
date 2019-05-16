@@ -8,6 +8,13 @@ import org.junit.jupiter.api.Test;
 import SpaceExplorer.CrewMembers.Doctor;
 import SpaceExplorer.CrewMembers.Scout;
 
+/**
+ * This class tests the functionality of the Doctor sub class
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ *
+ */
 class DoctorTest {
 	
 	private Doctor testDoc;
@@ -15,6 +22,9 @@ class DoctorTest {
 	private int healthDoc;
 	private int healthCrew2;
 	
+	/**
+	 * Initializes a doctor object and another crew member for testing
+	 */
 	@BeforeEach
 	public void init() {
 		testDoc = new Doctor("Edward Scissor Hands");
@@ -23,6 +33,9 @@ class DoctorTest {
 		healthCrew2 = testCrew2.getHealth();
 	}
 	
+	/**
+	 * Test a doctor can heal itself when damaged, and that it has an action consumed
+	 */
 	@Test
 	public void healSelf() {
 		testDoc.damageCrew(20);
@@ -31,6 +44,9 @@ class DoctorTest {
 		assertEquals(testDoc.getActions(), 1);
 	}
 	
+	/**
+	 * Tests a doctor can set its own plague status to false
+	 */
 	@Test
 	public void cureSelf() {
 		testDoc.setPlague(true);
@@ -39,6 +55,9 @@ class DoctorTest {
 		assertEquals(testDoc.hasPlague(), false);
 	}
 	
+	/**
+	 * Tests a doctor can heal another crew member
+	 */
 	@Test
 	public void healOther() {
 		testCrew2.damageCrew(20);
@@ -46,6 +65,9 @@ class DoctorTest {
 		assertEquals(healthCrew2, testCrew2.getHealth());
 	}
 	
+	/**
+	 * Tests a doctor can cure another crew member of the plague
+	 */
 	@Test
 	public void cureOther() {
 		testCrew2.setPlague(true);
@@ -53,9 +75,11 @@ class DoctorTest {
 		assertEquals(testCrew2.hasPlague(), false);
 	}
 	
+	/**
+	 * Tests doctor specific methods cannot be used with insufficient actions remaining
+	 */
 	@Test
 	public void actionsTest() {
-		//Tests that heal and cure plague can't be used with no actions remaining
 		testDoc.damageCrew(40);
 		testDoc.setPlague(true);
 		testDoc.takeAction();

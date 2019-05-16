@@ -8,11 +8,21 @@ import org.junit.jupiter.api.Test;
 import SpaceExplorer.Ship;
 import SpaceExplorer.CrewMembers.Mechanic;
 
+/**
+ * This class tests the functionality of the Mechanic sub class
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ *
+ */
 class MechanicTest {
 	
 	private Mechanic testMech;
 	private Ship canterbury;
-
+	
+	/**
+	 * Initializes a mechanic and ship for testing
+	 */
 	@BeforeEach
 	public void init() {
 		testMech = new Mechanic("Claptrap");
@@ -20,6 +30,9 @@ class MechanicTest {
 		
 	}
 	
+	/**
+	 * Tests a ship can be repaired by the mechanic
+	 */
 	@Test
 	public void repairTest() {
 		canterbury.damageShield(100);
@@ -29,6 +42,9 @@ class MechanicTest {
 		assertEquals(140, canterbury.getHealth());
 	}
 	
+	/**
+	 * Tests a mechanic with insufficient actions cannot repair a ship
+	 */
 	@Test
 	public void depletedActionsTest() {
 		testMech.takeAction();

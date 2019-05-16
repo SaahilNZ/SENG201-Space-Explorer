@@ -15,6 +15,13 @@ import SpaceExplorer.CrewMembers.Doctor;
 import SpaceExplorer.CrewMembers.Scout;
 import SpaceExplorer.CrewMembers.SpaceBard;
 
+/**
+ * This class tests the functionality of the SpaceBard sub class
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ *
+ */
 class SpaceBardTest {
 	
 	private SpaceBard testBard;
@@ -25,6 +32,9 @@ class SpaceBardTest {
 	public ArrayList<Item> items;
 	public Crew canterbury;
 	
+	/**
+	 * Initializes crew members and a crew for testing
+	 */
 	@BeforeEach
 	public void init() {
 		testBard = new SpaceBard("Dandelion");
@@ -38,6 +48,9 @@ class SpaceBardTest {
 		canterbury = new Crew(testCrew, "Canterbury", dinglebud, 0, items);
 	}
 	
+	/**
+	 * Tests a bard can restore the tiredness of all other members of the crew
+	 */
 	@Test
 	public void testPerform() {
 		testBard.becomeTired(30);
@@ -48,7 +61,10 @@ class SpaceBardTest {
 		assertEquals(10, testCrew2.getTiredness());
 		assertEquals(50, testBard.getTiredness());
 	}
-
+	
+	/**
+	 * Tests a bard cannot use its own specific methods while out of actions
+	 */
 	@Test
 	public void depletedActionsTest() {
 		testBard.takeAction();

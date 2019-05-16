@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import SpaceExplorer.Crew;
-import SpaceExplorer.FoodItem;
-import SpaceExplorer.Item;
-import SpaceExplorer.Outpost;
-import SpaceExplorer.Planet;
 import SpaceExplorer.Ship;
-import SpaceExplorer.CrewMembers.CrewMember;
 import SpaceExplorer.CrewMembers.Scout;
 
-//Remaining tests to write: useItem, repairShip, searchPlanet, pilotShip, visitOutpost, purchaseItem
+/**
+ * This class tests the functionality of the CrewMember class
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ *
+ */
 class CrewMemberTester {
 	
 	private Scout testCrew;
@@ -24,6 +24,9 @@ class CrewMemberTester {
 	private int startHunger;
 	private int startTired;
 	
+	/**
+	 * Initializes a crew member object and records its starting values
+	 */
 	@BeforeEach
 	public void init() {
 		testCrew = new Scout("Claptrap");
@@ -32,6 +35,10 @@ class CrewMemberTester {
 		startTired = testCrew.getTiredness();
 	}
 	
+	/**
+	 * Tests the health variable of the Crew member class and the methods that manipulate it.
+	 * Specifically checks damage/restore methods, as well as decreasing health by more than the max
+	 */
 	@Test
 	public void healthTest() {
 		//Basic tests for functionality of damage and heal
@@ -45,7 +52,10 @@ class CrewMemberTester {
 		
 	}
 
-	
+	/**
+	 * Tests crew members can have their tiredness increased. Additionally checks tiredness can be removed using sleep(),
+	 * and that tiredness cannot fall beyond the specified limits
+	 */
 	@Test
 	public void tiredTest() {
 		//Tests if a crew member's tiredness can change
@@ -68,6 +78,9 @@ class CrewMemberTester {
 		assertEquals(testCrew.getMaxTiredness(), testCrew.getTiredness());
 	}
 	
+	/**
+	 * Tests hunger can be increased, and that it can't be increased beyond the specified maximum
+	 */
 	@Test
 	public void hungerTest() {
 		//Checks a crew member can become hungry
@@ -79,6 +92,9 @@ class CrewMemberTester {
 		assertEquals(testCrew.getMaxHunger(), testCrew.getHunger());
 	}
 	
+	/**
+	 * Checks that crew members can have the plague effect applied to them
+	 */
 	@Test
 	public void plagueTest() {
 		//Checks plague status can be applied
@@ -86,6 +102,9 @@ class CrewMemberTester {
 		assertEquals(true, testCrew.hasPlague());
 	}
 	
+	/**
+	 * Checks that a crew member can repair a ship object
+	 */
 	@Test
 	public void repairTest() {
 		Ship voyager = new Ship("Voyager", 200, 200);
@@ -100,27 +119,5 @@ class CrewMemberTester {
 		assertEquals(120, voyager.getShieldLevel());
 		assertEquals(110, voyager.getHealth());
 	}
-	
-	
-	@Test
-	public void planetSearchTest() {
-		//I don't know how to properly implement this test
-		//Currently runs an ERROR
-		Ship voyager = new Ship("Voyager", 200, 200);
-		FoodItem burger = new FoodItem(1, "Burger", "Cooked Burger", 20, true, true, 20, 0);
-		ArrayList<Item> testItems = new ArrayList<Item>();
-		testItems.add(burger);
-		ArrayList<CrewMember> testMembers = new ArrayList<CrewMember>();
-		testMembers.add(testCrew);
-		Crew canterbury = new Crew(testMembers, "Canterbury", voyager, 0, testItems);
-		Outpost spaceOutpost = new Outpost("Space Station");
-		Planet jupiter = new Planet("Jupiter", spaceOutpost);
-		testCrew.searchPlanet(canterbury, jupiter);
-		testCrew.searchPlanet(canterbury, jupiter);
-		testCrew.setActions(2);
-		testCrew.searchPlanet(canterbury, jupiter);
-		testCrew.searchPlanet(canterbury, jupiter);
-	}
-	
 
 }

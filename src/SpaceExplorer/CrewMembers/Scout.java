@@ -3,11 +3,31 @@ package SpaceExplorer.CrewMembers;
 import SpaceExplorer.Crew;
 import SpaceExplorer.Planet;
 
+/**
+ * This class implements a Mechanic and its associated functionality
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ *
+ */
 public class Scout extends CrewMember {
+	
+	/**
+	 * Uses default constructor method of the parent class
+	 * 
+	 * @param name			Name of the scout
+	 */
 	public Scout(String name) {
 		super(name, "Scout", 110, DEFAULT_HUNGER, 120);
 	}
 	
+	/**
+	 * Takes a crew and planet and allows the scout to search it twice if they have enough actions
+	 * 
+	 * @param crew			The crew
+	 * @param planet		The planet to be searched
+	 * @return				A message based on whether the action was successful or not
+	 */
 	@Override
 	public ActionResult searchPlanet(Crew crew, Planet planet) {
 		String message = "";
