@@ -157,32 +157,34 @@ public class SetupScreen extends JDialog {
 					CreateCrewMemberDialog dialog = new CreateCrewMemberDialog(parent);
 					dialog.setVisible(true);
 					CrewMember crewMember = null;
-					switch (dialog.getCrewMemberType()) {
-					case "Space Marine":
-						crewMember = new SpaceMarine(dialog.getCrewMemberName());
-						break;
-					case "Scout":
-						crewMember = new Scout(dialog.getCrewMemberName());
-						break;
-					case "Mechanic":
-						crewMember = new Mechanic(dialog.getCrewMemberName());
-						break;
-					case "Doctor":
-						crewMember = new Doctor(dialog.getCrewMemberName());
-						break;
-					case "Chef":
-						crewMember = new Chef(dialog.getCrewMemberName());
-						break;
-					case "Space Bard":
-						crewMember = new SpaceBard(dialog.getCrewMemberName());
-						break;
-					}
-					if (crewMember != null) {						
-						crewListModel.addElement(crewMember);
-						int crewCount = crewListModel.size();
-						btnConfirm.setEnabled(crewCount >= 2);
-						if (crewCount >= 4) {
-							btnAdd.setEnabled(false);
+					if (dialog.getStatusCode() == 0) {						
+						switch (dialog.getCrewMemberType()) {
+							case "Space Marine":
+								crewMember = new SpaceMarine(dialog.getCrewMemberName());
+								break;
+							case "Scout":
+								crewMember = new Scout(dialog.getCrewMemberName());
+								break;
+							case "Mechanic":
+								crewMember = new Mechanic(dialog.getCrewMemberName());
+								break;
+							case "Doctor":
+								crewMember = new Doctor(dialog.getCrewMemberName());
+								break;
+							case "Chef":
+								crewMember = new Chef(dialog.getCrewMemberName());
+								break;
+							case "Space Bard":
+								crewMember = new SpaceBard(dialog.getCrewMemberName());
+								break;
+						}
+						if (crewMember != null) {						
+							crewListModel.addElement(crewMember);
+							int crewCount = crewListModel.size();
+							btnConfirm.setEnabled(crewCount >= 2);
+							if (crewCount >= 4) {
+								btnAdd.setEnabled(false);
+							}
 						}
 					}
 				}
