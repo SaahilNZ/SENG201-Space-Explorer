@@ -22,6 +22,7 @@ import SpaceExplorer.Item;
 import SpaceExplorer.Planet;
 import SpaceExplorer.CrewMembers.Chef;
 import SpaceExplorer.CrewMembers.CrewMember;
+import SpaceExplorer.CrewMembers.Doctor;
 import SpaceExplorer.CrewMembers.SpaceBard;
 import SpaceExplorer.CrewMembers.CrewMember.ActionResult;
 import SpaceExplorer.GUI.Actions.SelectListItemDialog;
@@ -286,7 +287,6 @@ public class MainGameScreen extends JDialog {
 		JButton btnCookFood = new JButton("<html><center>Cook Food</center></html>");
 		btnCookFood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: cook food
 				ArrayList<Chef> chefs = new ArrayList<Chef>();
 				for (CrewMember crewMember : game.getCrew().getCrewMembers()) {
 					if (crewMember instanceof Chef) chefs.add((Chef)crewMember);
@@ -364,7 +364,24 @@ public class MainGameScreen extends JDialog {
 		JButton btnHealCrewMember = new JButton("<html><center>Heal Crew</center></html>");
 		btnHealCrewMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: heal crew
+				ArrayList<Doctor> doctors = new ArrayList<Doctor>();
+				for (CrewMember crewMember : game.getCrew().getCrewMembers()) {
+					if (crewMember instanceof Doctor) doctors.add((Doctor)crewMember);
+				}
+				SelectListItemDialog<Doctor> doctorDialog = new SelectListItemDialog<Doctor>(parent, 
+						doctors, "Select Doctor");
+				doctorDialog.setVisible(true);
+				if (doctorDialog.getStatusCode() == 0) {
+					SelectListItemDialog<CrewMember> targetDialog = new SelectListItemDialog<CrewMember>(parent, 
+							game.getCrew().getCrewMembers(), "Select Target");
+					targetDialog.setVisible(true);
+					if (targetDialog.getStatusCode() == 0) {
+						Doctor doctor = doctorDialog.getSelectedItem();
+						CrewMember target = targetDialog.getSelectedItem();
+						ActionResult result = doctor.heal(target);
+						JOptionPane.showMessageDialog(parent, result.getMessage(), "Heal Crew", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
 			}
 		});
 		btnHealCrewMember.setBounds(414, 36, 100, 94);
@@ -373,7 +390,24 @@ public class MainGameScreen extends JDialog {
 		JButton btnCurePlague = new JButton("<html><center>Cure Plague</center></html>");
 		btnCurePlague.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: cure plague
+				ArrayList<Doctor> doctors = new ArrayList<Doctor>();
+				for (CrewMember crewMember : game.getCrew().getCrewMembers()) {
+					if (crewMember instanceof Doctor) doctors.add((Doctor)crewMember);
+				}
+				SelectListItemDialog<Doctor> doctorDialog = new SelectListItemDialog<Doctor>(parent, 
+						doctors, "Select Doctor");
+				doctorDialog.setVisible(true);
+				if (doctorDialog.getStatusCode() == 0) {
+					SelectListItemDialog<CrewMember> targetDialog = new SelectListItemDialog<CrewMember>(parent, 
+							game.getCrew().getCrewMembers(), "Select Target");
+					targetDialog.setVisible(true);
+					if (targetDialog.getStatusCode() == 0) {
+						Doctor doctor = doctorDialog.getSelectedItem();
+						CrewMember target = targetDialog.getSelectedItem();
+						ActionResult result = doctor.curePlague(target);
+						JOptionPane.showMessageDialog(parent, result.getMessage(), "Cure Plague", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
 			}
 		});
 		btnCurePlague.setBounds(414, 147, 100, 100);
