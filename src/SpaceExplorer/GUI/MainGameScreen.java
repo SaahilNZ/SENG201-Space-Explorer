@@ -18,6 +18,7 @@ import javax.swing.JTextPane;
 
 import SpaceExplorer.Game;
 import SpaceExplorer.Item;
+import SpaceExplorer.Planet;
 import SpaceExplorer.CrewMembers.CrewMember;
 import SpaceExplorer.CrewMembers.SpaceBard;
 import SpaceExplorer.CrewMembers.CrewMember.ActionResult;
@@ -97,8 +98,8 @@ public class MainGameScreen extends JDialog {
 				dialog.setVisible(true);
 				if (dialog.getStatusCode() == 0) {
 					CrewMember crewMember = dialog.getSelectedItem();
-					String message = crewMember.searchPlanet(game.getCrew(), game.getCurrentPlanet());
-					JOptionPane.showMessageDialog(parent, message, "Search Results", JOptionPane.INFORMATION_MESSAGE);
+					ActionResult result = crewMember.searchPlanet(game.getCrew(), game.getCurrentPlanet());
+					JOptionPane.showMessageDialog(parent, result.getMessage(), "Search Results", JOptionPane.INFORMATION_MESSAGE);
 					refreshDialog();
 				}
 				dialog.dispose();
@@ -191,7 +192,45 @@ public class MainGameScreen extends JDialog {
 		JButton btnPilotShip = new JButton("<html><center>Pilot Ship</center></html>");
 		btnPilotShip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: pilot ship
+				SelectListItemDialog<CrewMember> crewDialog1 = new SelectListItemDialog<CrewMember>(parent,
+						game.getCrew().getCrewMembers(), "Select First Crew Member");
+				crewDialog1.setVisible(true);
+				if (crewDialog1.getStatusCode() == 0) {
+					SelectListItemDialog<CrewMember> crewDialog2 = new SelectListItemDialog<CrewMember>(parent,
+							game.getCrew().getCrewMembers(), "Select Second Crew Member");
+					crewDialog2.setVisible(true);
+					if (crewDialog2.getStatusCode() == 0) {
+						SelectListItemDialog<Planet> planetDialog = new SelectListItemDialog<Planet>(parent,
+								game.getPlanets(), "Select Destination");
+						planetDialog.setVisible(true);
+						if (planetDialog.getStatusCode() == 0) {
+							String message = "";
+							CrewMember cm1 = crewDialog1.getSelectedItem();
+							CrewMember cm2 = crewDialog2.getSelectedItem();
+							Planet planet = planetDialog.getSelectedItem();
+							
+							if (cm1 == cm2) {
+								message = "You cannot pick the same crew member twice.";
+							} else {
+								if (game.getCurrentPlanet() == planet) {
+									message = "You are already on " + planet.getName();
+								} else {
+									if (cm1.canPilotShip() && cm2.canPilotShip()) {
+										cm1.pilotShip();
+										cm2.pilotShip();
+										game.setCurrentPlanet(planet);
+										message = "You have travelled to " + planet.getName();
+									} else {
+										message = "One or both crew members do not have enough actions left to pilot the ship.";
+									}
+								}
+							}
+							
+							refreshDialog();
+							JOptionPane.showMessageDialog(parent, message, "Pilot Ship", JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+				}
 			}
 		});
 		btnPilotShip.setBounds(120, 36, 100, 100);

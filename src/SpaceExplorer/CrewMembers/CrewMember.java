@@ -169,15 +169,17 @@ public abstract class CrewMember {
 	 * 
 	 * @return 						A message stating what has occurred
 	 */
-	public String sleep() {
+	public ActionResult sleep() {
 		String message = "";
+		boolean success = false;
 		if (takeAction()) {
 			message += getName() + " has rested, and is no longer tired.";
 			tiredness = 0;
+			success = true;
 		} else {
 			message += getName() + " does not have enough actions left to sleep.";
 		}
-		return message;
+		return new ActionResult(message, success);
 	}
 	
 	/**
@@ -195,19 +197,6 @@ public abstract class CrewMember {
 	 */
 	public void setPlague(boolean status) {
 		this.hasPlague = status;
-	}
-	
-	/**
-	 * Prints the crew member's status
-	 */
-	public void viewStatus() {
-		//For command line application
-		System.out.println(name + "'s status:");
-		System.out.println("Class: " + crewClass);
-		System.out.println("Health: " + health + "%");
-		System.out.println("Hunger: " + hunger + "%");
-		System.out.println("Tiredness: " + tiredness + "%");
-		System.out.println("Actions left: " + actionsLeft);
 	}
 	
 	/**
@@ -277,18 +266,20 @@ public abstract class CrewMember {
 	 * @param ship				The ship the crew members are in
 	 * @return					A message stating what has occurred
 	 */
-	public String repairShip(Ship ship) {
+	public ActionResult repairShip(Ship ship) {
 		String message = "";
+		boolean success = false;
 		if (takeAction()) {
 			ship.repairShield(20);
 			ship.repairShip(10);
 			message += getName() + " has repaired the " + ship.toString() + ".\n";
 			message += "The " + ship.toString() + "'s shields have been restored by 20 points.\n";
 			message += "The " + ship.toString() + "'s health has been restored by 10 points.\n";
+			success = true;
 		} else {
 			message += getName() + " does not have enough actions left to repair the ship.";
 		}
-		return message;
+		return new ActionResult(message, success);
 	}
 	
 	/**
@@ -298,15 +289,16 @@ public abstract class CrewMember {
 	 * @param crew					The crew to add found items to
 	 * @param planet				The current planet
 	 */
-	public String searchPlanet(Crew crew, Planet planet) {
+	public ActionResult searchPlanet(Crew crew, Planet planet) {
 		String message = "";
+		boolean success = false;
 		if (takeAction()) {
 			message += getName() + " searches " + planet.toString() + ":\n";
 			message += searchPlanetOnce(crew, planet);
 		} else {
 			message += getName() + " doesn't have enough actions left to search the planet.";
 		}
-		return message;
+		return new ActionResult(message, success);
 	}
 	
 	protected String searchPlanetOnce(Crew crew, Planet planet) {
@@ -364,8 +356,12 @@ public abstract class CrewMember {
 	 * 
 	 * @return						Returns whether or not the action was successful
 	 */
-	public boolean pilotShip() {
-		return takeAction();
+	public ActionResult pilotShip() {
+		return new ActionResult("", takeAction());
+	}
+	
+	public boolean canPilotShip() {
+		return actionsLeft > 0;
 	}
 	
 	/**
@@ -396,6 +392,11 @@ public abstract class CrewMember {
 		
 		public boolean getSuccess() {
 			return success;
+		}
+		
+		@Override
+		public String toString() {
+			return this.message;
 		}
 	}
 }

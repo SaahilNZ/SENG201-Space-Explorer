@@ -38,8 +38,16 @@ public class Game {
 		return crew;
 	}
 	
+	public ArrayList<Planet> getPlanets() {
+		return planets;
+	}
+	
 	public Planet getCurrentPlanet() {
 		return this.currentPlanet;
+	}
+	
+	public void setCurrentPlanet(Planet planet) {
+		this.currentPlanet = planet;
 	}
 	
 	public ArrayList<Item> getItems() {

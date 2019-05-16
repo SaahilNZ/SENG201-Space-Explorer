@@ -9,8 +9,9 @@ public class Scout extends CrewMember {
 	}
 	
 	@Override
-	public String searchPlanet(Crew crew, Planet planet) {
+	public ActionResult searchPlanet(Crew crew, Planet planet) {
 		String message = "";
+		boolean success = false;
 		if (takeAction()) {
 			message += getName() + " searches " + planet.toString() + " twice:\n";
 			message += searchPlanetOnce(crew, planet);
@@ -19,6 +20,6 @@ public class Scout extends CrewMember {
 			message = getName() + " doesn't have enough actions left to search the planet.";
 		}
 		
-		return message;
+		return new ActionResult(message, success);
 	}
 }

@@ -7,8 +7,9 @@ public class SpaceBard extends CrewMember {
 		super(name, "Space Bard", 90, DEFAULT_HUNGER, 90);
 	}
 	
-	public String performMusic(Collection<CrewMember> crewMembers) {
+	public ActionResult performMusic(Collection<CrewMember> crewMembers) {
 		String message = "";
+		boolean success = false;
 		if (takeAction()) {
 			for (CrewMember crewMember : crewMembers) {
 				if (crewMember != this) {
@@ -16,10 +17,11 @@ public class SpaceBard extends CrewMember {
 				}
 			}
 			message += getName() + " performs music for the crew, decreasing the crew's tiredness by 20 points.";
+			success = true;
 		} else {
 			message += getName() + " does not have enough actions left to perform.";
 		}
-		return message;
+		return new ActionResult(message, success);
 	}
 	
 }
