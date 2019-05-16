@@ -40,9 +40,9 @@ class SpaceBardTest {
 	
 	@Test
 	public void testPerform() {
-		testBard.becomeTired(30);
-		testCrew1.becomeTired(30);
-		testCrew2.becomeTired(30);
+		testBard.modifyTiredness(30);
+		testCrew1.modifyTiredness(30);
+		testCrew2.modifyTiredness(30);
 		testBard.performMusic(canterbury.getCrewMembers());
 		assertEquals(10, testCrew1.getTiredness());
 		assertEquals(10, testCrew2.getTiredness());
@@ -53,7 +53,7 @@ class SpaceBardTest {
 	public void depletedActionsTest() {
 		testBard.takeAction();
 		testBard.takeAction();
-		testCrew1.becomeTired(30);
+		testCrew1.modifyTiredness(30);
 		testBard.performMusic(canterbury.getCrewMembers());
 		assertEquals(30, testCrew1.getTiredness());
 	}

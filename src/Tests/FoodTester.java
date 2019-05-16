@@ -29,7 +29,7 @@ class FoodTester {
 	@Test
 	public void hungerTest() {
 		//Tests hunger is restored correctly
-		testCrew.increaseHunger(50);
+		testCrew.modifyHunger(50);
 		testCrew.useItem(burger);
 		assertEquals(startHunger+30, testCrew.getHunger());
 	}
@@ -37,7 +37,7 @@ class FoodTester {
 	@Test
 	public void eatingTest() {
 		//Checks food can't be eaten when no actions remain
-		testCrew.increaseHunger(50);
+		testCrew.modifyHunger(50);
 		testCrew.sleep();
 		testCrew.sleep();
 		testCrew.useItem(burger);
@@ -47,7 +47,7 @@ class FoodTester {
 	@Test
 	public void tiredTest() {
 		//Tests tiredness is restored correctly
-		testCrew.becomeTired(60);
+		testCrew.modifyTiredness(60);
 		testCrew.useItem(coffee);
 		assertEquals(startTired+30, testCrew.getTiredness());
 	}

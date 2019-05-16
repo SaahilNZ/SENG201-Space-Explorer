@@ -13,7 +13,7 @@ public class SpaceBard extends CrewMember {
 		if (takeAction()) {
 			for (CrewMember crewMember : crewMembers) {
 				if (crewMember != this) {
-					crewMember.decreaseTiredness(20);
+					crewMember.modifyTiredness(-20);
 				}
 			}
 			message += getName() + " performs music for the crew, decreasing the crew's tiredness by 20 points.";

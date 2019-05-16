@@ -72,11 +72,12 @@ public class Crew {
 	
 	public int newDay() {
 		for (CrewMember crewMember : this.crewMembers) {
+			crewMember.modifyHunger(20);
 			if (crewMember.hasPlague()) {
-				crewMember.damageCrew(20);
+				crewMember.modifyHealth(-20);
 			}
 			if (crewMember.getHunger() >= crewMember.getMaxHunger()) {
-				crewMember.damageCrew(20);
+				crewMember.modifyHealth(-20);
 			}
 			crewMember.setActions(crewMember.getTiredness() < crewMember.getMaxTiredness() ? 2 : 1);
 		}

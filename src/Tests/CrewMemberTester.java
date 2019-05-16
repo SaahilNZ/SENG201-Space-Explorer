@@ -35,12 +35,12 @@ class CrewMemberTester {
 	@Test
 	public void healthTest() {
 		//Basic tests for functionality of damage and heal
-		testCrew.damageCrew(60);
-		testCrew.restoreHealth(10);
+		testCrew.modifyHealth(-60);
+		testCrew.modifyHealth(10);
 		assertEquals(startHealth - 60 + 10, testCrew.getHealth());
 		
 		//Tests health can't get higher than max
-		testCrew.restoreHealth(800);
+		testCrew.modifyHealth(800);
 		assertEquals(startHealth, testCrew.getHealth());
 		
 	}
@@ -49,7 +49,7 @@ class CrewMemberTester {
 	@Test
 	public void tiredTest() {
 		//Tests if a crew member's tiredness can change
-		testCrew.becomeTired(60);
+		testCrew.modifyTiredness(60);
 		assertEquals(startTired+60, testCrew.getTiredness());
 		
 		//Tests if sleeping will reset a crew member's tiredness, and take one action
@@ -59,23 +59,23 @@ class CrewMemberTester {
 		
 		//Ensures crew members can't sleep after all actions are depleted 
 		testCrew.sleep();
-		testCrew.becomeTired(10);
+		testCrew.modifyTiredness(10);
 		testCrew.sleep();
 		assertEquals(startTired+10, testCrew.getTiredness());
 		
 		//Makes sure tiredness cannot fall below 0
-		testCrew.becomeTired(200);
+		testCrew.modifyTiredness(200);
 		assertEquals(testCrew.getMaxTiredness(), testCrew.getTiredness());
 	}
 	
 	@Test
 	public void hungerTest() {
 		//Checks a crew member can become hungry
-		testCrew.increaseHunger(60);
+		testCrew.modifyHunger(60);
 		assertEquals(startHunger+60, testCrew.getHunger());
 		
 		//Makes sure hunger can't fall below 0
-		testCrew.increaseHunger(200);
+		testCrew.modifyHunger(200);
 		assertEquals(testCrew.getMaxHunger(), testCrew.getHunger());
 	}
 	

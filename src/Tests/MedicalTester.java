@@ -21,7 +21,7 @@ class MedicalTester {
 	public void healthTest() {
 		//Tests health is restored correctly
 		int startHealth = testCrew.getHealth();
-		testCrew.damageCrew(30);
+		testCrew.modifyHealth(-30);
 		testCrew.useItem(healthPod);
 		assertEquals(startHealth-10, testCrew.getHealth());
 	}
@@ -41,7 +41,7 @@ class MedicalTester {
 		int startHealth = testCrew.getHealth();
 		testCrew.sleep();
 		testCrew.sleep();
-		testCrew.damageCrew(20);
+		testCrew.modifyHealth(-20);
 		testCrew.setPlague(true);
 		testCrew.useItem(healthPod);
 		assertEquals(true, testCrew.hasPlague());
