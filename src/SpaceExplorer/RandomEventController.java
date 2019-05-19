@@ -9,10 +9,10 @@ import SpaceExplorer.CrewMembers.CrewMember;
 import SpaceExplorer.CrewMembers.SpaceMarine;
 
 public class RandomEventController {
-	private static final int DAMAGE_AMOUNT = 20;
+	private static final int DAMAGE_AMOUNT = 60;
 	private static final int PIRATE_CHANCE = 30;
 	private static final int INFECT_CHANCE = 20;
-	private static final int ASTEROID_CHANCE = 20;
+	private static final int ASTEROID_CHANCE = 40;
 	
 	public RandomEventController() { }
 	

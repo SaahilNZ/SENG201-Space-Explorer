@@ -223,7 +223,7 @@ public class Game {
 	public boolean newDay() {
 		this.currentDay += 1;
 		randomEventController.rollRandomEvents(crew);
-		boolean gameStatus = crew.newDay() > 0;
+		boolean gameStatus = (crew.newDay() > 0) && (crew.getShip().getHealth()>0);
 		if (gameStatus) {
 			if (currentDay > desiredDays) {
 				gameStatus = false;

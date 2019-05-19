@@ -166,7 +166,8 @@ public class MainGameScreen extends JDialog {
 				if (gameStatus) {					
 					refreshDialog();
 				} else {
-					JOptionPane.showMessageDialog(parent, "You have either run out of days, or all your crew members are dead.\nBetter luck next time!",
+					JOptionPane.showMessageDialog(parent, "You have either run out of days, all your"
+							+ " crew members are dead, or your ship has been destroyed.\nBetter luck next time!",
 							"Game Over", JOptionPane.INFORMATION_MESSAGE);
 					setVisible(false);
 					dispose();
