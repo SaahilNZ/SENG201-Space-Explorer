@@ -29,15 +29,20 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTabbedPane;
 
 public class VisitOutpostDialog extends JDialog {
 
 	private final JPanel pnlContent = new JPanel();
 	private JButton btnBuy;
-	private JList<Item> lstItems;
-	private DefaultListModel<Item> itemsModel;
+	private JList<Item> lstOutpostItems;
+	private DefaultListModel<Item> outpostItemsModel;
+	private JList<Item> lstCrewItems;
+	private DefaultListModel<Item> crewItemsModel;
 	private JTextPane txtpnItemInfo;
+	private JTextPane txtpnCrewItemInfo;
 	private JLabel lblItemName;
+	private JLabel lblCrewItemName;
 	private JLabel lblMoney;
 	
 	private Crew crew;
@@ -55,6 +60,18 @@ public class VisitOutpostDialog extends JDialog {
 		pnlContent.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(pnlContent, BorderLayout.CENTER);
 		pnlContent.setLayout(new BorderLayout(0, 0));
+		
+
+		outpostItemsModel = new DefaultListModel<Item>();
+		for (Item item : outpost.getInventory()) {
+			outpostItemsModel.addElement(item);
+		}
+		
+		crewItemsModel = new DefaultListModel<Item>();
+		for (Item item : crew.getItems()) {
+			crewItemsModel.addElement(item);
+		}
+		
 		{
 			JPanel pnlHeaderContent = new JPanel();
 			pnlContent.add(pnlHeaderContent, BorderLayout.NORTH);
@@ -80,24 +97,16 @@ public class VisitOutpostDialog extends JDialog {
 					pnlMoney.add(lblMoney);
 				}
 			}
-			{
-				JPanel pnlContentHeader = new JPanel();
-				FlowLayout flowLayout = (FlowLayout) pnlContentHeader.getLayout();
-				flowLayout.setAlignment(FlowLayout.LEFT);
-				pnlHeaderContent.add(pnlContentHeader);
-				{
-					JLabel lblItems = new JLabel("Items:");
-					pnlContentHeader.add(lblItems);
-				}
-			}
 		}
 		{
-			JSplitPane spItems = new JSplitPane();
-			spItems.setResizeWeight(0.5);
-			pnlContent.add(spItems, BorderLayout.CENTER);
+			JTabbedPane tabsInventories = new JTabbedPane(JTabbedPane.TOP);
+			pnlContent.add(tabsInventories, BorderLayout.CENTER);
+			JSplitPane spOutpostItems = new JSplitPane();
+			tabsInventories.addTab("Outpost Inventory", null, spOutpostItems, null);
+			spOutpostItems.setResizeWeight(0.5);
 			{
 				JPanel pnlItemInformation = new JPanel();
-				spItems.setRightComponent(pnlItemInformation);
+				spOutpostItems.setRightComponent(pnlItemInformation);
 				pnlItemInformation.setLayout(new BorderLayout(0, 0));
 				{
 					JPanel pnlItemName = new JPanel();
@@ -119,13 +128,15 @@ public class VisitOutpostDialog extends JDialog {
 					btnBuy = new JButton("Buy");
 					btnBuy.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							Item item = lstItems.getSelectedValue();
+							Item item = lstOutpostItems.getSelectedValue();
 							if (crew.currentMoney() >= item.getPrice()) {
 								crew.deductMoney(item.getPrice());
-								crew.addItem(item.createCopy());
+								Item newItem = item.createCopy();
+								crew.addItem(newItem);
 								outpost.removeItem(item);
-								itemsModel.removeElement(item);
-								lstItems.clearSelection();
+								outpostItemsModel.removeElement(item);
+								crewItemsModel.addElement(item);
+								lstOutpostItems.clearSelection();
 								refreshInfo();
 							} else {
 								JOptionPane.showMessageDialog(parent, "You cannot afford this item.",
@@ -137,41 +148,91 @@ public class VisitOutpostDialog extends JDialog {
 					pnlItemInformation.add(btnBuy, BorderLayout.SOUTH);
 				}
 			}
-			{
-				itemsModel = new DefaultListModel<Item>();
-				for (Item item : outpost.getInventory()) {
-					itemsModel.addElement(item);
-				}
-				lstItems = new JList<Item>();
-				lstItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				lstItems.setModel(itemsModel);
-				lstItems.addListSelectionListener(new ListSelectionListener() {
-					public void valueChanged(ListSelectionEvent e) {
-						btnBuy.setEnabled(lstItems.getSelectedIndex() != -1);
-						if (lstItems.getSelectedIndex() == -1) {
-							lblItemName.setText("");
-							txtpnItemInfo.setText("");
-						} else {
-							Item item = lstItems.getSelectedValue();
-							lblItemName.setText(item.getName());
-							String itemInfo = "";
-							if (item instanceof MedicalItem) {
-								itemInfo += "Medical Item\n";
-								itemInfo += "Restores " + ((MedicalItem)item).getRestoreAmount() + " points of health.\n";
-								itemInfo += ((MedicalItem)item).curesPlague() ? "This item cures Space Plague.\n"
-										: "This item does not cure Space Plague.\n";
-							} else if (item instanceof FoodItem) {
-								itemInfo += "Food Item\n";
-								itemInfo += "Restores " + ((FoodItem)item).getHungerAmount() + " points of hunger.\n";
-								itemInfo += "Restores " + ((FoodItem)item).getTiredAmount() + " points of exhaustion.\n";
-							}
-							itemInfo += "Price: $" + item.getPrice();
-							txtpnItemInfo.setText(itemInfo);
+			lstOutpostItems = new JList<Item>();
+			lstOutpostItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			lstOutpostItems.setModel(outpostItemsModel);
+			lstOutpostItems.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent e) {
+					btnBuy.setEnabled(lstOutpostItems.getSelectedIndex() != -1);
+					if (lstOutpostItems.getSelectedIndex() == -1) {
+						lblItemName.setText("");
+						txtpnItemInfo.setText("");
+					} else {
+						Item item = lstOutpostItems.getSelectedValue();
+						lblItemName.setText(item.getName());
+						String itemInfo = "";
+						if (item instanceof MedicalItem) {
+							itemInfo += "Medical Item\n";
+							itemInfo += "Restores " + ((MedicalItem)item).getRestoreAmount() + " points of health.\n";
+							itemInfo += ((MedicalItem)item).curesPlague() ? "This item cures Space Plague.\n"
+									: "This item does not cure Space Plague.\n";
+						} else if (item instanceof FoodItem) {
+							itemInfo += "Food Item\n";
+							itemInfo += "Restores " + ((FoodItem)item).getHungerAmount() + " points of hunger.\n";
+							itemInfo += "Restores " + ((FoodItem)item).getTiredAmount() + " points of exhaustion.\n";
 						}
-						refreshInfo();
+						itemInfo += "Price: $" + item.getPrice();
+						txtpnItemInfo.setText(itemInfo);
 					}
-				});
-				spItems.setLeftComponent(lstItems);
+				}
+			});
+			spOutpostItems.setLeftComponent(lstOutpostItems);
+			{
+				JSplitPane spCrewInventory = new JSplitPane();
+				spCrewInventory.setResizeWeight(0.5);
+				tabsInventories.addTab("Crew Inventory", null, spCrewInventory, null);
+				{
+					lstCrewItems = new JList<Item>();
+					lstCrewItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					lstCrewItems.setModel(crewItemsModel);
+					lstCrewItems.addListSelectionListener(new ListSelectionListener() {
+						public void valueChanged(ListSelectionEvent e) {
+							if (lstCrewItems.getSelectedIndex() == -1) {
+								lblCrewItemName.setText("");
+								txtpnCrewItemInfo.setText("");
+							} else {
+								Item item = lstCrewItems.getSelectedValue();
+								lblCrewItemName.setText(item.getName());
+								String itemInfo = "";
+								if (item instanceof MedicalItem) {
+									itemInfo += "Medical Item\n";
+									itemInfo += "Restores " + ((MedicalItem)item).getRestoreAmount() + " points of health.\n";
+									itemInfo += ((MedicalItem)item).curesPlague() ? "This item cures Space Plague.\n"
+											: "This item does not cure Space Plague.\n";
+								} else if (item instanceof FoodItem) {
+									itemInfo += "Food Item\n";
+									itemInfo += "Restores " + ((FoodItem)item).getHungerAmount() + " points of hunger.\n";
+									itemInfo += "Restores " + ((FoodItem)item).getTiredAmount() + " points of exhaustion.\n";
+								}
+								itemInfo += "Price: $" + item.getPrice();
+								txtpnCrewItemInfo.setText(itemInfo);
+							}
+							refreshInfo();
+						}
+					});
+					spCrewInventory.setLeftComponent(lstCrewItems);
+				}
+				{
+					JPanel pnlItemInformation = new JPanel();
+					spCrewInventory.setRightComponent(pnlItemInformation);
+					pnlItemInformation.setLayout(new BorderLayout(0, 0));
+					{
+						JPanel pnlItemName = new JPanel();
+						FlowLayout flowLayout = (FlowLayout) pnlItemName.getLayout();
+						flowLayout.setAlignment(FlowLayout.LEFT);
+						pnlItemInformation.add(pnlItemName, BorderLayout.NORTH);
+						{
+							lblCrewItemName = new JLabel("");
+							pnlItemName.add(lblCrewItemName);
+						}
+					}
+					{
+						txtpnCrewItemInfo = new JTextPane();
+						txtpnCrewItemInfo.setText("");
+						txtpnCrewItemInfo.setBackground(SystemColor.menu);
+						pnlItemInformation.add(txtpnCrewItemInfo, BorderLayout.CENTER);
+					}
+				}
 			}
 		}
 		{
