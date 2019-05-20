@@ -1,6 +1,14 @@
 package SpaceExplorer.Utilities;
 
+/**
+ * This class stores the static data that is used within the project
+ * 
+ * @author Saahil Hari and Isaac Walton
+ */
 public class StaticData {
+	/**
+	 * The planet name prefixes to use with the random name generator
+	 */
 	public static final String[] PLANET_PREFIXES = {
 		"Alpha ",
         "Beta ",
@@ -17,6 +25,9 @@ public class StaticData {
         "Old "
     };
 	
+	/**
+	 * The base planet names to use with the random name generator
+	 */
     public static final String[] PLANET_NAMES = {
         "Phobos",
         "Deimos",
@@ -100,6 +111,9 @@ public class StaticData {
         "Aphelion",
     };
     
+    /**
+	 * The planet name suffixes to use with the random name generator
+	 */
     public static final String[] PLANET_SUFFIXES = {
         " I",
         " II",
@@ -118,6 +132,9 @@ public class StaticData {
         " Major"
     };
     
+    /**
+	 * The base outpost names to use with the random name generator
+	 */
     public static final String[] OUTPOST_NAMES = {
     	"Omicron",
     	"Zune",
@@ -137,6 +154,9 @@ public class StaticData {
     	"Olympus"
     };
     
+    /**
+	 * The outpost name suffixes to use with the random name generator
+	 */
     public static final String[] OUTPOST_SUFFIXES = {
     	" Station",
     	" City",
