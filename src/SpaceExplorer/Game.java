@@ -121,6 +121,7 @@ public class Game {
 	public void setupGame(int days, Crew crew) {
 		this.gameWon = false;
 		this.desiredDays = days;
+		this.currentDay = 1;
 		this.crew = crew;
 		this.randomEventController = new RandomEventController();
 		this.totalShipParts = (this.desiredDays * 2) / 3;
