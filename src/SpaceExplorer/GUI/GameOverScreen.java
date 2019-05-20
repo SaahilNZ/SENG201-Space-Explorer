@@ -56,6 +56,24 @@ public class GameOverScreen extends JDialog {
 					pnlResult.add(verticalStrut);
 				}
 				{
+					JPanel pnlShipName = new JPanel();
+					pnlResult.add(pnlShipName);
+					{
+						JLabel lblShipName = new JLabel("Ship Name: " + game.getCrew().getShip().getName());
+						pnlShipName.add(lblShipName);
+					}
+				}
+				{
+					JPanel pnlDaysTaken = new JPanel();
+					pnlResult.add(pnlDaysTaken);
+					{
+						int daysTaken = game.getCurrentDay() > game.getDesiredDays()
+								? game.getDesiredDays() : game.getCurrentDay();
+						JLabel lblDaysTaken = new JLabel("Days Taken: " + daysTaken);
+						pnlDaysTaken.add(lblDaysTaken);
+					}
+				}
+				{
 					JPanel pnlGameResult = new JPanel();
 					pnlResult.add(pnlGameResult);
 					{

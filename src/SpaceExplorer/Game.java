@@ -98,6 +98,14 @@ public class Game {
 	}
 	
 	/**
+	 * Getter for the desired number of days
+	 * @return					The desired number of days
+	 */
+	public int getDesiredDays() {
+		return desiredDays;
+	}
+	
+	/**
 	 * Getter for the total number of ship parts for the current game
 	 * @return					The number of ship parts
 	 */
