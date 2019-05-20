@@ -19,6 +19,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
+/**
+ * This class implements a GUI dialog used to select a list item from
+ * a list of the given type
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class SelectListItemDialog<T> extends JDialog {
 
 	private final JPanel pnlContent = new JPanel();

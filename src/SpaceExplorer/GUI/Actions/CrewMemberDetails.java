@@ -16,6 +16,13 @@ import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * This class implements a GUI dialog used to display crew member
+ * information
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class CrewMemberDetails extends JDialog {
 
 	private final JPanel pnlContent = new JPanel();

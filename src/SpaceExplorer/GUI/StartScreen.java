@@ -17,6 +17,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * This class implements a GUI application frame used as the start screen
+ * for the game
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class StartScreen {
 
 	private JFrame frmStartScreen;

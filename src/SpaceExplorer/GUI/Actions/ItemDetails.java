@@ -19,6 +19,12 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * This class implements a GUI dialog used to display item details
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class ItemDetails extends JDialog {
 
 	private final JPanel pnlContent = new JPanel();

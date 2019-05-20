@@ -30,6 +30,12 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.Box;
 
+/**
+ * This class implements a GUI dialog used to set up the game
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class SetupScreen extends JDialog {
 
 	private JSlider sldDays;

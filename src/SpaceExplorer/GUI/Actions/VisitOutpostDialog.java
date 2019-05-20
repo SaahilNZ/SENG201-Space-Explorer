@@ -31,6 +31,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 
+/**
+ * This class implements a GUI dialog used to view a planet's outpost as
+ * well as view and purchase items from an outpost
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class VisitOutpostDialog extends JDialog {
 
 	private final JPanel pnlContent = new JPanel();

@@ -4,6 +4,7 @@ package SpaceExplorer.Utilities;
  * This class stores the static data that is used within the project
  * 
  * @author Saahil Hari and Isaac Walton
+ * @version 1.0, April 2019
  */
 public class StaticData {
 	/**

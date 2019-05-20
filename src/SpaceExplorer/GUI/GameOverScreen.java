@@ -20,6 +20,12 @@ import javax.swing.Box;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * This class implements a GUI dialog used to display the Game Over screen
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class GameOverScreen extends JDialog {
 
 	private final JPanel pnlContent = new JPanel();

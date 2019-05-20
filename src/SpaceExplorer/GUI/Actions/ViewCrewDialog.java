@@ -26,6 +26,12 @@ import javax.swing.event.ListSelectionListener;
 
 import javax.swing.event.ListSelectionEvent;
 
+/**
+ * This class implements a GUI dialog used to view the crew's details
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class ViewCrewDialog extends JDialog {
 
 	private final JPanel pnlContent = new JPanel();

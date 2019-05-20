@@ -21,6 +21,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
+/**
+ * This class implements a GUI dialog used to create crew members
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class CreateCrewMemberDialog extends JDialog implements ActionListener {
 	private static final HashMap<String, String> CREW_INFORMATION = new HashMap<String, String>() {
 		{

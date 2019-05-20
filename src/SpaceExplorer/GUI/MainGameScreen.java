@@ -34,6 +34,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+/**
+ * This class implements a GUI dialog used as the main screen for the game
+ * 
+ * @author Saahil Hari and Isaac Walton
+ * @version 1.0, May 2019
+ */
 public class MainGameScreen extends JDialog {
 	
 	private JLabel lblPlanetName;
