@@ -3,7 +3,7 @@ package SpaceExplorer.CrewMembers;
 import java.util.Collection;
 
 /**
- * This class implements a SpaceBard and its associated functionality
+ * This class implements a SpaceBard. Extends the crew member functionality with an additional method to perform music.
  * 
  * @author Saahil Hari and Isaac Walton
  * @version 1.0, May 2019
@@ -12,7 +12,7 @@ import java.util.Collection;
 public class SpaceBard extends CrewMember {
 	
 	/**
-	 * Uses default constructor method of the parent class
+	 * Default crew member constructor
 	 * 
 	 * @param name			Name of the spacebard
 	 */

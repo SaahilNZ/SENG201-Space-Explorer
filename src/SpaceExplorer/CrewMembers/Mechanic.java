@@ -3,7 +3,7 @@ package SpaceExplorer.CrewMembers;
 import SpaceExplorer.Ship;
 
 /**
- * This class implements a Mechanic and its associated functionality
+ * This class implements a Mechanic. Modifies the repairShip function of the parent class to be more effective
  * 
  * @author Saahil Hari and Isaac Walton
  * @version 1.0, May 2019
@@ -12,7 +12,7 @@ import SpaceExplorer.Ship;
 public class Mechanic extends CrewMember {
 	
 	/**
-	 * Uses default constructor method of the parent class
+	 * Default crew member constructor
 	 * 
 	 * @param name			Name of the mechanic
 	 */

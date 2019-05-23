@@ -4,7 +4,7 @@ import SpaceExplorer.Crew;
 import SpaceExplorer.Planet;
 
 /**
- * This class implements a Mechanic and its associated functionality
+ * This class implements a Scout. Modifies the searchPlanet method of the parent class to be more effective.
  * 
  * @author Saahil Hari and Isaac Walton
  * @version 1.0, May 2019
@@ -13,7 +13,7 @@ import SpaceExplorer.Planet;
 public class Scout extends CrewMember {
 	
 	/**
-	 * Uses default constructor method of the parent class
+	 * Default crew member constructor
 	 * 
 	 * @param name			Name of the scout
 	 */

@@ -3,7 +3,8 @@ package SpaceExplorer.CrewMembers;
 import SpaceExplorer.FoodItem;
 
 /**
- * This class implements a Chef and its associated functionality
+ * This class implements a Chef class. Extends the crew member class with an additional method that allows
+ * for a Food Item to be cooked.
  * 
  * @author Saahil Hari and Isaac Walton
  * @version 1.0, May 2019
@@ -12,7 +13,7 @@ import SpaceExplorer.FoodItem;
 public class Chef extends CrewMember {
 	
 	/**
-	 * Uses default constructor method of the parent class
+	 * Default crew member class constructor
 	 * 
 	 * @param name			Name of the chef
 	 */

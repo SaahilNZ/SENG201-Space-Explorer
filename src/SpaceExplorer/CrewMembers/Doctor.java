@@ -1,7 +1,8 @@
 package SpaceExplorer.CrewMembers;
 
 /**
- * This class implements a Doctor and its associated functionality
+ * This class implements a Doctor crew member. Along with all other crew member functionality, this class
+ * can also heal and cure plague for other crew members 
  * 
  * @author Saahil Hari and Isaac Walton
  * @version 1.0, May 2019
@@ -10,7 +11,7 @@ package SpaceExplorer.CrewMembers;
 public class Doctor extends CrewMember {
 	
 	/**
-	 * Uses default constructor method of the parent class
+	 * Default crew member constructor
 	 * 
 	 * @param name			Name of the doctor
 	 */

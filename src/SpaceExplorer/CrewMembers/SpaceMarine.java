@@ -1,7 +1,7 @@
 package SpaceExplorer.CrewMembers;
 
 /**
- * This class implements a SpaceMarine sub class
+ * This class implements a SpaceMarine.
  * 
  * @author Saahil Hari and Isaac Walton
  * @version 1.0, May 2019
@@ -9,7 +9,7 @@ package SpaceExplorer.CrewMembers;
  */
 public class SpaceMarine extends CrewMember {
 	/**
-	 * Uses default constructor method of the parent class
+	 * Default crew member constructor
 	 * 
 	 * @param name			Name of the spacemarine
 	 */
